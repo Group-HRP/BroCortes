@@ -1,4 +1,1 @@
-#!/usr/bin/env sh
-. "$(dirname "$0")/_/husky.sh"
-
-npx --no -- commitlint --edit "$1" || exit 0  # Mude para exit 1 para bloquear commits inválidos
+npx --no -- commitlint --edit "$1" || exit 1  # Mude para exit 1 para bloquear commits inválidos
