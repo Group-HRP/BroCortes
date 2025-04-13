@@ -1,4 +1,3 @@
-echo "node_modules/
 node_modules/
 .env
 .idea/
@@ -11,4 +10,3 @@ coverage/
 .DS_Store
 /android/
 /ios/
-" > .gitignore
