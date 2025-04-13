@@ -13,7 +13,7 @@ interface LoginScreenProps {
 export default function LoginScreen({ navigation }: LoginScreenProps) {
   const theme = useTheme();
   return (
-    <Containerdefault>
+    <Containerdefault alignItems="center" justifyContent="center">
       <Title fontSize="medium" fontFamily="bold">
         Acessar conta
       </Title>
@@ -40,7 +40,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
         style={{
           flexDirection: "row",
           alignItems: "flex-start",
-          marginLeft: -180,
+		  width: "100%"
         }}
       >
         <Button>
