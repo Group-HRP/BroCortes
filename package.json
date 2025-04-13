@@ -1,51 +1,52 @@
 {
-	"name": "BroCortes",
-	"version": "1.0.0",
-	"main": "index.ts",
-	"scripts": {
-		"start": "expo start",
-		"biome": "npx @biomejs/biome format --write src/",
-		"android": "expo start --android",
-		"ios": "expo start --ios",
-		"web": "expo start --web",
-		"biome:dev": "npx @biomejs/biome lint --apply src/",
-		"prepare": "husky",
-		"commit": "cz",
-  		"test": "echo \"No tests yet\" && exit 0"
-	},
-	"config": {
-		"commitizen": {
-			"path": "cz-conventional-changelog"
-		}
-	},
-	"dependencies": {
-		"@react-native-community/masked-view": "^0.1.11",
-		"@react-navigation/bottom-tabs": "^7.3.10",
-		"@react-navigation/native": "^7.1.6",
-		"@react-navigation/native-stack": "^7.3.10",
-		"@types/styled-components": "^5.1.34",
-		"@types/styled-components-react-native": "^5.2.5",
-		"expo": "~52.0.43",
-		"expo-status-bar": "~2.0.1",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-native": "0.76.9",
-		"react-native-gesture-handler": "^2.25.0",
-		"react-native-reanimated": "^3.17.3",
-		"react-native-safe-area-context": "^5.3.0",
-		"react-native-screens": "^4.10.0",
-		"styled-components": "^5.3.11"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.25.2",
-		"@biomejs/biome": "^1.9.4",
-		"@commitlint/cli": "^19.8.0",
-		"@commitlint/config-conventional": "^19.8.0",
-		"@types/react": "~18.3.12",
-		"commitizen": "^4.3.1",
-		"cz-conventional-changelog": "^3.3.0",
-		"husky": "^9.1.7",
-		"typescript": "^5.3.3"
-	},
-	"private": true
+  "name": "BroCortes",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "biome": "npx @biomejs/biome format --write src/",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "biome:dev": "npx @biomejs/biome lint --apply src/",
+    "prepare": "husky",
+    "commit": "cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/bottom-tabs": "^7.3.10",
+    "@react-navigation/native": "^7.1.6",
+    "@react-navigation/native-stack": "^7.3.10",
+    "@types/styled-components": "^5.1.34",
+    "@types/styled-components-react-native": "^5.2.5",
+    "expo": "~52.0.43",
+    "expo-status-bar": "~2.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-native": "0.76.9",
+    "react-native-gesture-handler": "^2.25.0",
+    "react-native-reanimated": "^3.17.3",
+    "react-native-safe-area-context": "^5.3.0",
+    "react-native-screens": "^4.10.0",
+    "styled-components": "^5.3.11",
+    "react-native-web": "~0.19.13",
+    "@expo/metro-runtime": "~4.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@biomejs/biome": "^1.9.4",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@types/react": "~18.3.12",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.1.7",
+    "typescript": "^5.3.3"
+  },
+  "private": true
 }

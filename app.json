@@ -23,6 +23,22 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins":[
+      [
+        "expo-font",
+        {
+          "fonts":[
+            "../../assets/fonts/Satoshi-Bold.otf",
+            "../../assets/fonts/OpenSans-ExtraBold.ttf",
+            "../../assets/fonts/OpenSans-Bold.ttf",
+            "../../assets/fonts/OpenSans-SemiBold.ttf",
+            "../../assets/fonts/OpenSans-Medium.ttf",
+            "../../assets/fonts/OpenSans-Regular.ttf",
+            "../../assets/fonts/OpenSans-Light.ttf'"                 
+          ]
+        }
+      ]
+    ]
   }
 }
