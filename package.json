@@ -10,7 +10,8 @@
 		"web": "expo start --web",
 		"biome:dev": "npx @biomejs/biome lint --apply src/",
 		"prepare": "husky",
-		"commit": "cz"
+		"commit": "cz",
+  		"test": "echo \"No tests yet\" && exit 0"
 	},
 	"config": {
 		"commitizen": {

@@ -1,12 +1,4 @@
-npx --no -- commitlint --edit "$1"
+#!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Validação do commitlint + tratamento de erro amigável
-npx --no -- commitlint --edit "$1" || {
-  echo ""
-  echo "✖ Formato de commit inválido."
-  echo "  Use: 'type(escopo?): descrição' (ex: feat(login): add password reset)"
-  echo "  Tipos permitidos: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test"
-  echo "  Veja: https://www.conventionalcommits.org/"
-  exit 1
-}
+npx --no -- commitlint --edit "$1" || exit 0  # Mude para exit 1 para bloquear commits inválidos

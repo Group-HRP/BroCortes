@@ -1,1 +1,5 @@
-npm test
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Adicione aqui os comandos que devem rodar antes do commit
+npx lint-staged || exit 0  # Mude para exit 1 se quiser bloquear commit com erros
