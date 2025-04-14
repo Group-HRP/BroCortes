@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-interface ContainerdefaultProps {
+interface ContainerDefaultProps {
 	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
 	justifyContent?:
 		| "flex-start"
@@ -26,10 +26,10 @@ interface ContainerdefaultProps {
 	borderColor?: string;
 }
 
-export const Containerdefault = styled.View<ContainerdefaultProps>`
+export const ContainerDefault = styled.View<ContainerDefaultProps>`
   background-color: ${({ theme }) => theme.colors.background};
   color: #ffffff;
-  padding: 20px;
+  padding: 0px 20px 0px 20px;
   height: 100%;
   ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
   ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}

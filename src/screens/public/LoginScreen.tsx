@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { useTheme } from "styled-components/native";
-import { Containerdefault } from "../../components/ContainerDefault";
+import { ContainerDefault } from "../../components/ContainerDefault";
 import { Input } from "../../components/Input";
 import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
@@ -13,7 +13,7 @@ interface LoginScreenProps {
 export default function LoginScreen({ navigation }: LoginScreenProps) {
 	const theme = useTheme();
 	return (
-		<Containerdefault alignItems="center" justifyContent="center">
+		<ContainerDefault alignItems="center" justifyContent="center">
 			<Title fontSize="small" weight="bold">
 				Acessar conta
 			</Title>
@@ -69,6 +69,6 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 					</ButtonText>
 				</Button>
 			</View>
-		</Containerdefault>
+		</ContainerDefault>
 	);
 }

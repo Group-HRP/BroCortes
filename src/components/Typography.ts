@@ -147,7 +147,7 @@ const BaseText = styled.Text<TypographyProps>`
   font-family: ${({ fontFamily, weight = "normal", isTitle, theme }) =>
 		getFontFamily(fontFamily, weight, isTitle, theme)};
   
-  ${({ padding }) => padding !== undefined && `padding: ${padding}px;`}
+  ${({ padding }) => padding !== undefined && `padding: ${padding}px;`}A
   ${({ paddingHorizontal }) => paddingHorizontal !== undefined && `padding-horizontal: ${paddingHorizontal}px;`}
   ${({ paddingVertical }) => paddingVertical !== undefined && `padding-vertical: ${paddingVertical}px;`}
   ${({ margin }) => margin !== undefined && `margin: ${margin}px;`}
