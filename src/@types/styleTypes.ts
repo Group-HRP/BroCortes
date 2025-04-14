@@ -1,9 +1,9 @@
 import type { ThemeType } from "../theme";
 
-type ThemeColorKey = keyof ThemeType["colors"];
-type ThemeFontSizeKey = keyof ThemeType["fonts"]["sizes"];
+export type ThemeColorKey = keyof ThemeType["colors"];
+export type ThemeFontSizeKey = keyof ThemeType["fonts"]["sizes"];
 type ThemeFontWeightKey = keyof ThemeType["fonts"]["weights"];
-type ThemeFontFamilyKey = keyof ThemeType["fonts"]["family"];
+export type ThemeFontFamilyKey = keyof ThemeType["fonts"]["family"];
 type ThemeSpacingKey = keyof ThemeType["spacing"];
 
 /**

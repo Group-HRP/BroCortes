@@ -34,7 +34,8 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				borderSize={1}
 				fontFamily="regular"
 				marginTop={6}
-				marginBottom={6}
+				marginBottom={8}
+
 			/>
 			<View
 				style={{
@@ -44,7 +45,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				}}
 			>
 				<Button>
-					<ButtonText color="text" fontSize="small" weight="bold">
+					<ButtonText color="text" fontSize={'xs'} fontWeight="bold">
 						Esqueceu a senha?
 					</ButtonText>
 				</Button>
@@ -57,7 +58,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				paddingVertical={12}
 				borderRadius={18}
 			>
-				<ButtonText fontSize="regular" weight="semiBold" color="background">
+				<ButtonText fontSize={'sm'} fontWeight="semiBold" color="background">
 					Entrar
 				</ButtonText>
 			</Button>
@@ -66,7 +67,9 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 					Nao possui conta?
 				</Text>
 				<Button onPress={() => navigation.navigate("Register")}>
-					<ButtonText color="primary200">Criar conta</ButtonText>
+					<ButtonText color="primary200" fontSize={'sm'} fontWeight="medium">
+						Criar conta
+					</ButtonText>
 				</Button>
 			</View>
 		</Containerdefault>

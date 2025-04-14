@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import type { ButtonProps, ButtonTextProps } from "../@types/styleTypes";
+import type{ ButtonProps, ButtonTextProps } from "../@types/styleTypes";
 
 // Função helper para acesso seguro ao theme.colors
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -21,7 +21,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   
   /* Appearance */
   background-color: ${({ backgroundColor, theme }) =>
-		getThemeColor(backgroundColor, theme, theme.colors.primary)};
+    backgroundColor ? theme.colors[backgroundColor as keyof typeof theme.colors] : theme.colors.background};
   
   /* Spacing */
   ${({ padding }) => padding !== undefined && `padding: ${padding}px;`}
@@ -38,7 +38,6 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 		if (borderRadius === undefined) return "border-radius: 4px;";
 		if (typeof borderRadius === "number")
 			return `border-radius: ${borderRadius}px;`;
-		return `border-radius: ${theme.spacing[borderRadius as keyof typeof theme.spacing] || 4}px;`;
 	}}
   
   ${({ borderWidth }) => borderWidth !== undefined && `border-width: ${borderWidth}px;`}
@@ -58,22 +57,20 @@ export const ButtonText = styled.Text<ButtonTextProps>`
   /* Typography */
   color: ${({ color, theme }) => getThemeColor(color, theme, theme.colors.text)};
   
-  font-size: ${({ fontSize = "md", theme }) =>
-		typeof fontSize === "number"
-			? `${fontSize}px`
-			: `${theme.fonts.sizesBody[fontSize as keyof typeof theme.fonts.sizesBody]}px`};
+  font-size: ${({ fontSize = "md", theme }) => 
+    typeof fontSize === 'number' 
+      ? `${fontSize}px` 
+      : `${theme.fonts.sizesBody[fontSize as keyof typeof theme.fonts.sizesBody]}px`};
   
   font-weight: ${({ fontWeight = "semiBold", theme }) => {
-		if (typeof fontWeight === "number") return fontWeight;
-		// biome-ignore lint/suspicious/noGlobalIsNan: <explanation>
-		if (typeof fontWeight === "string" && !isNaN(Number(fontWeight)))
-			return Number(fontWeight);
-		return theme.fonts.weights[fontWeight as keyof typeof theme.fonts.weights];
-	}};
+    if (typeof fontWeight === 'number') return fontWeight;
+    // biome-ignore lint/suspicious/noGlobalIsNan: <explanation>
+    if (typeof fontWeight === 'string' && !isNaN(Number(fontWeight))) return Number(fontWeight);
+    return theme.fonts.weights[fontWeight as keyof typeof theme.fonts.weights];
+  }};
   
-  font-family: ${({ fontFamily = "primary", theme }) =>
-		theme.fonts.body[fontFamily as keyof typeof theme.fonts.body] ||
-		fontFamily};
+  font-family: ${({ fontFamily = "primary", theme }) => 
+    theme.fonts.body[fontFamily as keyof typeof theme.fonts.body] || fontFamily};
   
   /* Text Transformation */
   ${({ uppercase }) => uppercase && "text-transform: uppercase;"}
