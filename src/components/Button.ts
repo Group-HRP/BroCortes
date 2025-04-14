@@ -1,88 +1,83 @@
 import styled from "styled-components/native";
-import type ThemeType from "../theme";
+import type { ButtonProps, ButtonTextProps } from "../@types/styleTypes";
 
-interface ButtonProps {
-  padding?: number;
-  paddingHorizontal?: number;
-  paddingVertical?: number;
-  fontSize?: keyof (typeof ThemeType)["fonts"]["sizesBody"] | keyof (typeof ThemeType)["fonts"]["sizesHeading"];
-  backgroundColor?: keyof (typeof ThemeType)["colors"];
-  color?: keyof (typeof ThemeType)["colors"];
-  fontFamily?: keyof (typeof ThemeType)["fonts"]["body"] | keyof (typeof ThemeType)["fonts"]["heading"];
-  margin?: number;
-  marginHorizontal?: number;
-  marginVertical?: number;
-  borderRadius?: number | keyof (typeof ThemeType)["fonts"]["sizesBody"] | keyof (typeof ThemeType)["fonts"]["sizesHeading"];
-  fullWidth?: boolean;
-  disabled?: boolean;
-  alignSelf?: "flex-start" | "center" | "flex-end";
-  width?: number | string;
-  height?: number | string;
-  borderWidth?: number;
-  borderColor?: keyof (typeof ThemeType)["colors"];
-  isTitle?: boolean;
-}
+// Função helper para acesso seguro ao theme.colors
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+const getThemeColor = (
+	color: string | undefined,
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	theme: any,
+	defaultColor: string,
+) => {
+	if (!color) return defaultColor;
+	return theme.colors[color as keyof typeof theme.colors] || color;
+};
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
+  /* Layout */
   ${({ fullWidth }) => fullWidth && "width: 100%;"}
   ${({ width }) => width !== undefined && `width: ${typeof width === "number" ? `${width}px` : width};`}
   ${({ height }) => height !== undefined && `height: ${typeof height === "number" ? `${height}px` : height};`}
   
+  /* Appearance */
   background-color: ${({ backgroundColor, theme }) =>
-    backgroundColor ? theme.colors[backgroundColor] : theme.colors.background};
+		getThemeColor(backgroundColor, theme, theme.colors.primary)};
   
+  /* Spacing */
   ${({ padding }) => padding !== undefined && `padding: ${padding}px;`}
   ${({ paddingHorizontal }) => paddingHorizontal !== undefined && `padding-horizontal: ${paddingHorizontal}px;`}
   ${({ paddingVertical }) => paddingVertical !== undefined && `padding-vertical: ${paddingVertical}px;`}
   
+  /* Margin */
   ${({ margin }) => margin !== undefined && `margin: ${margin}px;`}
   ${({ marginHorizontal }) => marginHorizontal !== undefined && `margin-horizontal: ${marginHorizontal}px;`}
   ${({ marginVertical }) => marginVertical !== undefined && `margin-vertical: ${marginVertical}px;`}
   
+  /* Borders */
   ${({ borderRadius, theme }) => {
-    if (borderRadius === undefined) return "border-radius: 4px;";
-    if (typeof borderRadius === "number") return `border-radius: ${borderRadius}px;`;
-    return `border-radius: ${theme.fonts.sizesBody[borderRadius as keyof typeof theme.fonts.sizesBody] || 
-            theme.fonts.sizesHeading[borderRadius as keyof typeof theme.fonts.sizesHeading] || 4}px;`;
-  }}
+		if (borderRadius === undefined) return "border-radius: 4px;";
+		if (typeof borderRadius === "number")
+			return `border-radius: ${borderRadius}px;`;
+		return `border-radius: ${theme.spacing[borderRadius as keyof typeof theme.spacing] || 4}px;`;
+	}}
   
   ${({ borderWidth }) => borderWidth !== undefined && `border-width: ${borderWidth}px;`}
-  ${({ borderColor, theme }) => borderColor !== undefined && `border-color: ${theme.colors[borderColor]};`}
+  ${({ borderColor, theme }) =>
+		borderColor !== undefined &&
+		`border-color: ${getThemeColor(borderColor, theme, "transparent")};`}
   
-  ${({ alignSelf }) => alignSelf !== undefined && `align-self: ${alignSelf};`}
-  
+  /* States */
   ${({ disabled }) => disabled && "opacity: 0.6;"}
   
+  /* Flex */
   justify-content: center;
   align-items: center;
 `;
 
-interface ButtonTextProps {
-  color?: keyof (typeof ThemeType)["colors"];
-  fontSize?: keyof (typeof ThemeType)["fonts"]["sizesBody"] | keyof (typeof ThemeType)["fonts"]["sizesHeading"];
-  fontFamily?: keyof (typeof ThemeType)["fonts"]["body"] | keyof (typeof ThemeType)["fonts"]["heading"];
-  weight?: keyof (typeof ThemeType)["fonts"]["weights"];
-  uppercase?: boolean;
-  isTitle?: boolean;
-}
-
 export const ButtonText = styled.Text<ButtonTextProps>`
-  color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.text)};
-  font-size: ${({ fontSize = "medium", theme }) => 
-    theme.fonts.sizesBody[fontSize as keyof typeof theme.fonts.sizesBody] || 
-    theme.fonts.sizesHeading[fontSize as keyof typeof theme.fonts.sizesHeading]}px;
-  font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights[weight]};
-  font-family: ${({ fontFamily, weight = "regular", isTitle, theme }) => {
-    if (fontFamily) {
-      return isTitle
-        ? theme.fonts.heading[fontFamily as keyof typeof theme.fonts.heading]
-        : theme.fonts.body[fontFamily as keyof typeof theme.fonts.body];
-    }
-    return isTitle
-      ? theme.fonts.heading.bold
-      : weight === "bold"
-        ? theme.fonts.body.bold
-        : theme.fonts.body.regular;
-  }};
+  /* Typography */
+  color: ${({ color, theme }) => getThemeColor(color, theme, theme.colors.text)};
+  
+  font-size: ${({ fontSize = "md", theme }) =>
+		typeof fontSize === "number"
+			? `${fontSize}px`
+			: `${theme.fonts.sizesBody[fontSize as keyof typeof theme.fonts.sizesBody]}px`};
+  
+  font-weight: ${({ fontWeight = "semiBold", theme }) => {
+		if (typeof fontWeight === "number") return fontWeight;
+		// biome-ignore lint/suspicious/noGlobalIsNan: <explanation>
+		if (typeof fontWeight === "string" && !isNaN(Number(fontWeight)))
+			return Number(fontWeight);
+		return theme.fonts.weights[fontWeight as keyof typeof theme.fonts.weights];
+	}};
+  
+  font-family: ${({ fontFamily = "primary", theme }) =>
+		theme.fonts.body[fontFamily as keyof typeof theme.fonts.body] ||
+		fontFamily};
+  
+  /* Text Transformation */
   ${({ uppercase }) => uppercase && "text-transform: uppercase;"}
+  
+  /* Layout */
+  text-align: center;
 `;
