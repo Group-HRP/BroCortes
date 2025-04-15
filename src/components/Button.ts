@@ -118,7 +118,7 @@ interface ButtonTextProps {
 export const ButtonText = styled.Text<ButtonTextProps>`
   color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.text)};
   font-size: ${({ fontSize = "md", theme }) => theme.fonts.sizes[fontSize]}px;
-  font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights[weight]};
+  font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights};
   font-family: ${({ fontFamily, weight = "normal", isTitle, theme }) => {
     if (fontFamily) {
       return isTitle

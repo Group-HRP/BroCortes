@@ -15,7 +15,14 @@ type AppTheme = {
     text: string;
   };
   fonts: {
-    body: FontBody;
+    body: {
+      light: string;
+      regular: string;
+      medium: string;
+      semiBold: string;
+      bold: string;
+      extraBold: string;
+    };
     heading: {
       bold: string;
     };
@@ -29,11 +36,11 @@ type AppTheme = {
     };
     weights: {
       light: number;
-      normal: number;
+      regular: number;
       medium: number;
       semiBold: number;
       bold: number;
-      extraBold: number;
+      black: number;
     };
     lineHeight: string;
   };
@@ -41,6 +48,19 @@ type AppTheme = {
     small: number;
     medium: number;
     large: number;
+  };
+  borders: {
+    radius: {
+      sm: number;
+      md: number;
+      lg: number;
+      full: number;
+    };
+    width: {
+      thin: number;
+      regular: number;
+      thick: number;
+    };
   };
 };
 
@@ -118,7 +138,7 @@ const BaseText = styled.Text<TypographyProps>`
     `${getFontSize(fontSize, isTitle, theme)}px`};
   
   font-weight: ${({ fontWeight = "normal", theme }) =>
-    theme.fonts.weights[fontWeight]};
+    theme.fonts.weights};
   
   font-family: ${({ fontFamily, fontWeight, isTitle, theme }) =>
     getFontFamily(fontFamily, fontWeight, isTitle, theme)};

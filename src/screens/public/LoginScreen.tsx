@@ -44,7 +44,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
         }}
       >
         <Button>
-          <ButtonText color="text" fontSize="xs" weight="bold">Esqueceu a senha?</ButtonText>
+          <ButtonText color="text" fontSize="sm" weight="bold">Esqueceu a senha?</ButtonText>
         </Button>
       </View>
       <Button
@@ -60,7 +60,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
         </ButtonText>
       </Button>
       <View style={{ flexDirection: "row", marginTop: 40 }}>
-        <Text fontSize="md" fontWeight="normal" padding={5}>Nao possui conta?</Text>
+        <Text fontSize="md" fontWeight="regular" padding={5}>Nao possui conta?</Text>
         <Button onPress={() =>
         navigation.navigate('Register')
       }>
