@@ -27,12 +27,16 @@ declare module 'styled-components/native' {
         bold: string;
       };
       sizes: {
-        xs: number;
-        sm: number;
-        md: number;
-        lg: number;
-        xl: number;
-        xxl: number;
+        xs: number,
+        sm: number,
+        md: number,
+        lg: number,
+        h6: number,
+        h5: number,
+        h4: number,
+        h3: number,
+        h2: number,
+        h1: number,
       };
       weights: {
         light: number;
