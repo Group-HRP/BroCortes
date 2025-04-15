@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { Title } from "./Typography";
 
 interface HeaderDefaultProps {
-  paddingTop?: number;
+	paddingTop?: number;
 }
 
 export const HeaderDefault = styled.View<HeaderDefaultProps>`
@@ -10,6 +10,6 @@ export const HeaderDefault = styled.View<HeaderDefaultProps>`
 `;
 
 export const HeaderTitle = styled(Title).attrs({
-  fontSize: "h1",  
-  isTitle: true      
+	fontSize: "h1",
+	isTitle: true,
 })``;
