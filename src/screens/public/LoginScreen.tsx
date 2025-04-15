@@ -14,7 +14,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
   const theme = useTheme();
   return (
     <Containerdefault alignItems="center" justifyContent="center">
-      <Title fontSize="sm" fontWeight="bold">
+      <Title fontSize="h5" fontWeight="bold">
         Acessar conta
       </Title>
       <Input
@@ -49,7 +49,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
       </View>
       <Button
         backgroundColor="primary"
-        marginVertical={24}
+        marginTop={24}
         width={186}
         paddingHorizontal={24}
         paddingVertical={12}

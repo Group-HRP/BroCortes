@@ -55,6 +55,8 @@ interface ButtonProps {
   margin?: number;
   marginHorizontal?: number;
   marginVertical?: number;
+  marginTop?: number;
+  marginBottom?: number;
   borderRadius?: number | keyof AppTheme['spacing'];
   fullWidth?: boolean;
   disabled?: boolean;
@@ -85,6 +87,8 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   ${({ margin }) => margin !== undefined && `margin: ${margin}px;`}
   ${({ marginHorizontal }) => marginHorizontal !== undefined && `margin-horizontal: ${marginHorizontal}px;`}
   ${({ marginVertical }) => marginVertical !== undefined && `margin-vertical: ${marginVertical}px;`}
+  ${({ marginTop }) => marginTop !== undefined && `margin-top: ${marginTop}px;`}
+  ${({ marginBottom }) => marginBottom !== undefined && `margin-bottom: ${marginBottom}px;`}
   
   /* Borders */
   ${({ borderRadius, theme }) => {
