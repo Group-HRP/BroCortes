@@ -1,118 +1,169 @@
 import styled from "styled-components/native";
-import type { 
-  StyleProps, 
-  ButtonTextProps,
-  ThemeColorKey,
-  ThemeFontSizeKey,
-  ThemeFontWeights,
-  ThemeFontFamilyKey
-} from "../@types/styleTypes";
-import type { ThemeType } from "../theme";
+import type { FontBody } from "../theme";
 
-// Helper functions
-const getThemeColor = (color: string | undefined, theme: ThemeType, defaultColor: string): string => {
-  if (!color) return defaultColor;
-  return theme.colors[color as ThemeColorKey] || color;
+type AppTheme = {
+  colors: {
+    background: string;
+    background200: string;
+    background300: string;
+    primary: string;
+    primary200: string;
+    primary300: string;
+    accent: string;
+    accent200: string;
+    accent300: string;
+    text: string;
+  };
+  fonts: {
+    body: FontBody;
+    heading: {
+      bold: string;
+    };
+    sizes: {
+      xs: number;
+      sm: number;
+      md: number;
+      lg: number;
+      xl: number;
+      xxl: number;
+    };
+    weights: {
+      light: number;
+      normal: number;
+      medium: number;
+      semiBold: number;
+      bold: number;
+      extraBold: number;
+    };
+    lineHeight: string;
+  };
+  spacing: {
+    small: number;
+    medium: number;
+    large: number;
+  };
 };
 
-const getFontSize = (fontSize: string | number | undefined, theme: ThemeType): number => {
-	if (typeof fontSize === 'number') return fontSize;
-	if (typeof fontSize === 'string' && fontSize in theme.fonts.sizes) {
-	  return theme.fonts.sizes[fontSize as keyof typeof theme.fonts.sizes];
-	}
-	return theme.fonts.sizes.md;
-  };
-  
-  const getFontWeight = (
-	weight: keyof ThemeType['fonts']['weights'] | string | number | undefined,
-	theme: ThemeType
-  ): string | number => {
-	if (typeof weight === 'number') return weight;
-	// biome-ignore lint/suspicious/noGlobalIsNan: <explanation>
-	if (typeof weight === 'string' && !isNaN(Number(weight))) return Number(weight);
-	if (typeof weight === 'string' && weight in theme.fonts.weights) {
-	  return theme.fonts.weights[weight as keyof typeof theme.fonts.weights];
-	}
-	return theme.fonts.weights.regular;
-  };
-  
-  const getFontFamily = (
-	fontFamily: string | undefined,
-	theme: ThemeType
-  ): string => {
-	if (!fontFamily) return theme.fonts.family.primary;
-	return theme.fonts.family[fontFamily as keyof typeof theme.fonts.family] || fontFamily;
-  };
+// Props do componente
+interface TypographyProps {
+  color?: keyof AppTheme['colors'] | string;
+  fontSize?: keyof AppTheme['fonts']['sizes'];
+  fontWeight?: keyof AppTheme['fonts']['weights'];
+  fontFamily?: keyof FontBody | keyof AppTheme['fonts']['heading'];
+  padding?: number;
+  paddingHorizontal?: number;
+  paddingVertical?: number;
+  margin?: number;
+  marginTop?: number;
+  marginBottom?: number;
+  marginLeft?: number;
+  marginRight?: number;
+  marginHorizontal?: number;
+  marginVertical?: number;
+  borderBottomWidth?: number;
+  borderColor?: keyof AppTheme['colors'];
+  borderWidth?: number;
+  borderRadius?: number | keyof AppTheme['spacing'];
+  textAlign?: "auto" | "center" | "left" | "right" | "justify";
+  lineHeight?: number;
+  letterSpacing?: number;
+  textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
+  isTitle?: boolean;
+}
 
-// Base Text Component
-const BaseText = styled.Text<StyleProps>`
-  /* Layout */
-  ${({ flex }) => flex !== undefined && `flex: ${flex};`}
-  
-  /* Spacing */
-  ${({ padding }) => padding !== undefined && `padding: ${padding}px;`}
-  ${({ paddingHorizontal }) => paddingHorizontal !== undefined && `padding-horizontal: ${paddingHorizontal}px;`}
-  ${({ paddingVertical }) => paddingVertical !== undefined && `padding-vertical: ${paddingVertical}px;`}
-  
-  /* Margin */
-  ${({ margin }) => margin !== undefined && `margin: ${margin}px;`}
-  ${({ marginTop }) => marginTop !== undefined && `margin-top: ${marginTop}px;`}
-  ${({ marginBottom }) => marginBottom !== undefined && `margin-bottom: ${marginBottom}px;`}
-  ${({ marginLeft }) => marginLeft !== undefined && `margin-left: ${marginLeft}px;`}
-  ${({ marginRight }) => marginRight !== undefined && `margin-right: ${marginRight}px;`}
-  ${({ marginHorizontal }) => marginHorizontal !== undefined && `margin-horizontal: ${marginHorizontal}px;`}
-  ${({ marginVertical }) => marginVertical !== undefined && `margin-vertical: ${marginVertical}px;`}
+// Funções auxiliares
+const getFontSize = (
+  fontSize: keyof AppTheme['fonts']['sizes'] | undefined,
+  isTitle: boolean | undefined,
+  theme: AppTheme
+): number => {
+  if (!fontSize) {
+    return isTitle
+      ? theme.fonts.sizes.md
+      : theme.fonts.sizes.lg;
+  }
 
-  /* Typography */
+  return theme.fonts.sizes[fontSize];
+};
+
+const getFontFamily = (
+  fontFamily: keyof FontBody | keyof AppTheme['fonts']['heading'] | undefined,
+  fontWeight: keyof AppTheme['fonts']['weights'] | undefined,
+  isTitle: boolean | undefined,
+  theme: AppTheme
+): string => {
+  if (fontFamily) {
+    return isTitle
+      // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+      ? theme.fonts.heading['bold'] || theme.fonts.heading.bold
+      : theme.fonts.body[fontFamily as keyof FontBody] || theme.fonts.body.regular;
+  }
+
+  const weight = fontWeight || "normal";
+  return isTitle
+    ? theme.fonts.heading.bold
+    : theme.fonts.body[weight as keyof FontBody] || theme.fonts.body.regular;
+};
+
+// Componente base
+const BaseText = styled.Text<TypographyProps>`
+  /* Cores */
   color: ${({ color, theme }) => {
     if (!color) return theme.colors.text;
-    return theme.colors[color as keyof typeof theme.colors] || color;
+    return theme.colors[color as keyof AppTheme['colors']] || color;
   }};
-  
-  font-size: ${({ fontSize, theme }) => `${getFontSize(fontSize, theme)}px`};
-  
-  font-weight: ${({ fontWeight, theme }) => {
-    const weight = getFontWeight(fontWeight, theme);
-    return typeof weight === 'number' ? weight.toString() : weight;
-  }};
-  
-  font-family: ${({ fontFamily, theme }) => getFontFamily(fontFamily, theme)};
-  
-  ${({ textAlign }) => textAlign !== undefined && `text-align: ${textAlign};`}
-  ${({ lineHeight }) => lineHeight !== undefined && `line-height: ${lineHeight}px;`}
-  ${({ letterSpacing }) => letterSpacing !== undefined && `letter-spacing: ${letterSpacing}px;`}
-  ${({ textTransform }) => textTransform !== undefined && `text-transform: ${textTransform};`}
 
-  /* Borders */
-  ${({ borderColor, theme }) => borderColor !== undefined && 
-    `border-color: ${theme.colors[borderColor as keyof typeof theme.colors] || borderColor};`}
+  /* Tipografia */
+  font-size: ${({ fontSize, isTitle, theme }) =>
+    `${getFontSize(fontSize, isTitle, theme)}px`};
   
-  ${({ borderWidth }) => borderWidth !== undefined && `border-width: ${borderWidth}px;`}
+  font-weight: ${({ fontWeight = "normal", theme }) =>
+    theme.fonts.weights[fontWeight]};
   
-  ${({ borderRadius }) => borderRadius !== undefined && 
-    `border-radius: ${typeof borderRadius === 'number' ? borderRadius : theme.spacing[borderRadius as keyof typeof theme.spacing]}px;`}
+  font-family: ${({ fontFamily, fontWeight, isTitle, theme }) =>
+    getFontFamily(fontFamily, fontWeight, isTitle, theme)};
+  
+  ${({ textAlign }) => textAlign && `text-align: ${textAlign};`}
+  ${({ lineHeight }) => lineHeight && `line-height: ${lineHeight}px;`}
+  ${({ letterSpacing }) => letterSpacing && `letter-spacing: ${letterSpacing}px;`}
+  ${({ textTransform }) => textTransform && `text-transform: ${textTransform};`}
+
+  /* Espaçamento */
+  ${({ padding }) => padding && `padding: ${padding}px;`}
+  ${({ paddingHorizontal }) => paddingHorizontal && `padding-horizontal: ${paddingHorizontal}px;`}
+  ${({ paddingVertical }) => paddingVertical && `padding-vertical: ${paddingVertical}px;`}
+  
+  /* Margens */
+  ${({ margin }) => margin && `margin: ${margin}px;`}
+  ${({ marginTop }) => marginTop && `margin-top: ${marginTop}px;`}
+  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}px;`}
+  ${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft}px;`}
+  ${({ marginRight }) => marginRight && `margin-right: ${marginRight}px;`}
+  ${({ marginHorizontal }) => marginHorizontal && `margin-horizontal: ${marginHorizontal}px;`}
+  ${({ marginVertical }) => marginVertical && `margin-vertical: ${marginVertical}px;`}
+
+  /* Bordas */
+  ${({ borderColor, theme }) => borderColor &&
+    `border-color: ${theme.colors[borderColor as keyof AppTheme['colors']] || borderColor};`}
+  
+  ${({ borderWidth }) => borderWidth && `border-width: ${borderWidth}px;`}
+  
+  ${({ borderRadius, theme }) => borderRadius &&
+    `border-radius: ${typeof borderRadius === 'number'
+      ? borderRadius
+      : theme.spacing[borderRadius as keyof AppTheme['spacing']]}px;`}
 `;
 
-// Title Component
+// Componentes exportados
 export const Title = styled(BaseText).attrs({
-  fontWeight: 'bold',
-  fontSize: 'lg'
-})`
-  /* Additional title-specific styles can go here */
-`;
+  isTitle: true
+})``;
 
-// Regular Text Component
 export const Text = styled(BaseText).attrs({
-  fontWeight: 'regular',
-  fontSize: 'md'
-})`
-  /* Additional text-specific styles can go here */
-`;
+  isTitle: false
+})``;
 
-// ButtonText Component
-export const ButtonText = styled(BaseText).attrs({
-  fontWeight: 'semiBold'
-})<ButtonTextProps>`
-  text-align: center;
-  ${({ uppercase }) => uppercase && 'text-transform: uppercase;'}
-`;
+// Extensão do DefaultTheme para incluir seu AppTheme
+declare module 'styled-components' {
+  export interface DefaultTheme extends AppTheme {}
+}
