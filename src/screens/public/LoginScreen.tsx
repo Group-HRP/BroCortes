@@ -69,4 +69,5 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
       </View>
     </Containerdefault>
   );
+
 }
