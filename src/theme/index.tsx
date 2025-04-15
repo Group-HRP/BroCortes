@@ -103,27 +103,21 @@ const theme = {
 	  heading: {
 		bold: "Satoshi-Bold",      
 	  },
-	  sizesHeading: {
-		base: 18,
-		tiny: 20,
-		small: 24,
-		regular: 32,
-		medium: 36,
-		large: 40,
-	  },
-	  sizesBody:{
-		tiny:12,
-		small:14,
-		regular:16,
-		medium:18,
+	  sizes: {
+		xs: 18,
+		sm: 20,
+		md: 24,
+		lg: 32,
+		xl: 36,
+		xxl: 40,
 	  },
 	  weights: {
 		light: 300,
-		normal: 400,
+		regular: 400,
 		medium: 500,
 		semiBold: 600,
 		bold: 700,
-		extraBold: 800,
+		black: 800,
 	  },
 	  lineHeight: "150%",
 	},
@@ -132,6 +126,19 @@ const theme = {
 	  medium: 16,
 	  large: 24,
 	},
+	borders: {
+		radius: {
+		  sm: 4,
+		  md: 8,
+		  lg: 16,
+		  full: 999,
+		},
+		width: {
+		  thin: 1,
+		  regular: 2,
+		  thick: 4,
+		},
+	}
   };
   
   export default theme;

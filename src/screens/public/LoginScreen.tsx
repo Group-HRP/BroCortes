@@ -14,7 +14,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
   const theme = useTheme();
   return (
     <Containerdefault alignItems="center" justifyContent="center">
-      <Title fontSize="small" fontWeight="bold">
+      <Title fontSize="sm" fontWeight="bold">
         Acessar conta
       </Title>
       <Input
@@ -44,7 +44,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
         }}
       >
         <Button>
-          <ButtonText color="text" fontSize="small" weight="bold">Esqueceu a senha?</ButtonText>
+          <ButtonText color="text" fontSize="xs" weight="bold">Esqueceu a senha?</ButtonText>
         </Button>
       </View>
       <Button
@@ -55,12 +55,12 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
         paddingVertical={12}
         borderRadius={18}
       >
-        <ButtonText fontSize="regular" weight="semiBold" color="background">
+        <ButtonText fontSize="md" weight="semiBold" color="background">
           Entrar
         </ButtonText>
       </Button>
       <View style={{ flexDirection: "row", marginTop: 40 }}>
-        <Text fontSize="regular" fontWeight="normal" padding={5}>Nao possui conta?</Text>
+        <Text fontSize="md" fontWeight="normal" padding={5}>Nao possui conta?</Text>
         <Button onPress={() =>
         navigation.navigate('Register')
       }>

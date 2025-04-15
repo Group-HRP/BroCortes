@@ -5,15 +5,13 @@ export default function RegisterScreen() {
 	return (
 		<Containerdefault justifyContent="center" alignItems="center">
 			<CustomContainer padding={32} alignItems="center">
-				<Title fontSize="small" marginBottom={16}>
+				<Title fontSize="sm" marginBottom={16}>
 					Criar conta
 				</Title>
 				<Text marginTop={16}>
 					Basta preencher os campos abaixo para criar sua conta!
 				</Text>
 			</CustomContainer>
-
-			<CustomContainer></CustomContainer>
 		</Containerdefault>
 	);
 }
