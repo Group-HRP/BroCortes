@@ -38,6 +38,10 @@ interface CustomContainerProps {
 	paddingHorizontal?: number;
 	paddingVertical?: number;
 	margin?: number;
+	marginTop?: number;
+	marginLeft?: number;
+	marginRight?: number;
+	marginBottom?: number;
 	marginHorizontal?: number;
 	marginVertical?: number;
 	backgroundColor?: string;
@@ -65,6 +69,10 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 	${({ paddingHorizontal }) => paddingHorizontal && `padding-horizontal: ${paddingHorizontal}px;`}
 	${({ paddingVertical }) => paddingVertical && `padding-vertical: ${paddingVertical}px;`}
 	${({ margin }) => margin && `margin: ${margin}px;`}
+	${({ marginTop }) => marginTop && `margin-top: ${marginTop}px;`}
+	${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft}px;`}
+	${({ marginRight }) => marginRight && `margin-right: ${marginRight}px;`}
+	${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}px;`}
 	${({ marginHorizontal }) => marginHorizontal && `margin-horizontal: ${marginHorizontal}px;`}
 	${({ marginVertical }) => marginVertical && `margin-vertical: ${marginVertical}px;`}
   

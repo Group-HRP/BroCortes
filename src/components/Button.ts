@@ -16,7 +16,7 @@ interface ButtonProps {
 	marginVertical?: number;
 	marginTop?: number;
 	marginBottom?: number;
-	borderRadius?: number | keyof DefaultTheme["spacing"];
+	borderRadius?: number | keyof DefaultTheme["borders"]["radius"];
 	fullWidth?: boolean;
 	disabled?: boolean;
 	alignSelf?: "flex-start" | "center" | "flex-end";
@@ -54,7 +54,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 		if (borderRadius === undefined) return "border-radius: 4px;";
 		if (typeof borderRadius === "number")
 			return `border-radius: ${borderRadius}px;`;
-		return `border-radius: ${theme.spacing[borderRadius]}px;`;
+		return `border-radius: ${theme.borders.radius[borderRadius]}px;`;
 	}}
   
   ${({ borderWidth }) => borderWidth !== undefined && `border-width: ${borderWidth}px;`}

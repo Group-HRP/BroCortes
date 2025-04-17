@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import type { DefaultTheme } from "styled-components";
 
 interface ContainerDefaultProps {
 	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
