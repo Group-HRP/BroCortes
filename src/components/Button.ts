@@ -1,27 +1,29 @@
 import styled from "styled-components/native";
-import type { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from "styled-components";
 
 interface ButtonProps {
-  padding?: number;
-  paddingHorizontal?: number;
-  paddingVertical?: number;
-  fontSize?: keyof DefaultTheme['fonts']['sizes'];
-  backgroundColor?: keyof DefaultTheme['colors'];
-  color?: keyof DefaultTheme['colors'];
-  fontFamily?: keyof DefaultTheme['fonts']['body'] | keyof DefaultTheme['fonts']['heading'];
-  margin?: number;
-  marginHorizontal?: number;
-  marginVertical?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  borderRadius?: number | keyof DefaultTheme['spacing'];
-  fullWidth?: boolean;
-  disabled?: boolean;
-  alignSelf?: "flex-start" | "center" | "flex-end";
-  width?: number | string;
-  height?: number | string;
-  borderWidth?: number;
-  borderColor?: keyof DefaultTheme['colors'];
+	padding?: number;
+	paddingHorizontal?: number;
+	paddingVertical?: number;
+	fontSize?: keyof DefaultTheme["fonts"]["sizes"];
+	backgroundColor?: keyof DefaultTheme["colors"];
+	color?: keyof DefaultTheme["colors"];
+	fontFamily?:
+		| keyof DefaultTheme["fonts"]["body"]
+		| keyof DefaultTheme["fonts"]["heading"];
+	margin?: number;
+	marginHorizontal?: number;
+	marginVertical?: number;
+	marginTop?: number;
+	marginBottom?: number;
+	borderRadius?: number | keyof DefaultTheme["spacing"];
+	fullWidth?: boolean;
+	disabled?: boolean;
+	alignSelf?: "flex-start" | "center" | "flex-end";
+	width?: number | string;
+	height?: number | string;
+	borderWidth?: number;
+	borderColor?: keyof DefaultTheme["colors"];
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
@@ -33,7 +35,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   
   /* Appearance */
   background-color: ${({ backgroundColor, theme }) =>
-    backgroundColor ? theme.colors[backgroundColor] : theme.colors.background};
+		backgroundColor ? theme.colors[backgroundColor] : theme.colors.background};
   
   /* Spacing */
   ${({ padding }) => padding !== undefined && `padding: ${padding}px;`}
@@ -49,15 +51,15 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   
   /* Borders */
   ${({ borderRadius, theme }) => {
-    if (borderRadius === undefined) return "border-radius: 4px;";
-    if (typeof borderRadius === "number") return `border-radius: ${borderRadius}px;`;
-    return `border-radius: ${theme.spacing[borderRadius]}px;`;
-  }}
+		if (borderRadius === undefined) return "border-radius: 4px;";
+		if (typeof borderRadius === "number")
+			return `border-radius: ${borderRadius}px;`;
+		return `border-radius: ${theme.spacing[borderRadius]}px;`;
+	}}
   
   ${({ borderWidth }) => borderWidth !== undefined && `border-width: ${borderWidth}px;`}
   ${({ borderColor, theme }) =>
-    borderColor !== undefined &&
-    `border-color: ${theme.colors[borderColor]};`}
+		borderColor !== undefined && `border-color: ${theme.colors[borderColor]};`}
   
   /* States */
   ${({ disabled }) => disabled && "opacity: 0.6;"}
@@ -68,12 +70,14 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 `;
 
 interface ButtonTextProps {
-  color?: keyof DefaultTheme['colors'];
-  fontSize?: keyof DefaultTheme['fonts']['sizes'];
-  fontFamily?: keyof DefaultTheme['fonts']['body'] | keyof DefaultTheme['fonts']['heading'];
-  weight?: keyof DefaultTheme['fonts']['weights'];
-  uppercase?: boolean;
-  isTitle?: boolean;
+	color?: keyof DefaultTheme["colors"];
+	fontSize?: keyof DefaultTheme["fonts"]["sizes"];
+	fontFamily?:
+		| keyof DefaultTheme["fonts"]["body"]
+		| keyof DefaultTheme["fonts"]["heading"];
+	weight?: keyof DefaultTheme["fonts"]["weights"];
+	uppercase?: boolean;
+	isTitle?: boolean;
 }
 
 export const ButtonText = styled.Text<ButtonTextProps>`
@@ -81,14 +85,13 @@ export const ButtonText = styled.Text<ButtonTextProps>`
   font-size: ${({ fontSize = "md", theme }) => theme.fonts.sizes[fontSize]}px;
   font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights[weight]};
   font-family: ${({ fontFamily, weight = "normal", isTitle, theme }) => {
-    if (fontFamily) {
-      return isTitle
-        ? theme.fonts.heading.bold
-        : theme.fonts.body[fontFamily];
-    }
-    return isTitle
-      ? theme.fonts.heading.bold
-      : theme.fonts.body[weight as keyof typeof theme.fonts.body] || theme.fonts.body.regular;
-  }};
+		if (fontFamily) {
+			return isTitle ? theme.fonts.heading.bold : theme.fonts.body[fontFamily];
+		}
+		return isTitle
+			? theme.fonts.heading.bold
+			: theme.fonts.body[weight as keyof typeof theme.fonts.body] ||
+					theme.fonts.body.regular;
+	}};
   ${({ uppercase }) => uppercase && "text-transform: uppercase;"}
 `;
