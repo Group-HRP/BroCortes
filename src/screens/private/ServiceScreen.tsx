@@ -70,7 +70,6 @@ export default function ServiceScreen() {
 				<HeaderDefault paddingTop={40}>
 					<HeaderTitle fontWeight="bold">Selecionar serviços</HeaderTitle>
 
-					{/* Implementar aqui o FlatList */}
 					<FlatList
 						data={category}
 						keyExtractor={(item) => item.id.toString()}
