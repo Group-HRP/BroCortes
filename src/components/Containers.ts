@@ -21,6 +21,7 @@ export const Containerdefault = styled.View<ContainerdefaultProps>`
 `;
 
 interface CustomContainerProps {
+	display?: "flex";
 	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
 	flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
 	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
@@ -45,9 +46,14 @@ interface CustomContainerProps {
 	borderWidth?: number;
 	borderColor?: string;
 	gap?: number;
+	marginTop: number;
 }
 
 export const CustomContainer = styled.View<CustomContainerProps>`
+
+	/*Display*/
+	display: ${({ display }) => display };
+
 	/* Flexbox */
 	${({ flex }) => flex !== undefined && `flex: ${flex};`}
 	${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`}
@@ -67,6 +73,7 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 	${({ margin }) => margin && `margin: ${margin}px;`}
 	${({ marginHorizontal }) => marginHorizontal && `margin-horizontal: ${marginHorizontal}px;`}
 	${({ marginVertical }) => marginVertical && `margin-vertical: ${marginVertical}px;`}
+	${({ marginTop }) => marginTop && `margin-top: ${marginTop}px;`}
   
 	/* Appearance */
 	${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
