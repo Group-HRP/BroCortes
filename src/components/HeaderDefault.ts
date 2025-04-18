@@ -10,6 +10,6 @@ export const HeaderDefault = styled.View<HeaderDefaultProps>`
 `;
 
 export const HeaderTitle = styled(Title).attrs({
-	fontSize: "large",
+	fontSize: "h4",
 	isTitle: true,
 })``;

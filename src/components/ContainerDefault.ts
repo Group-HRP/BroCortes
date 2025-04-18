@@ -25,6 +25,7 @@ interface ContainerDefaultProps {
 	borderRadius?: number;
 	borderWidth?: number;
 	borderColor?: string;
+	position?: "abosolute" | "relative";
 }
 
 export const ContainerDefault = styled.View<ContainerDefaultProps>`
@@ -34,4 +35,6 @@ export const ContainerDefault = styled.View<ContainerDefaultProps>`
   height: 100%;
   ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
   ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
+
+  ${({ position }) => position && `position: ${position};`}
 `;

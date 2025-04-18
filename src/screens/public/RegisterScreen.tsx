@@ -45,9 +45,11 @@ export default function RegisterScreen() {
 					paddingHorizontal={24}
 					borderRadius={"lg"}
 				>
-					<ButtonText color="background" weight="semiBold">Criar conta</ButtonText>
+					<ButtonText color="background" weight="semiBold">
+						Criar conta
+					</ButtonText>
 				</Button>
-			</CustomContainer>	
+			</CustomContainer>
 		</Containerdefault>
 	);
 }

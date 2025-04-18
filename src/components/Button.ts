@@ -24,14 +24,28 @@ interface ButtonProps {
 	height?: number | string;
 	borderWidth?: number;
 	borderColor?: keyof DefaultTheme["colors"];
+	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
+	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	justifyContent?:
+		| "flex-start"
+		| "center"
+		| "flex-end"
+		| "space-between"
+		| "space-around"
+		| "space-evenly";
+	flex?: number;
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
   /* Layout */
+  ${({ flex }) => flex !== undefined && `flex: ${flex};`}
   ${({ fullWidth }) => fullWidth && "width: 100%;"}
   ${({ width }) => width !== undefined && `width: ${typeof width === "number" ? `${width}px` : width};`}
   ${({ height }) => height !== undefined && `height: ${typeof height === "number" ? `${height}px` : height};`}
   ${({ alignSelf }) => alignSelf && `align-self: ${alignSelf};`}
+  ${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`}
+  ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
+  ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
   
   /* Appearance */
   background-color: ${({ backgroundColor, theme }) =>
