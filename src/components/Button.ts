@@ -1,76 +1,27 @@
 import styled from "styled-components/native";
-import type { FontBody } from "../theme";
-
-type AppTheme = {
-	colors: {
-		background: string;
-		background200: string;
-		background300: string;
-		primary: string;
-		primary200: string;
-		primary300: string;
-		accent: string;
-		accent200: string;
-		accent300: string;
-		text: string;
-	};
-	fonts: {
-		body: FontBody;
-		heading: {
-			bold: string;
-		};
-		sizes: {
-			xs: number;
-			sm: number;
-			md: number;
-			lg: number;
-			h6: number;
-			h5: number;
-			h4: number;
-			h3: number;
-			h2: number;
-			h1: number;
-		};
-		weights: {
-			light: number;
-			normal: number;
-			medium: number;
-			semiBold: number;
-			bold: number;
-			extraBold: number;
-		};
-		lineHeight: string;
-	};
-	spacing: {
-		small: number;
-		medium: number;
-		large: number;
-	};
-};
+import type { DefaultTheme } from 'styled-components';
 
 interface ButtonProps {
-	padding?: number;
-	paddingHorizontal?: number;
-	paddingVertical?: number;
-	fontSize?: keyof AppTheme["fonts"]["sizes"];
-	backgroundColor?: keyof AppTheme["colors"];
-	color?: keyof AppTheme["colors"];
-	fontFamily?:
-		| keyof AppTheme["fonts"]["body"]
-		| keyof AppTheme["fonts"]["heading"];
-	margin?: number;
-	marginHorizontal?: number;
-	marginVertical?: number;
-	marginTop?: number;
-	marginBottom?: number;
-	borderRadius?: number | keyof AppTheme["spacing"];
-	fullWidth?: boolean;
-	disabled?: boolean;
-	alignSelf?: "flex-start" | "center" | "flex-end";
-	width?: number | string;
-	height?: number | string;
-	borderWidth?: number;
-	borderColor?: keyof AppTheme["colors"];
+  padding?: number;
+  paddingHorizontal?: number;
+  paddingVertical?: number;
+  fontSize?: keyof DefaultTheme['fonts']['sizes'];
+  backgroundColor?: keyof DefaultTheme['colors'];
+  color?: keyof DefaultTheme['colors'];
+  fontFamily?: keyof DefaultTheme['fonts']['body'] | keyof DefaultTheme['fonts']['heading'];
+  margin?: number;
+  marginHorizontal?: number;
+  marginVertical?: number;
+  marginTop?: number;
+  marginBottom?: number;
+  borderRadius?: number | keyof DefaultTheme['spacing'];
+  fullWidth?: boolean;
+  disabled?: boolean;
+  alignSelf?: "flex-start" | "center" | "flex-end";
+  width?: number | string;
+  height?: number | string;
+  borderWidth?: number;
+  borderColor?: keyof DefaultTheme['colors'];
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
@@ -117,34 +68,27 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 `;
 
 interface ButtonTextProps {
-	color?: keyof AppTheme["colors"];
-	fontSize?: keyof AppTheme["fonts"]["sizes"];
-	fontFamily?:
-		| keyof AppTheme["fonts"]["body"]
-		| keyof AppTheme["fonts"]["heading"];
-	weight?: keyof AppTheme["fonts"]["weights"];
-	uppercase?: boolean;
-	isTitle?: boolean;
+  color?: keyof DefaultTheme['colors'];
+  fontSize?: keyof DefaultTheme['fonts']['sizes'];
+  fontFamily?: keyof DefaultTheme['fonts']['body'] | keyof DefaultTheme['fonts']['heading'];
+  weight?: keyof DefaultTheme['fonts']['weights'];
+  uppercase?: boolean;
+  isTitle?: boolean;
 }
 
 export const ButtonText = styled.Text<ButtonTextProps>`
   color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.text)};
   font-size: ${({ fontSize = "md", theme }) => theme.fonts.sizes[fontSize]}px;
-  font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights};
+  font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights[weight]};
   font-family: ${({ fontFamily, weight = "normal", isTitle, theme }) => {
-		if (fontFamily) {
-			return isTitle
-				? // biome-ignore lint/complexity/useLiteralKeys: <explanation>
-					theme.fonts.heading["bold"] || theme.fonts.heading.bold
-				: theme.fonts.body[fontFamily as keyof FontBody];
-		}
-		return isTitle
-			? theme.fonts.heading.bold
-			: theme.fonts.body[weight as keyof FontBody] || theme.fonts.body.regular;
-	}};
+    if (fontFamily) {
+      return isTitle
+        ? theme.fonts.heading.bold
+        : theme.fonts.body[fontFamily];
+    }
+    return isTitle
+      ? theme.fonts.heading.bold
+      : theme.fonts.body[weight as keyof typeof theme.fonts.body] || theme.fonts.body.regular;
+  }};
   ${({ uppercase }) => uppercase && "text-transform: uppercase;"}
 `;
-
-declare module "styled-components" {
-	export interface DefaultTheme extends AppTheme {}
-}
