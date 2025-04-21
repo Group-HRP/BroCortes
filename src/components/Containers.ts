@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 interface ContainerdefaultProps {
-	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	alignItems?: "normal" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
 	justifyContent?:
 		| "flex-start"
 		| "center"
@@ -24,7 +24,7 @@ interface CustomContainerProps {
 	display?: "flex";
 	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
 	flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
-	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	alignItems?: "normal" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
 	justifyContent?:
 		| "flex-start"
 		| "center"
