@@ -34,6 +34,7 @@ interface ButtonProps {
 		| "space-around"
 		| "space-evenly";
 	flex?: number;
+	display?: string;
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
