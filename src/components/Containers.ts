@@ -39,6 +39,10 @@ interface CustomContainerProps {
 	paddingHorizontal?: number;
 	paddingVertical?: number;
 	margin?: number;
+	marginTop?: number;
+	marginLeft?: number;
+	marginRight?: number;
+	marginBottom?: number;
 	marginHorizontal?: number;
 	marginVertical?: number;
 	backgroundColor?: string;
@@ -46,7 +50,9 @@ interface CustomContainerProps {
 	borderWidth?: number;
 	borderColor?: string;
 	gap?: number;
-	marginTop: number;
+	bottom?: number;
+	zIndex?: number;
+	position?: "absolute" | "relative";
 }
 
 export const CustomContainer = styled.View<CustomContainerProps>`
@@ -61,23 +67,33 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 	${({ gap }) => gap && `gap: ${gap}px;`}
 	${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
 	${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
-  
+	${({ zIndex }) => zIndex && `z-index: ${zIndex};`}
+
 	/* Dimensions */
 	${({ width }) => width && `width: ${typeof width === "number" ? `${width}px` : width};`}
 	${({ height }) => height && `height: ${typeof height === "number" ? `${height}px` : height};`}
-  
+
 	/* Spacing */
 	${({ padding }) => padding && `padding: ${padding}px;`}
 	${({ paddingHorizontal }) => paddingHorizontal && `padding-horizontal: ${paddingHorizontal}px;`}
 	${({ paddingVertical }) => paddingVertical && `padding-vertical: ${paddingVertical}px;`}
 	${({ margin }) => margin && `margin: ${margin}px;`}
+	${({ marginTop }) => marginTop && `margin-top: ${marginTop}px;`}
+	${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft}px;`}
+	${({ marginRight }) => marginRight && `margin-right: ${marginRight}px;`}
+	${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}px;`}
 	${({ marginHorizontal }) => marginHorizontal && `margin-horizontal: ${marginHorizontal}px;`}
 	${({ marginVertical }) => marginVertical && `margin-vertical: ${marginVertical}px;`}
 	${({ marginTop }) => marginTop && `margin-top: ${marginTop}px;`}
-  
-	/* Appearance */
+
 	${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
 	${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius}px;`}
 	${({ borderWidth }) => borderWidth && `border-width: ${borderWidth}px;`}
 	${({ borderColor }) => borderColor && `border-color: ${borderColor};`}
-  `;
+
+	/* Position */
+	${({ position }) => position && `position: ${position};`}
+	${({ bottom }) => bottom && `bottom: ${bottom};`}
+`;
+
+export const ContainerFooter = styled(CustomContainer)``;

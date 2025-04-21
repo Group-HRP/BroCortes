@@ -2,30 +2,43 @@ import styled from "styled-components/native";
 import type { DefaultTheme } from "styled-components";
 
 interface ButtonProps {
-  padding?: number;
-  paddingHorizontal?: number;
-  paddingVertical?: number;
-  fontSize?: keyof DefaultTheme['fonts']['sizes'];
-  backgroundColor?: keyof DefaultTheme['colors'];
-  color?: keyof DefaultTheme['colors'];
-  fontFamily?: keyof DefaultTheme['fonts']['body'] | keyof DefaultTheme['fonts']['heading'];
-  margin?: number;
-  marginHorizontal?: number;
-  marginVertical?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  borderRadius?: number | keyof DefaultTheme['spacing'];
-  fullWidth?: boolean;
-  disabled?: boolean;
-  alignSelf?: "flex-start" | "center" | "flex-end";
-  width?: number | string;
-  height?: number | string;
-  borderWidth?: number;
-  borderColor?: keyof DefaultTheme['colors'];
+	padding?: number;
+	paddingHorizontal?: number;
+	paddingVertical?: number;
+	fontSize?: keyof DefaultTheme["fonts"]["sizes"];
+	backgroundColor?: keyof DefaultTheme["colors"];
+	color?: keyof DefaultTheme["colors"];
+	fontFamily?:
+		| keyof DefaultTheme["fonts"]["body"]
+		| keyof DefaultTheme["fonts"]["heading"];
+	margin?: number;
+	marginHorizontal?: number;
+	marginVertical?: number;
+	marginTop?: number;
+	marginBottom?: number;
+	borderRadius?: number | keyof DefaultTheme["borders"]["radius"];
+	fullWidth?: boolean;
+	disabled?: boolean;
+	alignSelf?: "flex-start" | "center" | "flex-end";
+	width?: number | string;
+	height?: number | string;
+	borderWidth?: number;
+	borderColor?: keyof DefaultTheme["colors"];
+	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
+	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	justifyContent?:
+		| "flex-start"
+		| "center"
+		| "flex-end"
+		| "space-between"
+		| "space-around"
+		| "space-evenly";
+	flex?: number;
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
   /* Layout */
+  ${({ flex }) => flex !== undefined && `flex: ${flex};`}
   ${({ fullWidth }) => fullWidth && "width: 100%;"}
   ${({ width }) => width !== undefined && `width: ${typeof width === "number" ? `${width}px` : width};`}
   ${({ height }) => height !== undefined && `height: ${typeof height === "number" ? `${height}px` : height};`}
@@ -34,6 +47,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   ${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`}
   ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
   ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
+
   
   /* Appearance */
   background-color: ${({ backgroundColor, theme }) =>
@@ -56,7 +70,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 		if (borderRadius === undefined) return "border-radius: 4px;";
 		if (typeof borderRadius === "number")
 			return `border-radius: ${borderRadius}px;`;
-		return `border-radius: ${theme.spacing[borderRadius]}px;`;
+		return `border-radius: ${theme.borders.radius[borderRadius]}px;`;
 	}}
   
   ${({ borderWidth }) => borderWidth !== undefined && `border-width: ${borderWidth}px;`}

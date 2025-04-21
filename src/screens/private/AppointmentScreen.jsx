@@ -43,7 +43,6 @@ export default function AppointmentScreen() {
 						Agendar Agora
 					</ButtonText>
 				</Button>
-
 			</View>
 		</ContainerDefault>
 	);
