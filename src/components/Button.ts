@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import type { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from "styled-components";
 
 interface ButtonProps {
   padding?: number;
@@ -22,10 +22,6 @@ interface ButtonProps {
   height?: number | string;
   borderWidth?: number;
   borderColor?: keyof DefaultTheme['colors'];
-  display?: string;
-  flexDirection?: string;
-  justifyContent?: string;
-  alignItems?: string;
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
@@ -73,12 +69,14 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 `;
 
 interface ButtonTextProps {
-  color?: keyof DefaultTheme['colors'];
-  fontSize?: keyof DefaultTheme['fonts']['sizes'];
-  fontFamily?: keyof DefaultTheme['fonts']['body'] | keyof DefaultTheme['fonts']['heading'];
-  weight?: keyof DefaultTheme['fonts']['weights'];
-  uppercase?: boolean;
-  isTitle?: boolean;
+	color?: keyof DefaultTheme["colors"];
+	fontSize?: keyof DefaultTheme["fonts"]["sizes"];
+	fontFamily?:
+		| keyof DefaultTheme["fonts"]["body"]
+		| keyof DefaultTheme["fonts"]["heading"];
+	weight?: keyof DefaultTheme["fonts"]["weights"];
+	uppercase?: boolean;
+	isTitle?: boolean;
 }
 
 export const ButtonText = styled.Text<ButtonTextProps>`
@@ -86,14 +84,13 @@ export const ButtonText = styled.Text<ButtonTextProps>`
   font-size: ${({ fontSize = "md", theme }) => theme.fonts.sizes[fontSize]}px;
   font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights[weight]};
   font-family: ${({ fontFamily, weight = "normal", isTitle, theme }) => {
-    if (fontFamily) {
-      return isTitle
-        ? theme.fonts.heading.bold
-        : theme.fonts.body[fontFamily];
-    }
-    return isTitle
-      ? theme.fonts.heading.bold
-      : theme.fonts.body[weight as keyof typeof theme.fonts.body] || theme.fonts.body.regular;
-  }};
+		if (fontFamily) {
+			return isTitle ? theme.fonts.heading.bold : theme.fonts.body[fontFamily];
+		}
+		return isTitle
+			? theme.fonts.heading.bold
+			: theme.fonts.body[weight as keyof typeof theme.fonts.body] ||
+					theme.fonts.body.regular;
+	}};
   ${({ uppercase }) => uppercase && "text-transform: uppercase;"}
 `;

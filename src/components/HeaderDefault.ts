@@ -21,3 +21,4 @@ export const HeaderTitle = styled(Title).attrs({
 	fontSize: "h1",
 	isTitle: true,
 })``;
+
