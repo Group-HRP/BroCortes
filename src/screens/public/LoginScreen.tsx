@@ -11,63 +11,64 @@ interface LoginScreenProps {
 }
 
 export default function LoginScreen({ navigation }: LoginScreenProps) {
-  const theme = useTheme();
-  return (
-    <Containerdefault alignItems="center" justifyContent="center">
-      <Title fontSize="h5" fontWeight="bold">
-        Acessar conta
-      </Title>
-      <Input
-        placeholder="Email"
-        padding={12}
-        borderRadius={8}
-        borderSize={1}
-        fontFamily="regular"
-        marginTop={32}
-        marginBottom={6}
-      />
-      <Input
-        placeholder="Senha"
-        secureTextEntry={true}
-        padding={12}
-        borderRadius={8}
-        borderSize={1}
-        fontFamily="regular"
-        marginTop={6}
-        marginBottom={6}
-      />
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "flex-start",
-          width:"100%",
-        }}
-      >
-        <Button>
-          <ButtonText color="text" fontSize="sm" weight="bold">Esqueceu a senha?</ButtonText>
-        </Button>
-      </View>
-      <Button
-        backgroundColor="primary"
-        marginTop={24}
-        width={186}
-        paddingHorizontal={24}
-        paddingVertical={12}
-        borderRadius={18}
-      >
-        <ButtonText fontSize="md" weight="semiBold" color="background">
-          Entrar
-        </ButtonText>
-      </Button>
-      <View style={{ flexDirection: "row", marginTop: 40 }}>
-        <Text fontSize="md" fontWeight="regular" padding={5}>Nao possui conta?</Text>
-        <Button onPress={() =>
-        navigation.navigate('Register')
-      }>
-          <ButtonText color="primary200">Criar conta</ButtonText>
-        </Button>
-      </View>
-    </Containerdefault>
-  );
-
+	const theme = useTheme();
+	return (
+		<Containerdefault alignItems="center" justifyContent="center">
+			<Title fontSize="h5" fontWeight="bold">
+				Acessar conta
+			</Title>
+			<Input
+				placeholder="Email"
+				padding={12}
+				borderRadius={8}
+				borderSize={1}
+				fontFamily="regular"
+				marginTop={32}
+				marginBottom={6}
+			/>
+			<Input
+				placeholder="Senha"
+				secureTextEntry={true}
+				padding={12}
+				borderRadius={8}
+				borderSize={1}
+				fontFamily="regular"
+				marginTop={6}
+				marginBottom={6}
+			/>
+			<View
+				style={{
+					flexDirection: "row",
+					alignItems: "flex-start",
+					width: "100%",
+				}}
+			>
+				<Button>
+					<ButtonText color="text" fontSize="sm" weight="bold">
+						Esqueceu a senha?
+					</ButtonText>
+				</Button>
+			</View>
+			<Button
+				backgroundColor="primary"
+				marginTop={24}
+				width={186}
+				paddingHorizontal={24}
+				paddingVertical={12}
+				borderRadius={18}
+			>
+				<ButtonText fontSize="md" weight="semiBold" color="background">
+					Entrar
+				</ButtonText>
+			</Button>
+			<View style={{ flexDirection: "row", marginTop: 40 }}>
+				<Text fontSize="md" fontWeight="regular" padding={5}>
+					Nao possui conta?
+				</Text>
+				<Button onPress={() => navigation.navigate("Register")}>
+					<ButtonText color="primary200">Criar conta</ButtonText>
+				</Button>
+			</View>
+		</Containerdefault>
+	);
 }
