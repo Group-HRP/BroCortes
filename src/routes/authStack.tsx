@@ -5,6 +5,7 @@ import AppointmentScreen from "../screens/private/AppointmentScreen";
 import HistoricScreen from "../screens/private/HistoricScreen";
 import ProfileScreen from "../screens/private/ProfileScreen";
 import ServiceScreen from "../screens/private/ServiceScreen";
+import { HoursScreen } from "../screens/private/HoursScreen";
 
 
 export type AuthStackParamList = {

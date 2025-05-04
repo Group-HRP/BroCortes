@@ -7,6 +7,7 @@ interface HeaderDefaultProps {
 	alignItems?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
 	justifyContent?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
 	flexDirection?: "column" | "row";
+	marginBottom?: number;
 }
 
 export const HeaderDefault = styled.View<HeaderDefaultProps>`
@@ -22,4 +23,10 @@ export const HeaderTitle = styled(Title).attrs({
 	isTitle: true,
 })``;
 
+  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}`}
+`;
 
+export const HeaderTitle = styled(Title).attrs({
+	fontSize: "h4",
+	isTitle: true,
+})``;

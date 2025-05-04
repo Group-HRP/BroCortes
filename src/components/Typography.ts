@@ -81,9 +81,8 @@ const BaseText = styled.Text<TypographyProps>`
   
   font-family: ${({ fontFamily, fontWeight, isTitle, theme }) =>
 		getFontFamily(fontFamily, fontWeight, isTitle, theme)};
-  
-
 `;
 
 export const Title = styled(BaseText).attrs({ isTitle: true })``;
 export const Text = styled(BaseText).attrs({ isTitle: false })``;
+
