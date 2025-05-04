@@ -15,6 +15,7 @@ export type AuthStackParamList = {
 	Historic: undefined;
 	Profile: undefined;
 	Service: undefined;
+	Hours: undefined;
 
 };
 
@@ -26,6 +27,7 @@ export default function AuthStack() {
 			<Stack.Screen name="Profile" component={ProfileScreen} />
 			<Stack.Screen name="Historic" component={HistoricScreen} />
 			<Stack.Screen name="Appointment" component={AppointmentScreen} />
+			<Stack.Screen name="Hours" component={HoursScreen} />
 			<Stack.Screen name="Service" component={ServiceScreen} />
 			<Stack.Screen name="Login" component={LoginScreen} />
 			<Stack.Screen name="Register" component={RegisterScreen} />

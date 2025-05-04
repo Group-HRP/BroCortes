@@ -16,6 +16,7 @@ export const HeaderDefault = styled.View<HeaderDefaultProps>`
   align-items: ${({ alignItems }) => alignItems};
   justify-content: ${({ justifyContent }) => justifyContent};
   flex-direction: ${({ flexDirection }) => flexDirection };
+  margin-bottom: ${({ marginBottom }) => marginBottom || 0}px;
 `;
 
 export const HeaderTitle = styled(Title).attrs({
@@ -23,10 +24,3 @@ export const HeaderTitle = styled(Title).attrs({
 	isTitle: true,
 })``;
 
-  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}`}
-`;
-
-export const HeaderTitle = styled(Title).attrs({
-	fontSize: "h4",
-	isTitle: true,
-})``;
