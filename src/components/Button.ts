@@ -1,80 +1,54 @@
 import styled from "styled-components/native";
-import type { FontBody } from "../theme";
-
-type AppTheme = {
-	colors: {
-		background: string;
-		background200: string;
-		background300: string;
-		primary: string;
-		primary200: string;
-		primary300: string;
-		accent: string;
-		accent200: string;
-		accent300: string;
-		text: string;
-	};
-	fonts: {
-		body: FontBody;
-		heading: {
-			bold: string;
-		};
-		sizes: {
-			xs: number;
-			sm: number;
-			md: number;
-			lg: number;
-			xl: number;
-			xxl: number;
-		};
-		weights: {
-			light: number;
-			normal: number;
-			medium: number;
-			semiBold: number;
-			bold: number;
-			extraBold: number;
-		};
-		lineHeight: string;
-	};
-	spacing: {
-		small: number;
-		medium: number;
-		large: number;
-	};
-};
+import type { DefaultTheme } from "styled-components";
 
 interface ButtonProps {
 	padding?: number;
 	paddingHorizontal?: number;
 	paddingVertical?: number;
-	fontSize?: keyof AppTheme["fonts"]["sizes"];
-	backgroundColor?: keyof AppTheme["colors"];
-	color?: keyof AppTheme["colors"];
+	fontSize?: keyof DefaultTheme["fonts"]["sizes"];
+	backgroundColor?: keyof DefaultTheme["colors"];
+	color?: keyof DefaultTheme["colors"];
 	fontFamily?:
-		| keyof AppTheme["fonts"]["body"]
-		| keyof AppTheme["fonts"]["heading"];
+		| keyof DefaultTheme["fonts"]["body"]
+		| keyof DefaultTheme["fonts"]["heading"];
 	margin?: number;
 	marginHorizontal?: number;
 	marginVertical?: number;
 	marginTop?: number;
 	marginBottom?: number;
-	borderRadius?: number | keyof AppTheme["spacing"];
+	borderRadius?: number | keyof DefaultTheme["borders"]["radius"];
 	fullWidth?: boolean;
 	disabled?: boolean;
 	alignSelf?: "flex-start" | "center" | "flex-end";
 	width?: number | string;
 	height?: number | string;
 	borderWidth?: number;
-	borderColor?: keyof AppTheme["colors"];
+	borderColor?: keyof DefaultTheme["colors"];
+	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
+	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	justifyContent?:
+		| "flex-start"
+		| "center"
+		| "flex-end"
+		| "space-between"
+		| "space-around"
+		| "space-evenly";
+	flex?: number;
+	display?: string;
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
   /* Layout */
+  ${({ flex }) => flex !== undefined && `flex: ${flex};`}
   ${({ fullWidth }) => fullWidth && "width: 100%;"}
   ${({ width }) => width !== undefined && `width: ${typeof width === "number" ? `${width}px` : width};`}
   ${({ height }) => height !== undefined && `height: ${typeof height === "number" ? `${height}px` : height};`}
   ${({ alignSelf }) => alignSelf && `align-self: ${alignSelf};`}
+  ${({ display }) => display && `display: ${display};`}
+  ${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`}
+  ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
+  ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
+
   
   /* Appearance */
   background-color: ${({ backgroundColor, theme }) =>
@@ -97,7 +71,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 		if (borderRadius === undefined) return "border-radius: 4px;";
 		if (typeof borderRadius === "number")
 			return `border-radius: ${borderRadius}px;`;
-		return `border-radius: ${theme.spacing[borderRadius]}px;`;
+		return `border-radius: ${theme.borders.radius[borderRadius]}px;`;
 	}}
   
   ${({ borderWidth }) => borderWidth !== undefined && `border-width: ${borderWidth}px;`}
@@ -107,18 +81,15 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   /* States */
   ${({ disabled }) => disabled && "opacity: 0.6;"}
   
-  /* Flex */
-  justify-content: center;
-  align-items: center;
 `;
 
 interface ButtonTextProps {
-	color?: keyof AppTheme["colors"];
-	fontSize?: keyof AppTheme["fonts"]["sizes"];
+	color?: keyof DefaultTheme["colors"];
+	fontSize?: keyof DefaultTheme["fonts"]["sizes"];
 	fontFamily?:
-		| keyof AppTheme["fonts"]["body"]
-		| keyof AppTheme["fonts"]["heading"];
-	weight?: keyof AppTheme["fonts"]["weights"];
+		| keyof DefaultTheme["fonts"]["body"]
+		| keyof DefaultTheme["fonts"]["heading"];
+	weight?: keyof DefaultTheme["fonts"]["weights"];
 	uppercase?: boolean;
 	isTitle?: boolean;
 }
@@ -126,21 +97,15 @@ interface ButtonTextProps {
 export const ButtonText = styled.Text<ButtonTextProps>`
   color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.text)};
   font-size: ${({ fontSize = "md", theme }) => theme.fonts.sizes[fontSize]}px;
-  font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights};
+  font-weight: ${({ weight = "semiBold", theme }) => theme.fonts.weights[weight]};
   font-family: ${({ fontFamily, weight = "normal", isTitle, theme }) => {
 		if (fontFamily) {
-			return isTitle
-				? // biome-ignore lint/complexity/useLiteralKeys: <explanation>
-					theme.fonts.heading["bold"] || theme.fonts.heading.bold
-				: theme.fonts.body[fontFamily as keyof FontBody];
+			return isTitle ? theme.fonts.heading.bold : theme.fonts.body[fontFamily];
 		}
 		return isTitle
 			? theme.fonts.heading.bold
-			: theme.fonts.body[weight as keyof FontBody] || theme.fonts.body.regular;
+			: theme.fonts.body[weight as keyof typeof theme.fonts.body] ||
+					theme.fonts.body.regular;
 	}};
   ${({ uppercase }) => uppercase && "text-transform: uppercase;"}
 `;
-
-declare module "styled-components" {
-	export interface DefaultTheme extends AppTheme {}
-}
