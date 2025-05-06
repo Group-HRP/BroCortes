@@ -8,12 +8,13 @@ const DoorProfileIcon = ({ width = 20, height = 20}) => (
         viewBox="0 0 20 21" // Ajustado para conter todo o desenho
     >
         <Path 
-            d="M11 10.5V10.51M1 19.5H19M3 19.5V3.5C3 2.96957 3.21071 2.46086 3.58579 2.08579C3.96086 1.71071 4.46957 1.5 5 1.5H11M15 12V19.5M19 5.5H12M12 5.5L15 2.5M12 5.5L15 8.5" 
+            d="M11 4.5V11.5H16M21 11.5C21 17.299 16.5228 22 11 22C5.47715 22 1 17.299 1 11.5C1 5.70101 5.47715 1 11 1C16.5228 1 21 5.70101 21 11.5Z" 
             stroke="white" 
-            stroke-width="2" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"
-        />
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth="2" 
+            />
+
     </Svg>
 );
 
