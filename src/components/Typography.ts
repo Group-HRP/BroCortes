@@ -40,6 +40,7 @@ const getFontSize = (
 		return isTitle ? theme.fonts.sizes.md : theme.fonts.sizes.lg;
 	}
 	return theme.fonts.sizes[fontSize] ?? theme.fonts.sizes.md;
+
 };
 
 const getFontFamily = (
@@ -75,15 +76,13 @@ const BaseText = styled.Text<TypographyProps>`
   /* Tipografia */
   font-size: ${({ fontSize, isTitle, theme }) =>
 		`${getFontSize(fontSize, isTitle, theme)}px`};
-  
   font-weight: ${({ fontWeight = "regular", theme }) =>
 		theme.fonts.weights[fontWeight]};
   
   font-family: ${({ fontFamily, fontWeight, isTitle, theme }) =>
 		getFontFamily(fontFamily, fontWeight, isTitle, theme)};
-  
-
 `;
 
 export const Title = styled(BaseText).attrs({ isTitle: true })``;
 export const Text = styled(BaseText).attrs({ isTitle: false })``;
+

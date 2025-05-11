@@ -34,6 +34,7 @@ interface ButtonProps {
 		| "space-around"
 		| "space-evenly";
 	flex?: number;
+	display?: string;
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
@@ -43,9 +44,11 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   ${({ width }) => width !== undefined && `width: ${typeof width === "number" ? `${width}px` : width};`}
   ${({ height }) => height !== undefined && `height: ${typeof height === "number" ? `${height}px` : height};`}
   ${({ alignSelf }) => alignSelf && `align-self: ${alignSelf};`}
+  ${({ display }) => display && `display: ${display};`}
   ${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`}
-  ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
   ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
+  ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
+
   
   /* Appearance */
   background-color: ${({ backgroundColor, theme }) =>
@@ -78,9 +81,6 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   /* States */
   ${({ disabled }) => disabled && "opacity: 0.6;"}
   
-  /* Flex */
-  justify-content: center;
-  align-items: center;
 `;
 
 interface ButtonTextProps {

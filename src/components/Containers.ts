@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 interface ContainerdefaultProps {
-	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	alignItems?: "normal" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
 	justifyContent?:
 		| "flex-start"
 		| "center"
@@ -21,9 +21,10 @@ export const Containerdefault = styled.View<ContainerdefaultProps>`
 `;
 
 interface CustomContainerProps {
+	display?: "flex";
 	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
 	flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
-	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	alignItems?: "normal" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
 	justifyContent?:
 		| "flex-start"
 		| "center"
@@ -55,6 +56,10 @@ interface CustomContainerProps {
 }
 
 export const CustomContainer = styled.View<CustomContainerProps>`
+
+	/*Display*/
+	display: ${({ display }) => display };
+
 	/* Flexbox */
 	${({ flex }) => flex !== undefined && `flex: ${flex};`}
 	${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`}
@@ -79,8 +84,8 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 	${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}px;`}
 	${({ marginHorizontal }) => marginHorizontal && `margin-horizontal: ${marginHorizontal}px;`}
 	${({ marginVertical }) => marginVertical && `margin-vertical: ${marginVertical}px;`}
+	${({ marginTop }) => marginTop && `margin-top: ${marginTop}px;`}
 
-	/* Appearance */
 	${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
 	${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius}px;`}
 	${({ borderWidth }) => borderWidth && `border-width: ${borderWidth}px;`}
