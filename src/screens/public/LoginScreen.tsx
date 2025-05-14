@@ -20,7 +20,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 			<Input
 				placeholder="Email"
 				padding={12}
-				borderRadius={8}
+				borderRadius={'md'}
 				borderSize={1}
 				fontFamily="regular"
 				marginTop={32}
@@ -30,7 +30,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				placeholder="Senha"
 				secureTextEntry={true}
 				padding={12}
-				borderRadius={8}
+				borderRadius={'md'}
 				borderSize={1}
 				fontFamily="regular"
 				marginTop={6}

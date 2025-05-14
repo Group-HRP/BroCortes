@@ -56,6 +56,7 @@ export default function ServiceScreen() {
 		category: string; 
 	}>();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (category.length > 0 && !selectedCategory) {
       setSelectedCategory(category[0]);
