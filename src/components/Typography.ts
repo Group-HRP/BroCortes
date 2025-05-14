@@ -40,7 +40,6 @@ const getFontSize = (
 		return isTitle ? theme.fonts.sizes.md : theme.fonts.sizes.lg;
 	}
 	return theme.fonts.sizes[fontSize] ?? theme.fonts.sizes.md;
-
 };
 
 const getFontFamily = (
@@ -85,4 +84,3 @@ const BaseText = styled.Text<TypographyProps>`
 
 export const Title = styled(BaseText).attrs({ isTitle: true })``;
 export const Text = styled(BaseText).attrs({ isTitle: false })``;
-

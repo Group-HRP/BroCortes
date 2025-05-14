@@ -7,7 +7,6 @@ import ProfileScreen from "../screens/private/ProfileScreen";
 import ServiceScreen from "../screens/private/ServiceScreen";
 import { HoursScreen } from "../screens/private/HoursScreen";
 
-
 export type AuthStackParamList = {
 	Login: undefined;
 	Register: undefined;
@@ -15,7 +14,6 @@ export type AuthStackParamList = {
 	Historic: undefined;
 	Profile: undefined;
 	Service: undefined;
-
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();

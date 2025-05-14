@@ -1,41 +1,102 @@
-import { View } from "react-native";
-import { useTheme } from "styled-components/native";
+import { Alert, View } from "react-native";
 import { Containerdefault } from "../../components/Containers";
 import { Input } from "../../components/Input";
 import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
 import type { LoginScreenNavigationProp } from "../../@types/navigation";
+import { useState } from "react";
+import api from "../../services/axios";
+import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../context/AuthContext";
 
 interface LoginScreenProps {
 	navigation: LoginScreenNavigationProp;
 }
 
 export default function LoginScreen({ navigation }: LoginScreenProps) {
-	const theme = useTheme();
+	const { login } = useAuth();
+
+	const [error, setError] = useState<string | null>(null);
+	const [formLogin, setFormLogin] = useState({
+		email: '',
+		password: ''
+	})
+
+	const handleChange = (key: string, value: string): void => {
+		setFormLogin({
+			...formLogin,
+			[key]: value,
+		});
+	};
+
+	const menssageError = (message: string) => {
+		setError(message);
+		setTimeout(() => {
+			setError("");
+		}, 10000);
+	};
+
+	const handleSubmit = async () => {
+		try {
+			const response = await api.post("/auth/login", formLogin, {
+				headers: {
+					"Content-Type": "application/json",
+				}
+			})
+			const {user, token} = response.data;	
+			if (response.status !== 200) {
+				menssageError("Erro ao fazer login");
+				return;
+			}
+
+			login(user,token)
+
+			navigation.navigate('Appointment')
+		} catch (error) {
+			Alert.alert("Erro", "Email ou senha incorretos");
+			console.log(error);
+		}
+	}
+
 	return (
 		<Containerdefault alignItems="center" justifyContent="center">
 			<Title fontSize="h5" fontWeight="bold">
 				Acessar conta
 			</Title>
 			<Input
+				value={formLogin.email}
+				onChangeText={(text) => handleChange("email", text)}
 				placeholder="Email"
 				padding={12}
-				borderRadius={'md'}
+				borderRadius={"md"}
 				borderSize={1}
 				fontFamily="regular"
 				marginTop={32}
 				marginBottom={6}
 			/>
 			<Input
+				value={formLogin.password}
+				onChangeText={(text) => handleChange("password", text)}
 				placeholder="Senha"
 				secureTextEntry={true}
 				padding={12}
-				borderRadius={'md'}
+				borderRadius={"md"}
 				borderSize={1}
 				fontFamily="regular"
 				marginTop={6}
 				marginBottom={6}
 			/>
+			{error && (
+				<Text
+					fontSize="sm"
+					fontWeight="bold"
+					color="accent"
+					marginTop={6}
+					marginBottom={6}
+				>
+					{error}
+				</Text>
+			)}
 			<View
 				style={{
 					flexDirection: "row",
@@ -50,6 +111,8 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				</Button>
 			</View>
 			<Button
+				onPress={handleSubmit}
+				justifyContent="center"
 				backgroundColor="primary"
 				marginTop={24}
 				width={186}
@@ -57,7 +120,11 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				paddingVertical={12}
 				borderRadius={18}
 			>
-				<ButtonText fontSize="md" weight="semiBold" color="background">
+				<ButtonText
+				disabled={formLogin.email === "" || formLogin.password === ""} 
+				fontSize="md" 
+				weight="semiBold" 
+				color="background">
 					Entrar
 				</ButtonText>
 			</Button>
