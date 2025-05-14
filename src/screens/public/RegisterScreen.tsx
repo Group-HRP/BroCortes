@@ -1,9 +1,63 @@
+import { useState } from "react";
 import { Button, ButtonText } from "../../components/Button";
 import { Containerdefault, CustomContainer } from "../../components/Containers";
 import { Input } from "../../components/Input";
-import { Text, Title } from "../../components/Typography";
+import { Text, Title } from "../../components/Typography"; 
+import { Alert } from "react-native";
+import api from "../../services/axios";
 
 export default function RegisterScreen() {
+	const [formRegister, setFormRegister] = useState({
+		name: '',
+		email: '',
+		password: '',
+	})
+	const [repPassword, setRepPassword] = useState('')
+	const [error, setError] =useState('')
+
+	const menssageError = (message: string) => {
+		setError(message)
+		setTimeout(() => {
+			setError('')
+		},10000)
+	}
+
+	const handleChange = (key: string, value: string): void => {
+		setFormRegister({
+			...formRegister,
+			[key]: value
+		})
+	}
+
+	const handleSubmit = async () => {
+		if(formRegister.password !== repPassword) {
+			menssageError('As senhas não coincidem')
+			return
+		}
+
+		if(formRegister.name === '' || formRegister.email === '' || formRegister.password === '') {
+			menssageError('Preencha todos os campos')
+			return
+		}
+
+		if(formRegister.password.length < 8) {
+			menssageError('A senha deve ter pelo menos 8 caracteres')
+			return
+		}
+
+		try {
+			const data = {
+				name: formRegister.name,
+				email: formRegister.email,
+				password: formRegister.password
+			}
+			const response = await api.post('/users', data)
+			console.log(response.data)
+		} catch (error) {
+			Alert.alert('Erro', 'Erro ao criar conta, tente novamente mais tarde')
+		}
+	}
+
 	return (
 		<Containerdefault justifyContent="center" alignItems="center">
 			<CustomContainer padding={32} alignItems="center">
@@ -19,27 +73,53 @@ export default function RegisterScreen() {
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Nome
 					</Text>
-					<Input borderRadius={"md"} marginTop={8} />
+					<Input
+					value={formRegister.name}
+					onChangeText={(text) => handleChange('name', text)}
+					borderRadius={"md"}
+					marginTop={8} />
 				</CustomContainer>
 				<CustomContainer marginVertical={8}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Email
 					</Text>
-					<Input borderRadius={"md"} marginTop={8} />
+					<Input
+					value={formRegister.email}
+					onChangeText={(text) => handleChange('email', text)} 
+					keyboardType="email-address"
+					borderRadius={"md"}
+					marginTop={8} />
 				</CustomContainer>
 				<CustomContainer marginVertical={8}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Senha
 					</Text>
-					<Input borderRadius={"md"} marginTop={8} />
+					<Input
+					value={formRegister.password}
+					onChangeText={(text) => handleChange('password', text)}
+					secureTextEntry={true} 
+					borderRadius={"md"} 
+					marginTop={8} />
 				</CustomContainer>
 				<CustomContainer marginBottom={32} marginTop={8}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Confirme sua senha
 					</Text>
-					<Input borderRadius={"md"} marginTop={8} />
+					<Input
+					value={repPassword}
+					onChangeText={(text) => setRepPassword(text)} 
+					secureTextEntry={true}
+					borderRadius={"md"} 
+					marginTop={8} />
+					{error !== '' && (
+						<Text fontSize="sm" color="accent" marginTop={8}>
+							{error}
+						</Text>
+					)} 
 				</CustomContainer>
 				<Button
+					disabled={formRegister.name === '' || formRegister.email === '' || formRegister.password === '' || repPassword === ''}
+					onPress={handleSubmit}
 					backgroundColor="primary"
 					paddingVertical={12}
 					paddingHorizontal={24}
