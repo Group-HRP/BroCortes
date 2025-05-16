@@ -53,16 +53,15 @@ export default function ServiceScreen() {
 
 	const [selectedCategory, setSelectedCategory] = useState<{
 		id: number;
-		category: string; 
+		category: string;
 	}>();
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    if (category.length > 0 && !selectedCategory) {
-      setSelectedCategory(category[0]);
-    }
-  }, [category]);
-  
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		if (category.length > 0 && !selectedCategory) {
+			setSelectedCategory(category[0]);
+		}
+	}, [category]);
 
 	return (
 		<>

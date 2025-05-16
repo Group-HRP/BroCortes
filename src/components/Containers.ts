@@ -1,7 +1,13 @@
 import styled from "styled-components/native";
 
 interface ContainerdefaultProps {
-	alignItems?: "normal" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	alignItems?:
+		| "normal"
+		| "flex-start"
+		| "center"
+		| "flex-end"
+		| "stretch"
+		| "baseline";
 	justifyContent?:
 		| "flex-start"
 		| "center"
@@ -24,7 +30,13 @@ interface CustomContainerProps {
 	display?: "flex";
 	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
 	flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
-	alignItems?: "normal" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	alignItems?:
+		| "normal"
+		| "flex-start"
+		| "center"
+		| "flex-end"
+		| "stretch"
+		| "baseline";
 	justifyContent?:
 		| "flex-start"
 		| "center"
@@ -58,7 +70,7 @@ interface CustomContainerProps {
 export const CustomContainer = styled.View<CustomContainerProps>`
 
 	/*Display*/
-	display: ${({ display }) => display };
+	display: ${({ display }) => display};
 
 	/* Flexbox */
 	${({ flex }) => flex !== undefined && `flex: ${flex};`}
