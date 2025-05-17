@@ -60,19 +60,18 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
 	return (
 		<Containerdefault alignItems="center" justifyContent="center">
-			<Title fontSize="h5" fontWeight="bold">
+			<Title fontSize="h4" fontWeight="bold">
 				Acessar conta
 			</Title>
 			<Input
 				value={formLogin.email}
 				onChangeText={(text) => handleChange("email", text)}
-				placeholder="Email"
+				placeholder="Email ou telefone"
 				padding={12}
 				borderRadius={"md"}
 				borderSize={1}
 				fontFamily="regular"
-				marginTop={32}
-				marginBottom={6}
+				marginTop={56}
 			/>
 			<Input
 				value={formLogin.password}
@@ -83,8 +82,8 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				borderRadius={"md"}
 				borderSize={1}
 				fontFamily="regular"
-				marginTop={6}
-				marginBottom={6}
+				marginTop={8}
+				marginBottom={12}
 			/>
 			{error && (
 				<Text
@@ -105,16 +104,16 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				}}
 			>
 				<Button>
-					<ButtonText color="text" fontSize="sm" weight="bold">
+					<ButtonText color="text" fontSize="sm" weight="medium">
 						Esqueceu a senha?
 					</ButtonText>
 				</Button>
 			</View>
 			<Button
 				onPress={handleSubmit}
-				justifyContent="center"
+				alignItems="center"
 				backgroundColor="primary"
-				marginTop={24}
+				marginTop={48}
 				width={186}
 				paddingHorizontal={24}
 				paddingVertical={12}
@@ -122,18 +121,18 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 			>
 				<ButtonText
 				disabled={formLogin.email === "" || formLogin.password === ""} 
-				fontSize="md" 
-				weight="semiBold" 
+				fontSize="md"
+				weight="medium" 
 				color="background">
 					Entrar
 				</ButtonText>
 			</Button>
 			<View style={{ flexDirection: "row", marginTop: 40 }}>
-				<Text fontSize="md" fontWeight="regular" padding={5}>
+				<Text fontSize="md" fontWeight="regular">
 					Nao possui conta?
 				</Text>
 				<Button onPress={() => navigation.navigate("Register")}>
-					<ButtonText color="primary200">Criar conta</ButtonText>
+					<ButtonText color="primary" weight="bold"> Criar conta</ButtonText>
 				</Button>
 			</View>
 		</Containerdefault>

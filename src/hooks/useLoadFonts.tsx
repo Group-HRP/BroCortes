@@ -7,13 +7,11 @@ export default function useLoadFonts() {
 	useEffect(() => {
 		async function loadFonts() {
 			await Font.loadAsync({
+				"Satoshi-Black": require("../../assets/fonts/Satoshi-Black.otf"),
 				"Satoshi-Bold": require("../../assets/fonts/Satoshi-Bold.otf"),
-				"OpenSans-ExtraBold": require("../../assets/fonts/OpenSans-ExtraBold.ttf"),
-				"OpenSans-Bold": require("../../assets/fonts/OpenSans-Bold.ttf"),
-				"OpenSans-SemiBold": require("../../assets/fonts/OpenSans-SemiBold.ttf"),
-				"OpenSans-Medium": require("../../assets/fonts/OpenSans-Medium.ttf"),
-				"OpenSans-Regular": require("../../assets/fonts/OpenSans-Regular.ttf"),
-				"OpenSans-Light": require("../../assets/fonts/OpenSans-Light.ttf"),
+				"Satoshi-Medium": require("../../assets/fonts/Satoshi-Medium.otf"),
+				"Satoshi-Regular": require("../../assets/fonts/Satoshi-Regular.otf"),
+				"Satoshi-Light": require("../../assets/fonts/Satoshi-Light.otf"),
 			});
 			setFontsLoaded(true);
 		}

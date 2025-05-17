@@ -78,16 +78,16 @@ export default function RegisterScreen() {
 
 	return (
 		<Containerdefault justifyContent="center" alignItems="center">
-			<CustomContainer padding={32} alignItems="center">
-				<Title fontSize="h4" marginBottom={16}>
+			<CustomContainer alignItems="center" paddingBottom={0} paddingHorizontal={32}>
+				<Title fontSize="h4" marginBottom={32}>
 					Criar conta
 				</Title>
-				<Text marginTop={16} fontSize="md">
+				<Text fontSize="md">
 					Basta preencher os campos abaixo para criar sua conta!
 				</Text>
 			</CustomContainer>
-			<CustomContainer width={"100%"} paddingHorizontal={32}>
-				<CustomContainer marginVertical={8}>
+			<CustomContainer width={"100%"} marginTop={24} paddingHorizontal={32} gap={24} alignItems="center">
+				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Nome
 					</Text>
@@ -98,7 +98,7 @@ export default function RegisterScreen() {
 						marginTop={8}
 					/>
 				</CustomContainer>
-				<CustomContainer marginVertical={8}>
+				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Email
 					</Text>
@@ -110,7 +110,7 @@ export default function RegisterScreen() {
 						marginTop={8}
 					/>
 				</CustomContainer>
-				<CustomContainer marginVertical={8}>
+				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Senha
 					</Text>
@@ -122,7 +122,7 @@ export default function RegisterScreen() {
 						marginTop={8}
 					/>
 				</CustomContainer>
-				<CustomContainer marginBottom={32} marginTop={8}>
+				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Confirme sua senha
 					</Text>
@@ -151,8 +151,11 @@ export default function RegisterScreen() {
 					paddingVertical={12}
 					paddingHorizontal={24}
 					borderRadius={"lg"}
+					marginTop={24}
+					alignItems="center"
+					width={186}
 				>
-					<ButtonText color="background" weight="semiBold">
+					<ButtonText color="background" weight="bold">
 						Criar conta
 					</ButtonText>
 				</Button>
