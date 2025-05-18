@@ -9,6 +9,7 @@ export interface ThemeColors {
 	accent200: string;
 	accent300: string;
 	text: string;
+	placeholdertext:string;
 	// Adicione outras cores conforme necessário
 }
 
@@ -92,6 +93,7 @@ const theme = {
 		accent200: "#FFD299",
 		accent300: "#E0E0E0",
 		text: "#FFFFFF",
+		placeholdertext: "#FFFFFF99",
 	},
 	fonts: {
 		body: {

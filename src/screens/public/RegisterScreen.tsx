@@ -6,9 +6,13 @@ import { Text, Title } from "../../components/Typography";
 import { Alert } from "react-native";
 import api from "../../services/axios";
 import { useNavigation } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
+
 
 export default function RegisterScreen() {
 	const navigation = useNavigation();
+
+	const theme = useTheme();
 
 	const [formRegister, setFormRegister] = useState({
 		name: "",
@@ -86,7 +90,7 @@ export default function RegisterScreen() {
 					Basta preencher os campos abaixo para criar sua conta!
 				</Text>
 			</CustomContainer>
-			<CustomContainer width={"100%"} marginTop={24} paddingHorizontal={32} gap={24} alignItems="center">
+			<CustomContainer width={"100%"} marginTop={24} paddingHorizontal={32} gap={16} alignItems="center">
 				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Nome
@@ -94,6 +98,8 @@ export default function RegisterScreen() {
 					<Input
 						value={formRegister.name}
 						onChangeText={(text) => handleChange("name", text)}
+						placeholder="Digite seu nome"
+						placeholderTextColor={theme.colors.placeholdertext}
 						borderRadius={"md"}
 						marginTop={8}
 					/>
@@ -105,6 +111,8 @@ export default function RegisterScreen() {
 					<Input
 						value={formRegister.email}
 						onChangeText={(text) => handleChange("email", text)}
+						placeholder="Digite o seu email"
+						placeholderTextColor={theme.colors.placeholdertext}
 						keyboardType="email-address"
 						borderRadius={"md"}
 						marginTop={8}
@@ -117,6 +125,8 @@ export default function RegisterScreen() {
 					<Input
 						value={formRegister.password}
 						onChangeText={(text) => handleChange("password", text)}
+						placeholder="Digite sua senha"
+						placeholderTextColor={theme.colors.placeholdertext}
 						secureTextEntry={true}
 						borderRadius={"md"}
 						marginTop={8}
@@ -129,6 +139,8 @@ export default function RegisterScreen() {
 					<Input
 						value={repPassword}
 						onChangeText={(text) => setRepPassword(text)}
+						placeholder="Repita a sua senha"
+						placeholderTextColor={theme.colors.placeholdertext}
 						secureTextEntry={true}
 						borderRadius={"md"}
 						marginTop={8}
@@ -151,10 +163,13 @@ export default function RegisterScreen() {
 					paddingVertical={12}
 					paddingHorizontal={24}
 					borderRadius={"lg"}
-					marginTop={24}
+					marginTop={16}
 					alignItems="center"
 					width={186}
 				>
+
+				{/*Colocar mensagem de aviso*/}
+
 					<ButtonText color="background" weight="bold">
 						Criar conta
 					</ButtonText>

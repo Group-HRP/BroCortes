@@ -8,13 +8,17 @@ import { useState } from "react";
 import api from "../../services/axios";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../context/AuthContext";
+import { useTheme } from "styled-components/native";
 
 interface LoginScreenProps {
 	navigation: LoginScreenNavigationProp;
 }
 
 export default function LoginScreen({ navigation }: LoginScreenProps) {
+
 	const { login } = useAuth();
+
+	const theme = useTheme();
 
 	const [error, setError] = useState<string | null>(null);
 	const [formLogin, setFormLogin] = useState({
@@ -67,6 +71,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				value={formLogin.email}
 				onChangeText={(text) => handleChange("email", text)}
 				placeholder="Email ou telefone"
+				placeholderTextColor={theme.colors.placeholdertext}
 				padding={12}
 				borderRadius={"md"}
 				borderSize={1}
@@ -77,37 +82,38 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				value={formLogin.password}
 				onChangeText={(text) => handleChange("password", text)}
 				placeholder="Senha"
+				placeholderTextColor={theme.colors.placeholdertext}
 				secureTextEntry={true}
 				padding={12}
 				borderRadius={"md"}
 				borderSize={1}
 				fontFamily="regular"
 				marginTop={8}
-				marginBottom={12}
+				marginBottom={4}
 			/>
-			{error && (
-				<Text
-					fontSize="sm"
-					fontWeight="bold"
-					color="accent"
-					marginTop={6}
-					marginBottom={6}
-				>
-					{error}
-				</Text>
-			)}
 			<View
 				style={{
-					flexDirection: "row",
+					flexDirection: "column",
 					alignItems: "flex-start",
 					width: "100%",
 				}}
 			>
-				<Button>
+				<Button marginTop={12}>
 					<ButtonText color="text" fontSize="sm" weight="medium">
 						Esqueceu a senha?
 					</ButtonText>
 				</Button>
+
+				{error && (
+				<Text
+					fontSize="sm"
+					fontWeight="bold"
+					color="accent"
+					marginTop={12}
+				>
+					{error}
+				</Text>
+			)}
 			</View>
 			<Button
 				onPress={handleSubmit}
