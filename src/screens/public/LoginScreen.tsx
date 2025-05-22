@@ -43,15 +43,18 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 					"Content-Type": "application/json",
 				}
 			})
-			const {user, token} = response.data;	
-			if (response.status !== 200) {
+			const {user, token} = response.data;
+			
+			if (response.status !== 201) {
 				menssageError("Erro ao fazer login");
 				return;
 			}
 
-			login(user,token)
+			login(user, token)
 
-			navigation.navigate('Appointment')
+			if(token) {
+				navigation.navigate('Appointment')
+			}
 		} catch (error) {
 			Alert.alert("Erro", "Email ou senha incorretos");
 			console.log(error);

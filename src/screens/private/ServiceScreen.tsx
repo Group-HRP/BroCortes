@@ -6,21 +6,7 @@ import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
 import { useState, useEffect } from "react";
 import { View } from "react-native";
-
-const servicos = [
-	{
-		id: 1,
-		nome: "Corte de Cabelo",
-		tempo: "30 minutos",
-		preco: "R$ 35,00",
-	},
-	{
-		id: 2,
-		nome: "Barba",
-		tempo: "20 minutos",
-		preco: "R$ 25,00",
-	},
-];
+import api from "../../services/axios";
 
 interface CategoryType {
 	id: number;
@@ -56,12 +42,30 @@ export default function ServiceScreen() {
 		category: string;
 	}>();
 
+	const [services, setServices] = useState()
+
+	const [messageError, setMessageError] = useState<string | null>(null);
+
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (category.length > 0 && !selectedCategory) {
 			setSelectedCategory(category[0]);
 		}
-	}, [category]);
+		
+		const fetchServices = async () => {
+			try {
+				const response = await api.get('/service');
+				setServices(response.data);
+
+			} catch (error) {
+				console.log(error);
+				setMessageError("Erro ao carregar os serviços");
+
+			}
+		};
+
+		fetchServices();
+	}, [category, services]);
 
 	return (
 		<>
@@ -97,7 +101,7 @@ export default function ServiceScreen() {
 				</HeaderDefault>
 
 				<FlatList
-					data={servicos}
+					data={services}
 					keyExtractor={(item) => item.id.toString()}
 					renderItem={({ item }) => (
 						<Button

@@ -1,69 +1,101 @@
-import React, { createContext, useState, useEffect, type ReactNode } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type AuthContextType = {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	user: any;
-	token: string | null;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	login: (userData: any, token: string) => void;
-	logout: () => void;
-	isLoading: boolean;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  user: any;
+  token: string | null;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  login: (userData: any, token: string) => void;
+  logout: () => void;
+  isLoading: boolean;
 };
 
-export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+export const AuthContext = createContext<AuthContextType>(
+  {} as AuthContextType
+);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	const [user, setUser] = useState<any>(null);
-	const [token, setToken] = useState<string | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const [user, setUser] = useState<any>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		const loadStorageData = async () => {
-			try {
-				const storedUser = await AsyncStorage.getItem("@user");
-				const storedToken = await AsyncStorage.getItem("@token");
+useEffect(() => {
+  const loadStorageData = async () => {
+    try {
+      const [storedUser, storedToken] = await Promise.all([
+        AsyncStorage.getItem("@user"),
+        AsyncStorage.getItem("@token")
+      ]);
 
-				if (storedUser && storedToken) {
-					setUser(JSON.parse(storedUser));
-					setToken(storedToken);
-				}
-			} catch (error) {
-				console.log("Erro ao carregar dados do AsyncStorage", error);
-			} finally {
-				setIsLoading(false);
-			}
-		};
+      if (storedUser && storedToken) {
+        setUser(JSON.parse(storedUser));
+        setToken(storedToken);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar dados:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-		loadStorageData();
-	}, []);
+  loadStorageData();
+}, []);
 
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	const login = async (userData: any, token: string) => {
-		setUser(userData);
-		setToken(token);
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const login = async (userData: any, token: string | null) => {
+  try {
+    // Validação rigorosa dos dados de entrada
+    if (!token || !userData) {
+      console.error("Dados de login inválidos: Token ou userData faltando");
+      throw new Error("Dados de login inválidos");
+    }
 
-		await AsyncStorage.setItem("@user", JSON.stringify(userData));
-		await AsyncStorage.setItem("@token", token);
-	};
+    // Verifica se o token é uma string não vazia
+    if (typeof token !== "string" || token.trim() === "") {
+      console.error("Token inválido: deve ser uma string não vazia");
+      throw new Error("Token inválido");
+    }
 
-	const logout = async () => {
-		setUser(null);
-		setToken(null);
-		await AsyncStorage.removeItem("@user");
-		await AsyncStorage.removeItem("@token");
-	};
+    setUser(userData);
+    setToken(token);
 
-	return (
-		<AuthContext.Provider value={{ user, token, login, logout, isLoading }}>
-			{children}
-		</AuthContext.Provider>
-	);
+    await AsyncStorage.setItem("@user", JSON.stringify(userData));
+    await AsyncStorage.setItem("@token", token);
+
+    console.log("Login realizado com sucesso");
+    return true; // Indica sucesso
+  } catch (error) {
+    console.error("Falha no login:", error);
+    // Limpa qualquer estado inconsistente
+    setUser(null);
+    setToken(null);
+    await AsyncStorage.multiRemove(["@user", "@token"]);
+    throw error; // Propaga o erro para quem chamou
+  }
+};
+
+  const logout = async () => {
+    setUser(null);
+    setToken(null);
+    await AsyncStorage.removeItem("@user");
+    await AsyncStorage.removeItem("@token");
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, token, login, logout, isLoading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
-
 export function useAuth() {
-	const context = React.useContext(AuthContext);
-	return context;
+  const context = React.useContext(AuthContext);
+  return context;
 }
