@@ -43,12 +43,17 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 					"Content-Type": "application/json",
 				}
 			})
-			const {user, token} = response.data;
+			const {payload, access_token} = response.data;
+			const token = access_token;
+			const user = payload;
+			console.log(token, "token")
+			console.log(user, "user")
 			
 			if (response.status !== 201) {
 				menssageError("Erro ao fazer login");
 				return;
-			}
+			}	
+			console.log(response.data, 'response')
 
 			login(user, token)
 
