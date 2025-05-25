@@ -96,8 +96,8 @@ const BaseText = styled.Text<TypographyProps>`
 	text-align: ${({ textAlign }) => textAlign ?? "left"};
 	text-transform: ${({ textTransform }) => textTransform ?? "none"};
 	line-height: ${({ lineHeight }) => (lineHeight ? `${lineHeight}px` : "auto")};
-	letter-spacing: ${({ letterSpacing }) =>
-		letterSpacing ? `${letterSpacing}px` : "normal"};
+	letter-spacing: ${({ letterSpacing }) => letterSpacing ?? 0};
+
 
 	/* Espaçamento */
 	padding: ${({ padding }) => (padding ? `${padding}px` : "0px")};
