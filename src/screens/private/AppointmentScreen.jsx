@@ -4,9 +4,12 @@ import { HeaderDefault, HeaderTitle } from "../../components/HeaderDefault";
 import { useTheme } from "styled-components/native";
 import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export default function AppointmentScreen() {
 	const theme = useTheme();
+	const navigation = useNavigation()
+
 	return (
 		<ContainerDefault>
 			<HeaderDefault>
@@ -32,6 +35,7 @@ export default function AppointmentScreen() {
 					Os agendamentos apareceram aqui quando você reservar{" "}
 				</Text>
 				<Button
+					onPress={() => navigation.navigate('Service')}
 					backgroundColor="primary"
 					marginTop={24}
 					width={186}
