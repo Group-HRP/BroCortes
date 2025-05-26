@@ -6,6 +6,7 @@ import AuthStack from "./authStack";
 import AppStack from "./appStack";
 import { useAuth } from "../context/AuthContext";
 import { ActivityIndicator, View } from "react-native";
+import { Loading } from "../components/Loading";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,9 +16,7 @@ export default function Routes() {
 
 	if (isLoading) {
 		return (
-			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-				<ActivityIndicator size={"large"} color={"#8B4513"} />
-			</View>
+			<Loading />
 		);
 	}
 
