@@ -62,7 +62,7 @@ export function HoursScreen() {
 
 				{dataSelecionada ? (
 					<>
-						<Text fontSize="lg" fontWeight="semiBold" paddingVertical={12}>
+						<Text fontSize="lg" fontFamily="semiBold" paddingVertical={12}>
 							Horários disponíveis:
 						</Text>
 						<FlatList

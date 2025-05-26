@@ -62,7 +62,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 			login(user, token)
 
 			if(token) {
-				navigation.navigate('Appointment')
+				navigation.navigate('Appointment');
 			}
 		} catch (error) {
 			Alert.alert("Erro", "Email ou senha incorretos");
@@ -72,7 +72,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
 	return (
 		<Containerdefault alignItems="center" justifyContent="center">
-			<Title fontSize="h4" fontWeight="bold">
+			<Title fontSize="h4" fontFamily="bold">
 				Acessar conta
 			</Title>
 			<Input

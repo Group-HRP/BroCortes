@@ -87,9 +87,9 @@ export default function ServiceScreen() {
   return (
     <>
       <ContainerDefault>
-        <Text>Seta</Text>
+        <Text marginTop={40}>Seta</Text>
         <HeaderDefault paddingTop={40}>
-          <HeaderTitle fontWeight="bold">Selecionar serviços</HeaderTitle>
+          <HeaderTitle fontFamily="bold">Selecionar serviços</HeaderTitle>
 
           <FlatList
             data={category}
@@ -99,17 +99,17 @@ export default function ServiceScreen() {
             renderItem={({ item }) => (
               <Button
                 onPress={() => setSelectedCategory(item)}
-                marginVertical={12}
+                marginTop={40}
                 borderRadius={20}
                 paddingHorizontal={16}
                 paddingVertical={8}
                 justifyContent="center"
-                alignItems="baseline"
+                alignItems="center"
                 backgroundColor={
                   selectedCategory === item ? "primary200" : "background"
                 }
               >
-                <Title fontSize="md" textAlign="center" marginBottom={6}>
+                <Title fontSize="md">
                   {item.category}
                 </Title>
               </Button>
@@ -161,31 +161,32 @@ export default function ServiceScreen() {
           position="absolute"
           backgroundColor="#404040"
           width={"100%"}
-          height={96}
+          height={88}
           borderRadius={20}
           zIndex={1}
           bottom={0}
-          justifyContent="space-around"
+          paddingHorizontal={20}
           alignItems="center"
           flexDirection="row"
+          justifyContent="space-between"
         >
           {selectedItem && selectedItem.id > 0 ? (
-            <CustomContainer>
-              <Text fontSize="sm" fontWeight="bold">
+            <CustomContainer gap={4}>
+              <Text fontSize="md" fontFamily="bold">
                 R$
                 {selectedItem.price}
               </Text>
-              <Text fontSize="sm" fontWeight="medium">
+              <Text fontSize="sm" fontFamily="medium">
                 {selectedItem.id.toString().length} serviços - 
                 <Text fontSize="sm">{selectedItem.duration} min</Text>
               </Text>
             </CustomContainer>
           ) : (
-            <CustomContainer>
-              <Text fontSize="sm" fontWeight="bold">
+            <CustomContainer gap={4}>
+              <Text fontSize="md" fontFamily="bold">
                 R$00.00
               </Text>
-              <Text fontSize="sm" fontWeight="medium">
+              <Text fontSize="sm" fontFamily="medium">
                 0 serviços - <Text fontSize="sm">00 min</Text>
               </Text>
             </CustomContainer>
@@ -197,7 +198,7 @@ export default function ServiceScreen() {
             paddingVertical={12}
             borderRadius={18}
           >
-            <ButtonText color="background" weight="semiBold">
+            <ButtonText color="background" fontSize="md" weight="medium">
               Continuar
             </ButtonText>
           </Button>
