@@ -8,13 +8,17 @@ import { useState } from "react";
 import api from "../../services/axios";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../context/AuthContext";
+import { useTheme } from "styled-components/native";
 
 interface LoginScreenProps {
 	navigation: LoginScreenNavigationProp;
 }
 
 export default function LoginScreen({ navigation }: LoginScreenProps) {
+
 	const { login } = useAuth();
+
+	const theme = useTheme();
 
 	const [error, setError] = useState<string | null>(null);
 	const [formLogin, setFormLogin] = useState({
@@ -57,61 +61,62 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
 	return (
 		<Containerdefault alignItems="center" justifyContent="center">
-			<Title fontSize="h5" fontWeight="bold">
+			<Title fontSize="h4" fontFamily="bold">
 				Acessar conta
 			</Title>
 			<Input
 				value={formLogin.email}
 				onChangeText={(text) => handleChange("email", text)}
-				placeholder="Email"
+				placeholder="Email ou telefone"
+				placeholderTextColor={theme.colors.placeholdertext}
 				padding={12}
 				borderRadius={"md"}
 				borderSize={1}
 				fontFamily="regular"
-				marginTop={32}
-				marginBottom={6}
+				marginTop={56}
 			/>
 			<Input
 				value={formLogin.password}
 				onChangeText={(text) => handleChange("password", text)}
 				placeholder="Senha"
+				placeholderTextColor={theme.colors.placeholdertext}
 				secureTextEntry={true}
 				padding={12}
 				borderRadius={"md"}
 				borderSize={1}
 				fontFamily="regular"
-				marginTop={6}
-				marginBottom={6}
+				marginTop={8}
+				marginBottom={4}
 			/>
-			{error && (
-				<Text
-					fontSize="sm"
-					fontWeight="bold"
-					color="accent"
-					marginTop={6}
-					marginBottom={6}
-				>
-					{error}
-				</Text>
-			)}
 			<View
 				style={{
-					flexDirection: "row",
+					flexDirection: "column",
 					alignItems: "flex-start",
 					width: "100%",
 				}}
 			>
-				<Button>
-					<ButtonText color="text" fontSize="sm" weight="bold">
+				<Button marginTop={12}>
+					<ButtonText color="text" fontSize="sm" weight="medium">
 						Esqueceu a senha?
 					</ButtonText>
 				</Button>
+
+				{error && (
+				<Text
+					fontSize="sm"
+					fontWeight="bold"
+					color="accent"
+					marginTop={12}
+				>
+					{error}
+				</Text>
+			)}
 			</View>
 			<Button
 				onPress={handleSubmit}
-				justifyContent="center"
+				alignItems="center"
 				backgroundColor="primary"
-				marginTop={24}
+				marginTop={48}
 				width={186}
 				paddingHorizontal={24}
 				paddingVertical={12}
@@ -127,11 +132,11 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				</ButtonText>
 			</Button>
 			<View style={{ flexDirection: "row", marginTop: 40 }}>
-				<Text fontSize="md" fontWeight="regular" padding={5}>
+				<Text fontSize="md" fontWeight="regular">
 					Nao possui conta?
 				</Text>
 				<Button onPress={() => navigation.navigate("Register")}>
-					<ButtonText color="primary200">Criar conta</ButtonText>
+					<ButtonText color="primary" weight="bold"> Criar conta</ButtonText>
 				</Button>
 			</View>
 		</Containerdefault>

@@ -25,7 +25,7 @@ export const HeaderDefault = styled.View<HeaderDefaultProps>`
 `;
 
 export const HeaderTitle = styled(Title).attrs({
-	fontSize: "h4",
+	fontSize: "h1",
 	isTitle: true,
 })<HeaderDefaultProps>`
   ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}px`};

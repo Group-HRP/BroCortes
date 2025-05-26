@@ -6,9 +6,13 @@ import { Text, Title } from "../../components/Typography";
 import { Alert } from "react-native";
 import api from "../../services/axios";
 import { useNavigation } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
+
 
 export default function RegisterScreen() {
 	const navigation = useNavigation();
+
+	const theme = useTheme();
 
 	const [formRegister, setFormRegister] = useState({
 		name: "",
@@ -78,57 +82,65 @@ export default function RegisterScreen() {
 
 	return (
 		<Containerdefault justifyContent="center" alignItems="center">
-			<CustomContainer padding={32} alignItems="center">
-				<Title fontSize="h4" marginBottom={16}>
+			<CustomContainer alignItems="center" paddingBottom={0} paddingHorizontal={32}>
+				<Title fontSize="h4" marginBottom={32}>
 					Criar conta
 				</Title>
-				<Text marginTop={16} fontSize="md">
+				<Text fontSize="md">
 					Basta preencher os campos abaixo para criar sua conta!
 				</Text>
 			</CustomContainer>
-			<CustomContainer width={"100%"} paddingHorizontal={32}>
-				<CustomContainer marginVertical={8}>
+			<CustomContainer width={"100%"} marginTop={24} paddingHorizontal={32} gap={16} alignItems="center">
+				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Nome
 					</Text>
 					<Input
 						value={formRegister.name}
 						onChangeText={(text) => handleChange("name", text)}
+						placeholder="Digite seu nome"
+						placeholderTextColor={theme.colors.placeholdertext}
 						borderRadius={"md"}
 						marginTop={8}
 					/>
 				</CustomContainer>
-				<CustomContainer marginVertical={8}>
+				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Email
 					</Text>
 					<Input
 						value={formRegister.email}
 						onChangeText={(text) => handleChange("email", text)}
+						placeholder="Digite o seu email"
+						placeholderTextColor={theme.colors.placeholdertext}
 						keyboardType="email-address"
 						borderRadius={"md"}
 						marginTop={8}
 					/>
 				</CustomContainer>
-				<CustomContainer marginVertical={8}>
+				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Senha
 					</Text>
 					<Input
 						value={formRegister.password}
 						onChangeText={(text) => handleChange("password", text)}
+						placeholder="Digite sua senha"
+						placeholderTextColor={theme.colors.placeholdertext}
 						secureTextEntry={true}
 						borderRadius={"md"}
 						marginTop={8}
 					/>
 				</CustomContainer>
-				<CustomContainer marginBottom={32} marginTop={8}>
+				<CustomContainer width={"100%"}>
 					<Text fontSize="sm" fontWeight="bold" fontFamily="regular">
 						Confirme sua senha
 					</Text>
 					<Input
 						value={repPassword}
 						onChangeText={(text) => setRepPassword(text)}
+						placeholder="Repita a sua senha"
+						placeholderTextColor={theme.colors.placeholdertext}
 						secureTextEntry={true}
 						borderRadius={"md"}
 						marginTop={8}
@@ -151,8 +163,14 @@ export default function RegisterScreen() {
 					paddingVertical={12}
 					paddingHorizontal={24}
 					borderRadius={"lg"}
+					marginTop={16}
+					alignItems="center"
+					width={186}
 				>
-					<ButtonText color="background" weight="semiBold">
+
+				{/*Colocar mensagem de aviso*/}
+
+					<ButtonText color="background" weight="bold">
 						Criar conta
 					</ButtonText>
 				</Button>
