@@ -14,7 +14,7 @@ export type AuthStackParamList = {
 	Historic: undefined;
 	Profile: undefined;
 	Service: undefined;
-	AppointmentHours: undefined
+	AppointmentHours: undefined;
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();

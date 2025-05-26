@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function AppointmentScreen() {
 	const theme = useTheme();
-	const navigation = useNavigation()
+	const navigation = useNavigation();
 
 	return (
 		<ContainerDefault>
@@ -35,7 +35,7 @@ export default function AppointmentScreen() {
 					Os agendamentos apareceram aqui quando você reservar{" "}
 				</Text>
 				<Button
-					onPress={() => navigation.navigate('Service')}
+					onPress={() => navigation.navigate("Service")}
 					backgroundColor="primary"
 					marginTop={32}
 					width={186}
