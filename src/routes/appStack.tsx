@@ -1,6 +1,6 @@
 // src/routes/appStack.tsx
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Tabs from "./Tabs"; // Seu navigator com abas
+import Tabs from "./Tabs";
 
 const Stack = createNativeStackNavigator();
 

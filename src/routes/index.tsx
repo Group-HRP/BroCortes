@@ -10,26 +10,26 @@ import { ActivityIndicator, View } from "react-native";
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
-  const { user } = useAuth();
-  const { isLoading } = useAuth();
+	const { user } = useAuth();
+	const { isLoading } = useAuth();
 
-  if(isLoading) {
+	if (isLoading) {
+		return (
+			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+				<ActivityIndicator size={"large"} color={"#8B4513"} />
+			</View>
+		);
+	}
+
 	return (
-		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-			<ActivityIndicator size={'large'} color={'#8B4513'} />
-		</View>
-	)
-  }
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {user ? (
-          <Stack.Screen name="AppStack" component={AppStack} />
-        ) : (
-          <Stack.Screen name="AuthStack" component={AuthStack} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+		<NavigationContainer>
+			<Stack.Navigator screenOptions={{ headerShown: false }}>
+				{user ? (
+					<Stack.Screen name="AppStack" component={AppStack} />
+				) : (
+					<Stack.Screen name="AuthStack" component={AuthStack} />
+				)}
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }

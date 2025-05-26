@@ -18,9 +18,9 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
 	const [error, setError] = useState<string | null>(null);
 	const [formLogin, setFormLogin] = useState({
-		email: '',
-		password: ''
-	})
+		email: "",
+		password: "",
+	});
 
 	const handleChange = (key: string, value: string): void => {
 		setFormLogin({
@@ -38,33 +38,22 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
 	const handleSubmit = async () => {
 		try {
-			const response = await api.post("/auth/login", formLogin, {
-				headers: {
-					"Content-Type": "application/json",
-				}
-			})
-			const {payload, access_token} = response.data;
+			const response = await api.post("/auth/login", formLogin);
+			const { payload, access_token } = response.data;
 			const token = access_token;
 			const user = payload;
-			console.log(token, "token")
-			console.log(user, "user")
-			
+
 			if (response.status !== 201) {
 				menssageError("Erro ao fazer login");
 				return;
-			}	
-			console.log(response.data, 'response')
-
-			login(user, token)
-
-			if(token) {
-				navigation.navigate('Appointment')
 			}
+
+			login(user, token);
 		} catch (error) {
 			Alert.alert("Erro", "Email ou senha incorretos");
 			console.log(error);
 		}
-	}
+	};
 
 	return (
 		<Containerdefault alignItems="center" justifyContent="center">
@@ -129,10 +118,11 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				borderRadius={18}
 			>
 				<ButtonText
-				disabled={formLogin.email === "" || formLogin.password === ""} 
-				fontSize="md" 
-				weight="semiBold" 
-				color="background">
+					disabled={formLogin.email === "" || formLogin.password === ""}
+					fontSize="md"
+					weight="semiBold"
+					color="background"
+				>
 					Entrar
 				</ButtonText>
 			</Button>
