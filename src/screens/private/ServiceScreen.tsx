@@ -15,15 +15,14 @@ import { AppointmentContext } from "../../context/AppointmentContext";
 export default function ServiceScreen() {
 	const navigation = useNavigation();
 
-
-
 	const [selectedCategory, setSelectedCategory] = useState<{
 		id: number;
 		category: string;
 	}>();
 
 	const [category, setCategory] = useState();
-	const { services, setServices, selectedItem, setSelectedItem } = useContext(AppointmentContext);
+	const { services, setServices, selectedItem, setSelectedItem } =
+		useContext(AppointmentContext);
 	const { token, logout } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
