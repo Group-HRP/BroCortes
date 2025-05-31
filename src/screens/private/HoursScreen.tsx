@@ -27,7 +27,7 @@ export function HoursScreen() {
 		<ContainerDefault>
 			<HeaderDefault paddingTop={40} marginBottom={40}>
 				<HeaderTitle>Selecionar horário</HeaderTitle>
-			</HeaderDefault>
+			</HeaderDefault> 
 			<CustomContainer>
 				<Calendar
 					onDayPress={(day: string) => {
