@@ -50,8 +50,8 @@ interface CustomContainerProps {
 	padding?: number;
 	paddingHorizontal?: number;
 	paddingVertical?: number;
-	paddingTop?: number,
-	paddingBottom?: number,
+	paddingTop?: number;
+	paddingBottom?: number;
 	margin?: number;
 	marginTop?: number;
 	marginLeft?: number;

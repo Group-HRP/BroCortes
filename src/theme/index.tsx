@@ -9,7 +9,7 @@ export interface ThemeColors {
 	accent200: string;
 	accent300: string;
 	text: string;
-	placeholdertext:string;
+	placeholdertext: string;
 	// Adicione outras cores conforme necessário
 }
 

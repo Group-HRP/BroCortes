@@ -13,7 +13,6 @@ export type AppStackParamList = {
 	Historic: undefined;
 	Appointment: undefined;
 	Service: undefined;
-	Hours: undefined;
 };
 const Stack = createNativeStackNavigator();
 

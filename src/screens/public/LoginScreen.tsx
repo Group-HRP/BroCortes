@@ -15,7 +15,6 @@ interface LoginScreenProps {
 }
 
 export default function LoginScreen({ navigation }: LoginScreenProps) {
-
 	const { login } = useAuth();
 
 	const theme = useTheme();
@@ -102,15 +101,10 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				</Button>
 
 				{error && (
-				<Text
-					fontSize="sm"
-					fontWeight="bold"
-					color="accent"
-					marginTop={12}
-				>
-					{error}
-				</Text>
-			)}
+					<Text fontSize="sm" fontWeight="bold" color="accent" marginTop={12}>
+						{error}
+					</Text>
+				)}
 			</View>
 			<Button
 				onPress={handleSubmit}
@@ -136,7 +130,10 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 					Nao possui conta?
 				</Text>
 				<Button onPress={() => navigation.navigate("Register")}>
-					<ButtonText color="primary" weight="bold"> Criar conta</ButtonText>
+					<ButtonText color="primary" weight="bold">
+						{" "}
+						Criar conta
+					</ButtonText>
 				</Button>
 			</View>
 		</Containerdefault>

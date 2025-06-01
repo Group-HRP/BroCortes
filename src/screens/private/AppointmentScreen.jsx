@@ -31,7 +31,12 @@ export default function AppointmentScreen() {
 				<Title fontSize="h6" weight="bold">
 					Nenhum agendamento
 				</Title>
-				<Text fontSize="md" weight="normal" marginTop={16} style={{width: 308, textAlign:"center"}}>
+				<Text
+					fontSize="md"
+					weight="normal"
+					marginTop={16}
+					style={{ width: 308, textAlign: "center" }}
+				>
 					Os agendamentos apareceram aqui quando você reservar{" "}
 				</Text>
 				<Button
@@ -44,7 +49,7 @@ export default function AppointmentScreen() {
 					borderRadius={18}
 					alignItems="center"
 				>
-					<ButtonText color="background" fontSize="md" weight="medium" >
+					<ButtonText color="background" fontSize="md" weight="medium">
 						Agendar Agora
 					</ButtonText>
 				</Button>

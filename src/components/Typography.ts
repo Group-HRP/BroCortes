@@ -76,21 +76,21 @@ const getFontFamily = (
 const BaseText = styled.Text<TypographyProps>`
     /* Cor */
     color: ${({ color, theme }) => {
-        if (!color) return theme.colors.text;
-        return color in theme.colors
-            ? theme.colors[color as keyof typeof theme.colors]
-            : color;
-    }};
+			if (!color) return theme.colors.text;
+			return color in theme.colors
+				? theme.colors[color as keyof typeof theme.colors]
+				: color;
+		}};
 
 	width: ${({ width }) => (width ? `${width}px` : "auto")};
 
     /* Tipografia */
 
     font-size: ${({ fontSize, isTitle, theme }) =>
-        getFontSize(fontSize, isTitle, theme)};
+			getFontSize(fontSize, isTitle, theme)};
 
     font-family: ${({ fontFamily, fontWeight, isTitle, theme }) =>
-        getFontFamily(fontFamily, fontWeight, isTitle, theme)};
+			getFontFamily(fontFamily, fontWeight, isTitle, theme)};
 
     /* font-weight: ${({ fontWeight }) => fontWeight || "regular"}; */ // Remover esta linha
 
@@ -104,34 +104,34 @@ const BaseText = styled.Text<TypographyProps>`
     /* Espaçamento */
     padding: ${({ padding }) => (padding ? `${padding}px` : "0px")};
     padding-horizontal: ${({ paddingHorizontal }) =>
-        paddingHorizontal ? `${paddingHorizontal}px` : "0px"};
+			paddingHorizontal ? `${paddingHorizontal}px` : "0px"};
     padding-vertical: ${({ paddingVertical }) =>
-        paddingVertical ? `${paddingVertical}px` : "0px"};
+			paddingVertical ? `${paddingVertical}px` : "0px"};
 
     margin: ${({ margin }) => (margin ? `${margin}px` : "0px")};
     margin-top: ${({ marginTop }) => (marginTop ? `${marginTop}px` : "0px")};
     margin-bottom: ${({ marginBottom }) =>
-        marginBottom ? `${marginBottom}px` : "0px"};
+			marginBottom ? `${marginBottom}px` : "0px"};
     margin-left: ${({ marginLeft }) => (marginLeft ? `${marginLeft}px` : "0px")};
     margin-right: ${({ marginRight }) => (marginRight ? `${marginRight}px` : "0px")};
     margin-horizontal: ${({ marginHorizontal }) =>
-        marginHorizontal ? `${marginHorizontal}px` : "0px"};
+			marginHorizontal ? `${marginHorizontal}px` : "0px"};
     margin-vertical: ${({ marginVertical }) =>
-        marginVertical ? `${marginVertical}px` : "0px"};
+			marginVertical ? `${marginVertical}px` : "0px"};
 
     /* Borda */
     border-bottom-width: ${({ borderBottomWidth }) =>
-        borderBottomWidth ? `${borderBottomWidth}px` : "0px"};
+			borderBottomWidth ? `${borderBottomWidth}px` : "0px"};
     border-width: ${({ borderWidth }) =>
-        borderWidth ? `${borderWidth}px` : "0px"};
+			borderWidth ? `${borderWidth}px` : "0px"};
     border-radius: ${({ borderRadius, theme }) =>
-        typeof borderRadius === "string" && borderRadius in theme.spacing
-            ? `${theme.spacing[borderRadius as keyof typeof theme.spacing]}px`
-            : `${borderRadius ?? 0}px`};
+			typeof borderRadius === "string" && borderRadius in theme.spacing
+				? `${theme.spacing[borderRadius as keyof typeof theme.spacing]}px`
+				: `${borderRadius ?? 0}px`};
     border-color: ${({ borderColor, theme }) =>
-        borderColor && borderColor in theme.colors
-            ? theme.colors[borderColor as keyof typeof theme.colors]
-            : borderColor ?? "transparent"};
+			borderColor && borderColor in theme.colors
+				? theme.colors[borderColor as keyof typeof theme.colors]
+				: (borderColor ?? "transparent")};
 `;
 
 export const Title = styled(BaseText).attrs({ isTitle: true })``;

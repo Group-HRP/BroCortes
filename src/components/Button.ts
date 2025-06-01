@@ -98,13 +98,13 @@ export const ButtonText = styled.Text<ButtonTextProps>`
   color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.text)};
   font-size: ${({ fontSize = "md", theme }) => theme.fonts.sizes[fontSize]}px;
   font-family: ${({ fontFamily, weight = "regular", isTitle, theme }) => {
-        if (fontFamily) {
-            return isTitle ? theme.fonts.heading.bold : theme.fonts.body[fontFamily];
-        }
-        return isTitle
-            ? theme.fonts.heading.bold
-            : theme.fonts.body[weight as keyof typeof theme.fonts.body] ||
-                    theme.fonts.body.regular;
-    }};
+		if (fontFamily) {
+			return isTitle ? theme.fonts.heading.bold : theme.fonts.body[fontFamily];
+		}
+		return isTitle
+			? theme.fonts.heading.bold
+			: theme.fonts.body[weight as keyof typeof theme.fonts.body] ||
+					theme.fonts.body.regular;
+	}};
   ${({ uppercase }) => uppercase && "text-transform: uppercase;"}
 `;
