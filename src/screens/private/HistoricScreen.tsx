@@ -13,7 +13,8 @@ export default function Historic() {
 			<HeaderDefault>
 				<HeaderTitle>Histórico</HeaderTitle>
 			</HeaderDefault>
-			<View style={{
+			<View
+				style={{
 					marginTop: 56,
 				}}
 			>

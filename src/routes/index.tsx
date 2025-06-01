@@ -15,9 +15,7 @@ export default function Routes() {
 	const { isLoading } = useAuth();
 
 	if (isLoading) {
-		return (
-			<Loading />
-		);
+		return <Loading />;
 	}
 
 	return (
