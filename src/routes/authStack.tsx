@@ -8,6 +8,8 @@ import ProfileScreen from "../screens/private/ProfileScreen";
 import ServiceScreen from "../screens/private/ServiceScreen";
 import ReviewAppointmentScreen from "../screens/private/ReviewAppointmentScreen";
 
+import { HoursScreen } from "../screens/private/HoursScreen";
+
 
 export type AuthStackParamList = {
 	Login: undefined;
@@ -18,7 +20,7 @@ export type AuthStackParamList = {
 	Historic: undefined;
 	Profile: undefined;
 	Service: undefined;
-
+	AppointmentHours: undefined;
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
@@ -32,7 +34,6 @@ export default function AuthStack() {
 			<Stack.Screen name="Historic" component={HistoricScreen} />
 			<Stack.Screen name="Appointment" component={AppointmentScreen} />
 			<Stack.Screen name="Service" component={ServiceScreen} />
-			<Stack.Screen name="Login" component={LoginScreen} />
 			<Stack.Screen name="Register" component={RegisterScreen} />
 		</Stack.Navigator>
 	);

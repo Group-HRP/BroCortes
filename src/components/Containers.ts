@@ -1,7 +1,13 @@
 import styled from "styled-components/native";
 
 interface ContainerdefaultProps {
-	alignItems?: "normal" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	alignItems?:
+		| "normal"
+		| "flex-start"
+		| "center"
+		| "flex-end"
+		| "stretch"
+		| "baseline";
 	justifyContent?:
 		| "flex-start"
 		| "center"
@@ -24,7 +30,13 @@ interface CustomContainerProps {
 	display?: "flex";
 	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
 	flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
-	alignItems?: "normal" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+	alignItems?:
+		| "normal"
+		| "flex-start"
+		| "center"
+		| "flex-end"
+		| "stretch"
+		| "baseline";
 	justifyContent?:
 		| "flex-start"
 		| "center"
@@ -38,6 +50,8 @@ interface CustomContainerProps {
 	padding?: number;
 	paddingHorizontal?: number;
 	paddingVertical?: number;
+	paddingTop?: number,
+	paddingBottom?: number,
 	margin?: number;
 	marginTop?: number;
 	marginLeft?: number;
@@ -58,7 +72,7 @@ interface CustomContainerProps {
 export const CustomContainer = styled.View<CustomContainerProps>`
 
 	/*Display*/
-	display: ${({ display }) => display };
+	display: ${({ display }) => display};
 
 	/* Flexbox */
 	${({ flex }) => flex !== undefined && `flex: ${flex};`}
@@ -77,6 +91,8 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 	${({ padding }) => padding && `padding: ${padding}px;`}
 	${({ paddingHorizontal }) => paddingHorizontal && `padding-horizontal: ${paddingHorizontal}px;`}
 	${({ paddingVertical }) => paddingVertical && `padding-vertical: ${paddingVertical}px;`}
+	${({ paddingTop }) => paddingTop && `padding-top: ${paddingTop}px;`}
+	${({ paddingBottom }) => paddingBottom && `padding-bottom: ${paddingBottom}px;`}
 	${({ margin }) => margin && `margin: ${margin}px;`}
 	${({ marginTop }) => marginTop && `margin-top: ${marginTop}px;`}
 	${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft}px;`}

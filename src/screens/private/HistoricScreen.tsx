@@ -15,7 +15,7 @@ export default function Historic() {
 			</HeaderDefault>
 			<View
 				style={{
-					marginTop: "56px",
+					marginTop: 56,
 				}}
 			>
 				<CustomContainer
@@ -23,25 +23,31 @@ export default function Historic() {
 					paddingVertical={10}
 					paddingHorizontal={16}
 					borderRadius={8}
-                    flexDirection={"row"}
-                    alignItems="center"
-                    justifyContent="space-between"
+					flexDirection={"row"}
+					alignItems="center"
+					justifyContent="space-between"
 				>
-                    <CustomContainer>
-                        <Title fontSize="h6" fontWeight="bold">
-                            Low Fade
-                        </Title>
-                        <Text fontSize="md" fontWeight="medium">Ter, 1 Abril, 2025</Text>
-                        <Text fontSize="md" fontWeight="medium">R$30,00</Text>
-                    </CustomContainer>
-                    <Button
-                        backgroundColor="accent"
-                        paddingHorizontal={20}
-                        paddingVertical={8}
-                        borderRadius={16}
-                        >
-                        <ButtonText fontSize="sm" weight="semiBold" color="text">Agendar Novamente</ButtonText>
-                    </Button>
+					<CustomContainer>
+						<Title fontSize="h6" fontFamily="bold">
+							Low Fade
+						</Title>
+						<Text fontSize="md" fontFamily="medium">
+							Ter, 1 Abril, 2025
+						</Text>
+						<Text fontSize="md" fontFamily="medium">
+							R$30,00
+						</Text>
+					</CustomContainer>
+					<Button
+						backgroundColor="accent"
+						paddingHorizontal={20}
+						paddingVertical={8}
+						borderRadius={16}
+					>
+						<ButtonText fontSize="sm" weight="semiBold" color="text">
+							Agendar Novamente
+						</ButtonText>
+					</Button>
 				</CustomContainer>
 			</View>
 		</ContainerDefault>

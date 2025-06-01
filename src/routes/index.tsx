@@ -5,11 +5,18 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AuthStack from "./authStack";
 import AppStack from "./appStack";
 import { useAuth } from "../context/AuthContext";
+import { ActivityIndicator, View } from "react-native";
+import { Loading } from "../components/Loading";
 
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
 	const { user } = useAuth();
+	const { isLoading } = useAuth();
+
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<NavigationContainer>

@@ -9,6 +9,7 @@ export interface ThemeColors {
 	accent200: string;
 	accent300: string;
 	text: string;
+	placeholdertext:string;
 	// Adicione outras cores conforme necessário
 }
 
@@ -16,7 +17,6 @@ export interface FontWeights {
 	light: number;
 	regular: number;
 	medium: number;
-	semiBold: number;
 	bold: number;
 	black: number;
 }
@@ -61,9 +61,8 @@ export interface FontBody {
 	light: string;
 	regular: string;
 	medium: string;
-	semiBold: string;
 	bold: string;
-	extraBold: string;
+	black: string;
 }
 
 export interface FontHeading {
@@ -94,15 +93,14 @@ const theme = {
 		accent200: "#FFD299",
 		accent300: "#E0E0E0",
 		text: "#FFFFFF",
+		placeholdertext: "#FFFFFF99",
 	},
 	fonts: {
 		body: {
-			light: "OpenSans-Light",
-			regular: "OpenSans-Regular",
-			medium: "OpenSans-Medium",
-			semiBold: "OpenSans-SemiBold",
-			bold: "OpenSans-Bold",
-			extraBold: "OpenSans-ExtraBold",
+			light: "Satoshi-Light",
+			regular: "Satoshi-Regular",
+			medium: "Satoshi-Medium",
+			black: "Satoshi-Black",
 		},
 		heading: {
 			bold: "Satoshi-Bold",
@@ -123,9 +121,8 @@ const theme = {
 			light: 300,
 			regular: 400,
 			medium: 500,
-			semiBold: 600,
-			bold: 700,
-			black: 800,
+			bold: 600,
+			black: 700,
 		},
 		lineHeight: "150%",
 	},
