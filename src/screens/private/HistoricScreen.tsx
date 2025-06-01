@@ -15,7 +15,7 @@ export default function Historic() {
 			</HeaderDefault>
 			<View
 				style={{
-					marginTop: "56px",
+					marginTop: 56,
 				}}
 			>
 				<CustomContainer

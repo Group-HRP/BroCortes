@@ -16,9 +16,10 @@ export function HoursScreen() {
     dataSelecionada,
     setDataSelecionada,
     horariosDisponiveis,
+    horaSelecionada,
+    setHoraSelecionada,
     isLoading,
   } = useContext(AppointmentContext);
-  const [horaSelecionada, setHoraSelecionada] = useState("");
 
   const handleDatePress = (date: { dateString: string }) => {
     setDataSelecionada(date.dateString);
@@ -62,18 +63,18 @@ export function HoursScreen() {
         />
 
         {isLoading ? (
-			<>
+          <>
             <Text fontSize="lg" fontWeight="semiBold" paddingVertical={12}>
               Horários disponíveis:
             </Text>
-			          <CustomContainer
-            alignItems="center"
-            justifyContent="center"
-            height={120}
-          >
-            <Loading />
-          </CustomContainer>
-		  </>
+            <CustomContainer
+              alignItems="center"
+              justifyContent="center"
+              height={120}
+            >
+              <Loading />
+            </CustomContainer>
+          </>
         ) : (
           <>
             {dataSelecionada ? (
