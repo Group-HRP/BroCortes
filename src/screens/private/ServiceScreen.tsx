@@ -135,10 +135,6 @@ export default function ServiceScreen() {
 
 				<HeaderDefault paddingTop={40}>
 					<HeaderTitle fontFamily="bold">Selecionar serviços</HeaderTitle>
-
-					{isLoading ? (
-						<Loading />
-					) : (
 						<FlatList
 							data={category}
 							keyExtractor={(item) => item.id.toString()}
@@ -163,7 +159,6 @@ export default function ServiceScreen() {
 								</Button>
 							)}
 						/>
-					)}
 				</HeaderDefault>
 
 				{isLoading ? (
@@ -251,7 +246,7 @@ export default function ServiceScreen() {
 						</>
 					) : (
 						<CustomContainer>
-							<Text fontSize="lg" fontWeight="bold">
+							<Text fontSize="lg" fontWeight="bold" textAlign="center">
 								Selecione um serviço
 							</Text>
 						</CustomContainer>
