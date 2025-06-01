@@ -10,7 +10,7 @@ export interface ThemeColors {
 	accent300: string;
 	text: string;
 	placeholdertext: string;
-	// Adicione outras cores conforme necessário
+	transparent: string;
 }
 
 export interface FontWeights {
@@ -94,6 +94,7 @@ const theme = {
 		accent300: "#E0E0E0",
 		text: "#FFFFFF",
 		placeholdertext: "#FFFFFF99",
+		transparent: "transparent",
 	},
 	fonts: {
 		body: {

@@ -5,55 +5,108 @@ import { useTheme } from "styled-components/native";
 import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
 import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { AppointmentContext } from "../../context/AppointmentContext";
+import { CustomContainer } from "../../components/Containers";
+import { Loading } from "../../components/Loading";
 
 export default function AppointmentScreen() {
 	const theme = useTheme();
 	const navigation = useNavigation();
 
+	const { appointment, isLoading } = useContext(AppointmentContext)
+
+	function formatarDataPersonalizada(dataISO) {
+		const data = new Date(dataISO);
+
+		const formatada = data.toLocaleDateString("pt-BR", {
+			weekday: "long",
+			day: "numeric",
+			month: "long",
+			year: "numeric",
+		});
+
+		// Capitaliza a primeira letra de cada palavra
+		return formatada
+			.split(" ")
+			.map((palavra) => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+			.join(" ")
+			.replace(" De ", ", ")
+			.replace(" De ", ", "); // Remove "de" e substitui por vírgulas
+	}
+
+
 	return (
 		<ContainerDefault>
-			<HeaderDefault>
+			<HeaderDefault marginBottom={56}>
 				<HeaderTitle>Agendamentos</HeaderTitle>
 			</HeaderDefault>
-
-			<View
-				style={{
-					display: "flex",
-					marginTop: 88,
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center",
-					backgroundColor: theme.colors.background300,
-					borderRadius: 8,
-					padding: 40,
-				}}
-			>
-				<Title fontSize="h6" weight="bold">
-					Nenhum agendamento
-				</Title>
-				<Text
-					fontSize="md"
-					weight="normal"
-					marginTop={16}
-					style={{ width: 308, textAlign: "center" }}
+			{isLoading ? (
+				<Loading />
+			) : Array.isArray(appointment) && appointment.length > 0 ? (
+				<>
+					<Title fontSize="h4">Em Andamento</Title>
+					{appointment.map((item) => (
+						<Button key={item.id} marginTop={"h4"}>
+							<CustomContainer
+								backgroundColor={theme.colors.background300}
+								borderRadius={8}
+								paddingVertical={12}
+								paddingHorizontal={24}
+							>
+								<CustomContainer>
+									<Text fontSize="h6" fontWeight="medium">
+										{item.service?.name ?? "Serviço não encontrado"}
+									</Text>
+									<Text fontSize="md" fontWeight="regular">
+										{formatarDataPersonalizada(item.date)}
+									</Text>
+									<Text fontSize="md" fontWeight="regular">
+										R$ {item.service.price ?? "N/A"},00
+									</Text>
+								</CustomContainer>
+							</CustomContainer>
+						</Button>
+					))}
+				</>
+			) : (
+				<View
+					style={{
+						display: "flex",
+						marginTop: 88,
+						flexDirection: "column",
+						justifyContent: "center",
+						alignItems: "center",
+						backgroundColor: theme.colors.background300,
+						borderRadius: 8,
+						padding: 40,
+					}}
 				>
-					Os agendamentos apareceram aqui quando você reservar{" "}
-				</Text>
-				<Button
-					onPress={() => navigation.navigate("Service")}
-					backgroundColor="primary"
-					marginTop={32}
-					width={186}
-					paddingHorizontal={24}
-					paddingVertical={12}
-					borderRadius={18}
-					alignItems="center"
-				>
-					<ButtonText color="background" fontSize="md" weight="medium">
-						Agendar Agora
-					</ButtonText>
-				</Button>
-			</View>
-		</ContainerDefault>
+					<Title fontSize="h6" weight="bold">Nenhum agendamento</Title>
+					<Text
+						fontSize="md"
+						weight="normal"
+						marginTop={16}
+						style={{ width: 308, textAlign: "center" }}
+					>
+						Os agendamentos aparecerão aqui quando você reservar
+					</Text>
+					<Button
+						onPress={() => navigation.navigate("Service")}
+						backgroundColor="primary"
+						marginTop={32}
+						width={186}
+						paddingHorizontal={24}
+						paddingVertical={12}
+						borderRadius={18}
+						alignItems="center"
+					>
+						<ButtonText color="background" fontSize="md" weight="medium">
+							Agendar Agora
+						</ButtonText>
+					</Button>
+				</View>
+			)}
+		</ContainerDefault >
 	);
 }

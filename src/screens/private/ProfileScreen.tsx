@@ -11,10 +11,20 @@ import RightArrowProfileIcon from "../../../assets/icons/RightArrowProfileIcon";
 import DoorProfileIcon from "../../../assets/icons/DoorProfileIcon";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 
 export default function ProfileScreen() {
   const theme = useTheme();
-  const { logout } = useContext(AuthContext);
+
+  type RootParamList = {
+    Historic: undefined;
+  }
+
+  const navigation = useNavigation<NavigationProp<RootParamList>>();
+
+  const { logout, user } = useContext(AuthContext);
+
+  const userRole = user.role === "client" ? "Conta pessoal" : "Conta profissional";
 
   const HandleClickLogout = async () => {
 	try {
@@ -28,8 +38,8 @@ export default function ProfileScreen() {
     <ContainerDefault>
       <HeaderDefault display="flex" flexDirection="row" paddingTop={44}>
         <CustomContainer display="flex" gap={4}>
-          <HeaderTitle>João Pedro</HeaderTitle>
-          <Text fontFamily="medium">Conta Pessoal</Text>
+          <HeaderTitle>{user.name}</HeaderTitle>
+          <Text fontFamily="medium">{userRole}</Text>
         </CustomContainer>
         {/* Colocar imagem do perfil aqui */}
       </HeaderDefault>
@@ -42,7 +52,8 @@ export default function ProfileScreen() {
         paddingHorizontal={24}
       >
         <Button
-          backgroundColor="transparent"
+          disabled={true}
+          backgroundColor="background300"
           display="flex"
           flexDirection="row"
           width={"100%"}
@@ -59,7 +70,8 @@ export default function ProfileScreen() {
           <RightArrowProfileIcon />
         </Button>
         <Button
-          backgroundColor="transparent"
+          onPress={() => navigation.navigate("Historic")}
+          backgroundColor="background300"
           display="flex"
           flexDirection="row"
           width={"100%"}
@@ -70,7 +82,7 @@ export default function ProfileScreen() {
           <CustomContainer gap={12} flexDirection="row">
             <ClockProfileIcon width={20} />
             <ButtonText fontSize="lg" weight="medium">
-              Histórico de pedidos
+              Histórico de agendamentos
             </ButtonText>
           </CustomContainer>
           <RightArrowProfileIcon />
@@ -87,7 +99,7 @@ export default function ProfileScreen() {
       >
         <Button
           onPress={HandleClickLogout}
-          backgroundColor="transparent"
+          backgroundColor="background300"
           display="flex"
           flexDirection="row"
           width={"100%"}
