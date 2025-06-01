@@ -14,7 +14,6 @@ interface User {
 }
 
 type AuthContextType = {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	user: User;
 	token: string | null;
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>

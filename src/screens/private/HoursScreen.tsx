@@ -6,10 +6,10 @@ import { Text } from "../../components/Typography";
 import { useContext, useState } from "react";
 import { FlatList } from "react-native";
 import { Button, ButtonText } from "../../components/Button";
-
 import "../../constants/LinguageCalendar";
 import { AppointmentContext } from "../../context/AppointmentContext";
 import { Loading } from "../../components/Loading";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 
 export function HoursScreen() {
 	const {
@@ -21,9 +21,20 @@ export function HoursScreen() {
 		isLoading,
 	} = useContext(AppointmentContext);
 
+	type RootStackParamList = {
+		ReviewAppointment: undefined;
+	};
+
+	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
 	const handleDatePress = (date: { dateString: string }) => {
 		setDataSelecionada(date.dateString);
 	};
+
+	if (horaSelecionada) {
+		navigation.navigate("ReviewAppointment");
+		return null; // Prevent rendering the rest of the component
+	}
 
 	return (
 		<ContainerDefault>

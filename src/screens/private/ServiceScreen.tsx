@@ -135,30 +135,30 @@ export default function ServiceScreen() {
 
 				<HeaderDefault paddingTop={40}>
 					<HeaderTitle fontFamily="bold">Selecionar serviços</HeaderTitle>
-						<FlatList
-							data={category}
-							keyExtractor={(item) => item.id.toString()}
-							horizontal
-							showsHorizontalScrollIndicator={false}
-							renderItem={({ item }) => (
-								<Button
-									onPress={() => handleClickCategoryList(item)}
-									marginVertical={12}
-									borderRadius={20}
-									paddingHorizontal={16}
-									paddingVertical={8}
-									justifyContent="center"
-									alignItems="baseline"
-									backgroundColor={
-										selectedCategory === item ? "primary200" : "background"
-									}
-								>
-									<Title fontSize="md" textAlign="center" marginBottom={6}>
-										{item.name}
-									</Title>
-								</Button>
-							)}
-						/>
+					<FlatList
+						data={category}
+						keyExtractor={(item) => item.id.toString()}
+						horizontal
+						showsHorizontalScrollIndicator={false}
+						renderItem={({ item }) => (
+							<Button
+								onPress={() => handleClickCategoryList(item)}
+								marginVertical={12}
+								borderRadius={20}
+								paddingHorizontal={16}
+								paddingVertical={8}
+								justifyContent="center"
+								alignItems="baseline"
+								backgroundColor={
+									selectedCategory === item ? "primary200" : "background"
+								}
+							>
+								<Title fontSize="md" textAlign="center" marginBottom={6}>
+									{item.name}
+								</Title>
+							</Button>
+						)}
+					/>
 				</HeaderDefault>
 
 				{isLoading ? (
