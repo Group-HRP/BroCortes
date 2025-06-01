@@ -8,22 +8,15 @@ import { useState, useEffect, useContext } from "react";
 import { View } from "react-native";
 import api from "../../services/axios";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigation } from "@react-navigation/native";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { Loading } from "../../components/Loading";
-
-interface Service {
-  id: number;
-  name: string;
-  price: string | number;
-  duration: string | number;
-}
+import { AppointmentContext } from "../../context/AppointmentContext";
 
 export default function ServiceScreen() {
-  const navigation = useNavigation();
-
-  const [selectedItem, setSelectedItem] = useState<
-    { id: number; name: string; duration: string; price: string } | undefined
-  >(undefined);
+  type RootStackParamList = {
+    Hours: undefined;
+  };
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const [selectedCategory, setSelectedCategory] = useState<{
     id: number;
@@ -31,7 +24,8 @@ export default function ServiceScreen() {
   }>();
 
   const [category, setCategory] = useState();
-  const [services, setServices] = useState<Service[]>([]);
+  const { services, setServices, selectedItem, setSelectedItem } =
+    useContext(AppointmentContext);
   const { token, logout } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -93,7 +87,7 @@ export default function ServiceScreen() {
     if (selectedCategory) {
       fetchServicesByCategory();
     }
-  }, [selectedCategory, token]);
+  }, [selectedCategory, token, setServices]);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -105,16 +99,24 @@ export default function ServiceScreen() {
           },
         });
 
-        const data = response.data;
-        setServices(data.data);
+        const servicesList =
+          response.data.data ?? response.data.service ?? response.data;
+
+        if (Array.isArray(servicesList)) {
+          setServices(servicesList);
+        } else {
+          console.warn("Formato inesperado:", servicesList);
+        }
       } catch (error) {
         console.log(error);
         setMessageError("Erro ao carregar os serviços");
       }
     };
 
-    fetchServices();
-  }, [token]);
+    if (!selectedCategory) {
+      fetchServices();
+    }
+  }, [token, setServices, selectedCategory]);
 
   const handleClickNextHours = () => {
     if (selectedItem && selectedItem.id >= 1) {
@@ -172,14 +174,16 @@ export default function ServiceScreen() {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <Button
-                onPress={() =>
-                  setSelectedItem({
-                    id: item.id,
-                    name: item.name,
-                    duration: item.duration.toString(),
-                    price: item.price.toString(),
-                  })
-                }
+                onPress={() => {
+                  if (setSelectedItem) {
+                    setSelectedItem({
+                      id: item.id,
+                      name: item.name,
+                      duration: item.duration.toString(),
+                      price: item.price.toString(),
+                    });
+                  }
+                }}
                 marginTop={16}
                 borderColor="background300"
                 borderWidth={1}

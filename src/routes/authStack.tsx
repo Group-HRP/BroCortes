@@ -5,11 +5,6 @@ import RegisterScreen from "../screens/public/RegisterScreen";
 export type AuthStackParamList = {
 	Login: undefined;
 	Register: undefined;
-	Appointment: undefined;
-	Historic: undefined;
-	Profile: undefined;
-	Service: undefined;
-	AppointmentHours: undefined;
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
