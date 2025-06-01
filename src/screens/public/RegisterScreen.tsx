@@ -69,7 +69,6 @@ export default function RegisterScreen() {
         },
       });
       console.log(response.data);
-
       navigation.navigate("Login");
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {

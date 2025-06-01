@@ -28,13 +28,13 @@ export default function Historic() {
 					justifyContent="space-between"
 				>
 					<CustomContainer>
-						<Title fontSize="h6" fontWeight="bold">
+						<Title fontSize="h6" fontFamily="bold">
 							Low Fade
 						</Title>
-						<Text fontSize="md" fontWeight="medium">
+						<Text fontSize="md" fontFamily="medium">
 							Ter, 1 Abril, 2025
 						</Text>
-						<Text fontSize="md" fontWeight="medium">
+						<Text fontSize="md" fontFamily="medium">
 							R$30,00
 						</Text>
 					</CustomContainer>

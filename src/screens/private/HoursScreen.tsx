@@ -61,7 +61,7 @@ export function HoursScreen() {
             textDayHeaderFontSize: 14,
           }}
         />
-
+        
         {isLoading ? (
           <>
             <Text fontSize="lg" fontWeight="semiBold" paddingVertical={12}>

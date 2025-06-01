@@ -132,8 +132,9 @@ export default function ServiceScreen() {
         <Button onPress={logout}>
           <Text>Seta</Text>
         </Button>
+
         <HeaderDefault paddingTop={40}>
-          <HeaderTitle fontWeight="bold">Selecionar serviços</HeaderTitle>
+          <HeaderTitle fontFamily="bold">Selecionar serviços</HeaderTitle>
 
           {isLoading ? (
             <Loading />
@@ -215,13 +216,14 @@ export default function ServiceScreen() {
           position="absolute"
           backgroundColor="#404040"
           width={"100%"}
-          height={96}
+          height={88}
           borderRadius={20}
           zIndex={1}
           bottom={0}
-          justifyContent="space-around"
+          paddingHorizontal={20}
           alignItems="center"
           flexDirection="row"
+          justifyContent="space-between"
         >
           {selectedItem && selectedItem.id > 0 ? (
             <>

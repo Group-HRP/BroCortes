@@ -17,7 +17,7 @@ export default function ProfileScreen() {
 			<HeaderDefault display="flex" flexDirection="row" paddingTop={44}>
 				<CustomContainer display="flex" gap={4}>
 					<HeaderTitle>João Pedro</HeaderTitle>
-					<Text fontWeight="medium">Conta Pessoal</Text>
+					<Text fontFamily="medium">Conta Pessoal</Text>
 				</CustomContainer>
 				{/* Colocar imagem do perfil aqui */}
 			</HeaderDefault>
