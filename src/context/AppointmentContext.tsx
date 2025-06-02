@@ -43,6 +43,8 @@ type AppointmentContextType = {
   setHoraSelecionada: React.Dispatch<React.SetStateAction<string>>;
   appointment: Appointment[];
   setAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
+  historicalAppointments?: Appointment[];
+  setHistoricalAppointments?: React.Dispatch<React.SetStateAction<Appointment[]>>;
   isLoading: boolean;
 };
 
@@ -58,6 +60,8 @@ export const AppointmentContext = createContext<AppointmentContextType>({
   setHoraSelecionada: () => {},
   appointment: [],
   setAppointment: () => {},
+  historicalAppointments: [],
+  setHistoricalAppointments: () => {},
   isLoading: false,
 });
 
@@ -66,7 +70,7 @@ export function AppointmentProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   const [services, setServices] = useState<Service[]>([]);
   const [selectedItem, setSelectedItem] = useState<
     { id: number; name: string; duration: string; price: string } | undefined
@@ -75,6 +79,7 @@ export function AppointmentProvider({
   const [horariosDisponiveis, setHorariosDisponiveis] = useState<string[]>([]);
   const [horaSelecionada, setHoraSelecionada] = useState("");
   const [appointment, setAppointment] = useState<Appointment[]>([]);
+  const [historicalAppointments, setHistoricalAppointments] = useState<Appointment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   type RootStackParamList = {
@@ -136,6 +141,39 @@ export function AppointmentProvider({
     fetchAppointments();
   }, [token]);
 
+  useEffect(() => {
+
+    const fetchHistoricalAppointments = async () => {
+      try {
+        setIsLoading(true);
+        const response = await api.get("/appointments", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            userId: user.sub,
+          }
+        })
+
+        const data = Array.isArray(response.data.data)
+          ? response.data.data
+          : [response.data.data];
+        setHistoricalAppointments(data);
+
+        console.log("Historical Appointments:", response.data.data);
+      } catch (error) {
+
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchHistoricalAppointments();
+  }, [token, user.sub]);
+
+  
+
   return (
     <AppointmentContext.Provider
       value={{
@@ -150,6 +188,7 @@ export function AppointmentProvider({
         setHoraSelecionada,
         appointment,
         setAppointment,
+        historicalAppointments,
         isLoading,
       }}
     >
