@@ -13,10 +13,10 @@ interface Service {
   description: string;
 }
 
-interface Appointment {
+export interface Appointment {
   id: number;
   serviceId: number;
-  service: Service;
+  service?: Service;
   date: string;
   status: string;
   canceledAt: string | null;
@@ -79,7 +79,6 @@ export function AppointmentProvider({
 
   type RootStackParamList = {
     ConfirmAppointment: undefined;
-    // add other routes here if needed
   };
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 

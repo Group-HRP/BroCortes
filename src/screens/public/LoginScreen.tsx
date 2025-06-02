@@ -1,5 +1,6 @@
 import { Alert, View } from "react-native";
 import { Containerdefault } from "../../components/Containers";
+import { CustomContainer } from "../../components/Containers";
 import { Input } from "../../components/Input";
 import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
@@ -9,6 +10,8 @@ import api from "../../services/axios";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "styled-components/native";
+
+import LogoBroCortes from "../../../assets/logo/LogoBroCortes"
 
 interface LoginScreenProps {
 	navigation: LoginScreenNavigationProp;
@@ -60,6 +63,10 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
 	return (
 		<Containerdefault alignItems="center" justifyContent="center">
+			<View style={{marginBottom: 64}}>
+				<LogoBroCortes width={172} height={70}/>
+			</View>
+			<CustomContainer width={"100%"} paddingHorizontal={32} alignItems="center">
 			<Title fontSize="h4" fontFamily="bold">
 				Acessar conta
 			</Title>
@@ -71,8 +78,8 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				padding={12}
 				borderRadius={"md"}
 				borderSize={1}
-				fontFamily="regular"
-				marginTop={56}
+				fontFamily="medium"
+				marginTop={40}
 			/>
 			<Input
 				value={formLogin.password}
@@ -83,7 +90,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				padding={12}
 				borderRadius={"md"}
 				borderSize={1}
-				fontFamily="regular"
+				fontFamily="medium"
 				marginTop={8}
 				marginBottom={4}
 			/>
@@ -119,23 +126,24 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 				<ButtonText
 					disabled={formLogin.email === "" || formLogin.password === ""}
 					fontSize="md"
-					weight="semiBold"
+					weight="medium"
 					color="background"
 				>
 					Entrar
 				</ButtonText>
 			</Button>
-			<View style={{ flexDirection: "row", marginTop: 40 }}>
+			<View style={{ flexDirection: "row", marginTop: 40, alignItems: "center" }}>
 				<Text fontSize="md" fontWeight="regular">
 					Nao possui conta?
 				</Text>
 				<Button onPress={() => navigation.navigate("Register")}>
-					<ButtonText color="primary" weight="bold">
+					<ButtonText color="primary" weight="medium" fontSize="md">
 						{" "}
 						Criar conta
 					</ButtonText>
 				</Button>
 			</View>
+			</CustomContainer>
 		</Containerdefault>
 	);
 }

@@ -40,7 +40,7 @@
     "react-native-reanimated": "^3.17.3",
     "react-native-safe-area-context": "^5.3.0",
     "react-native-screens": "^4.10.0",
-    "react-native-svg": "15.8.0",
+    "react-native-svg": "^15.8.0",
     "react-native-web": "~0.19.13",
     "styled-components": "^5.3.11"
   },
@@ -52,6 +52,7 @@
     "@types/react": "~18.3.12",
     "commitizen": "^4.3.1",
     "husky": "^9.1.7",
+    "react-native-svg-transformer": "^1.5.1",
     "typescript": "^5.3.3"
   },
   "private": true

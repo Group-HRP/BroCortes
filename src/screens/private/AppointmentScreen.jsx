@@ -35,6 +35,25 @@ export default function AppointmentScreen() {
 			.replace(" De ", ", "); // Remove "de" e substitui por vírgulas
 	}
 
+	const isValidAppointment = (appointments) => {
+		// Se não for array ou estiver vazio, inválido
+		if (!Array.isArray(appointments)) return false;
+		if (appointments.length === 0) return false;
+
+		// Verifica cada item do array
+		return appointments.every(item => {
+			if (!item) return false; // Item é null/undefined
+
+			// Verifica propriedades essenciais
+			const hasValidService = !!item.service &&
+				!!item.service.name &&
+				item.service.price !== undefined;
+
+			const hasValidDate = !!item.date;
+
+			return hasValidService && hasValidDate;
+		});
+	};
 
 	return (
 		<ContainerDefault>
@@ -43,31 +62,32 @@ export default function AppointmentScreen() {
 			</HeaderDefault>
 			{isLoading ? (
 				<Loading />
-			) : Array.isArray(appointment) && appointment.length > 0 ? (
+			) : isValidAppointment(appointment) ? (
 				<>
 					<Title fontSize="h4">Em Andamento</Title>
-					{appointment.map((item) => (
-						<Button key={item.id} marginTop={"h4"}>
-							<CustomContainer
-								backgroundColor={theme.colors.background300}
-								borderRadius={8}
-								paddingVertical={12}
-								paddingHorizontal={24}
-							>
-								<CustomContainer>
-									<Text fontSize="h6" fontWeight="medium">
-										{item.service?.name ?? "Serviço não encontrado"}
-									</Text>
-									<Text fontSize="md" fontWeight="regular">
-										{formatarDataPersonalizada(item.date)}
-									</Text>
-									<Text fontSize="md" fontWeight="regular">
-										R$ {item.service.price ?? "N/A"},00
-									</Text>
+					{appointment
+						.map((item) => (
+							<Button key={item.id} marginTop={"h4"}>
+								<CustomContainer
+									backgroundColor={theme.colors.background300}
+									borderRadius={8}
+									paddingVertical={12}
+									paddingHorizontal={24}
+								>
+									<CustomContainer>
+										<Text fontSize="h6" fontWeight="medium">
+											{item.service?.name ?? "Serviço não encontrado"}
+										</Text>
+										<Text fontSize="md" fontWeight="regular">
+											{formatarDataPersonalizada(item.date)}
+										</Text>
+										<Text fontSize="md" fontWeight="regular">
+											R$ {item.service?.price ?? "N/A"},00
+										</Text>
+									</CustomContainer>
 								</CustomContainer>
-							</CustomContainer>
-						</Button>
-					))}
+							</Button>
+						))}
 				</>
 			) : (
 				<View
