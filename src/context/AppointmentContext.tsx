@@ -113,7 +113,6 @@ export function AppointmentProvider({
     }
   }, [dataSelecionada, selectedItem, token]);
 
-  // Implementar o GET dos Appointments
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
