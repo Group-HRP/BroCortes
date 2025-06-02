@@ -28,7 +28,7 @@ export default function Historic() {
 					justifyContent="space-between"
 				>
 					<CustomContainer>
-						<Title fontSize="h6" fontFamily="bold">
+						<Title fontSize="h6" marginBottom={4}>
 							Low Fade
 						</Title>
 						<Text fontSize="md" fontFamily="medium">
@@ -41,10 +41,10 @@ export default function Historic() {
 					<Button
 						backgroundColor="accent"
 						paddingHorizontal={20}
-						paddingVertical={8}
+						paddingVertical={12}
 						borderRadius={16}
 					>
-						<ButtonText fontSize="sm" weight="semiBold" color="text">
+						<ButtonText fontSize="md" fontFamily="medium" color="text">
 							Agendar Novamente
 						</ButtonText>
 					</Button>

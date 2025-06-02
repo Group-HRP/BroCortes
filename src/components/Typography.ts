@@ -134,5 +134,29 @@ const BaseText = styled.Text<TypographyProps>`
 				: (borderColor ?? "transparent")};
 `;
 
-export const Title = styled(BaseText).attrs({ isTitle: true })``;
-export const Text = styled(BaseText).attrs({ isTitle: false })``;
+export const Title = styled(BaseText).attrs({ isTitle: true })`
+    line-height: ${({ lineHeight, fontSize = "md", theme }) => {
+        if (lineHeight) return `${lineHeight}px`;
+        // Defina os grupos de títulos
+        const group120 = ["h1", "h2", "h3"];
+        const group140 = ["h4", "h5", "h6"];
+        let size = theme.fonts.sizes[fontSize as keyof typeof theme.fonts.sizes];
+        if (!size) size = theme.fonts.sizes.md;
+        if (group120.includes(fontSize as string)) {
+            return `${size * 1.2}px`;
+        }
+        if (group140.includes(fontSize as string)) {
+            return `${size * 1.4}px`;
+        }
+        return `${size * 1.5}px`; // fallback para outros casos
+    }};
+`;
+
+export const Text = styled(BaseText).attrs({ isTitle: false })`
+    line-height: ${({ lineHeight, fontSize = "md", theme }) => {
+        if (lineHeight) return `${lineHeight}px`;
+        let size = theme.fonts.sizes[fontSize as keyof typeof theme.fonts.sizes];
+        if (!size) size = theme.fonts.sizes.md;
+        return `${size * 1.5}px`;
+    }};
+`;

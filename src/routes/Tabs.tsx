@@ -47,6 +47,7 @@ export default function Tabs() {
 					marginTop: 25,
 				},
 				tabBarShowLabel: false,
+				headerShown: false,
 			})}
 		>
 			<Tab.Screen name="Appointment" component={AppointmentScreen} />
