@@ -10,6 +10,8 @@ import { AppointmentContext } from "../../context/AppointmentContext";
 import { CustomContainer } from "../../components/Containers";
 import { Loading } from "../../components/Loading";
 
+import ArrowRightIcon from "../../../assets/icons/ArrowRightIcon";
+
 export default function AppointmentScreen() {
 	const theme = useTheme();
 	const navigation = useNavigation();
@@ -67,27 +69,71 @@ export default function AppointmentScreen() {
 					<Title fontSize="h4">Em Andamento</Title>
 					{appointment
 						.map((item) => (
-							<Button key={item.id} marginTop={"h4"}>
+							<Button key={item.id} marginTop={32}>
 								<CustomContainer
 									backgroundColor={theme.colors.background300}
 									borderRadius={8}
 									paddingVertical={12}
 									paddingHorizontal={24}
+									flexDirection="row"
+									justifyContent="space-between"
+									alignItems="center"
 								>
 									<CustomContainer>
 										<Text fontSize="h6" fontWeight="medium">
 											{item.service?.name ?? "Serviço não encontrado"}
 										</Text>
-										<Text fontSize="md" fontWeight="regular">
+										<Text fontSize="md" fontWeight="medium" marginTop={4}>
 											{formatarDataPersonalizada(item.date)}
 										</Text>
-										<Text fontSize="md" fontWeight="regular">
+										<Text fontSize="md" fontWeight="medium">
 											R$ {item.service?.price ?? "N/A"},00
 										</Text>
 									</CustomContainer>
+									<ArrowRightIcon/>
 								</CustomContainer>
 							</Button>
 						))}
+						<CustomContainer marginTop={48} flexDirection="row" alignItems="center" justifyContent="space-between">
+							<Text width={200}>Quer fazer um novo agendamento?</Text>
+							<Button 
+								onPress={() => navigation.navigate("Service")}
+								backgroundColor="primary"
+								width={186}
+								paddingHorizontal={24}
+								paddingVertical={12}
+								borderRadius={18}
+								alignItems="center" >
+								<ButtonText color="background" fontSize="md" weight="medium">
+									Agendar Agora
+								</ButtonText>
+							</Button>
+						</CustomContainer>
+
+					<Title fontSize="h4" marginTop={96}>Histórico</Title>
+						<CustomContainer
+							backgroundColor={theme.colors.background300}
+							borderRadius={8}
+							paddingVertical={12}
+							paddingHorizontal={24}
+							flexDirection="row"
+							justifyContent="space-between"
+							alignItems="center"
+							marginTop={32}
+						>
+							<CustomContainer>
+								<Text fontSize="h6" fontWeight="medium">
+									slala
+								</Text>
+								<Text fontSize="md" fontWeight="medium" marginTop={4}>
+									1556156
+								</Text>
+								<Text fontSize="md" fontWeight="medium">
+									R$ 20,00
+								</Text>
+							</CustomContainer>
+							<ArrowRightIcon/>
+						</CustomContainer>
 				</>
 			) : (
 				<View

@@ -6,12 +6,13 @@ import { useTheme } from "styled-components/native";
 import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
 
+
 export default function Historic() {
 	const theme = useTheme();
 	return (
 		<ContainerDefault>
 			<HeaderDefault>
-				<HeaderTitle>Histórico</HeaderTitle>
+				<HeaderTitle marginTop={40}>Histórico</HeaderTitle>
 			</HeaderDefault>
 			<View
 				style={{
