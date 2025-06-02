@@ -28,10 +28,7 @@ export default function AppStack() {
 				<Stack.Screen name="Appointment" component={AppointmentScreen} />
 				<Stack.Screen name="Historic" component={HistoricScreen} />
 				<Stack.Screen name="Hours" component={HoursScreen} />
-				<Stack.Screen
-					name="ReviewAppointment"
-					component={ReviewAppointmentScreen}
-				/>
+				<Stack.Screen name="ReviewAppointment" component={ReviewAppointmentScreen}/>
 				<Stack.Screen name="Profile" component={ProfileScreen} />
 				<Stack.Screen name="Service" component={ServiceScreen} />
 			</Stack.Navigator>

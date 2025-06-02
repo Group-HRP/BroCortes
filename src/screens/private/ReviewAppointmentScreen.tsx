@@ -14,6 +14,9 @@ import { ptBR, se } from "date-fns/locale";
 import api from "../../services/axios";
 import { AuthContext } from "../../context/AuthContext";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
+import { ContainerFooter, CustomContainer } from "../../components/Containers";
+
+import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
 
 export default function AppointmentScreen() {
   type RootStackParamList = {
@@ -105,70 +108,78 @@ export default function AppointmentScreen() {
   };
 
   return (
+    <>
     <ContainerDefault>
       <HeaderDefault>
-        <HeaderTitle style={{ fontSize: theme.fonts.sizes.h4 }}>
+        <Button onPress={() => navigation.goBack()}>
+						<BackArrowIcon/>
+					</Button>
+        <HeaderTitle marginTop={40} style={{ fontSize: theme.fonts.sizes.h4 }}>
           Revisar e confirmar
         </HeaderTitle>
       </HeaderDefault>
       <View style={{ marginTop: 35 }}>
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <SchedulingIcon width={16} height={16} />
-          <Text
+        <View style={{gap:4}}>
+          <View style={{ display: "flex", flexDirection: "row", alignItems: "center", gap:6 }}>
+            <SchedulingIcon width={16} height={16} />
+            <Text
+              style={{
+                fontSize: theme.fonts.sizes.sm,
+              }}
+            >
+              {"  "}
+              {dataFinal}
+            </Text>
+          </View>
+          <View
             style={{
-              fontSize: theme.fonts.sizes.xs,
-              paddingVertical: 5,
-              marginLeft: 5,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap:6
             }}
           >
-            {"  "}
-            {dataFinal}
-          </Text>
+            <ClockProfileIcon width={16} height={16} />
+            <Text style={{ fontSize: theme.fonts.sizes.sm }}>
+              {" "}
+              {resultado}
+            </Text>
+          </View>
         </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            marginTop: 5,
-            alignItems: "center",
-          }}
-        >
-          <ClockProfileIcon width={16} height={16} />
-          <Text style={{ fontSize: theme.fonts.sizes.xs, marginTop: 5 }}>
-            {" "}
-            {resultado}
-          </Text>
-        </View>
+
+
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            marginVertical: 10,
-            marginTop: 35,
+            marginTop: 32,
+            alignItems: "center",
           }}
         >
-          <Text style={{ fontSize: theme.fonts.sizes.sm, fontWeight: 500 }}>
-            {selectedItem?.name}
-          </Text>
+          <View style={{ flexDirection:"column", gap: 4 }}>
+            <Text style={{ fontSize: theme.fonts.sizes.sm, fontFamily:"medium" }}>
+              {selectedItem?.name}
+            </Text>
+            <Text style={{ fontSize: theme.fonts.sizes.sm }}>
+            {selectedItem?.duration}m
+            </Text>
+          </View>
           <Text style={{ fontSize: theme.fonts.sizes.sm, fontWeight: 500 }}>
             {`R$${selectedItem?.price},00`}
           </Text>
         </View>
-        <Text style={{ fontSize: theme.fonts.sizes.sm, marginTop: 5 }}>
-          {selectedItem?.duration}m
-        </Text>
+        
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            marginVertical: 10,
-            marginTop: 35,
+            marginTop: 32,
           }}
         >
-          <Text style={{ fontSize: theme.fonts.sizes.sm, fontWeight: "bold" }}>
+          <Text style={{ fontSize: theme.fonts.sizes.md, fontWeight: "bold" }}>
             Preço total
           </Text>
-          <Text style={{ fontSize: theme.fonts.sizes.sm, fontWeight: "bold" }}>
+          <Text style={{ fontSize: theme.fonts.sizes.md, fontWeight: "bold" }}>
             {`R$${totalPrice},00`}
           </Text>
         </View>
@@ -176,8 +187,7 @@ export default function AppointmentScreen() {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            marginVertical: 10,
-            marginTop: 5,
+            marginTop: 8,
           }}
         >
           <Text style={{ fontSize: theme.fonts.sizes.sm, fontWeight: 500 }}>
@@ -189,8 +199,8 @@ export default function AppointmentScreen() {
         </View>
         <Text
           style={{
-            fontSize: theme.fonts.sizes.md,
-            marginTop: 35,
+            fontSize: theme.fonts.sizes.lg,
+            marginTop: 32,
             fontWeight: "bold",
           }}
         >
@@ -200,16 +210,15 @@ export default function AppointmentScreen() {
           style={{
             display: "flex",
             flexDirection: "row",
-            marginTop: 5,
+            marginTop: 8,
             alignItems: "center",
           }}
         >
           <RelumeIcon width={18} height={18} />
           <Text
             style={{
-              fontSize: theme.fonts.sizes.xs,
-              marginTop: 5,
-              marginLeft: 5,
+              fontSize: theme.fonts.sizes.sm,
+              marginLeft: 8,
             }}
           >
             Pagamento no local
@@ -218,7 +227,7 @@ export default function AppointmentScreen() {
         <Text
           style={{
             fontSize: theme.fonts.sizes.md,
-            marginTop: 35,
+            marginTop: 32,
             fontWeight: "bold",
           }}
         >
@@ -228,41 +237,35 @@ export default function AppointmentScreen() {
           style={{
             height: 129,
             backgroundColor: theme.colors.background300,
-            padding: 10,
+            padding: 12,
             fontSize: theme.fonts.sizes.md,
-            marginTop: 10,
+            marginTop: 16,
             color: theme.colors.text,
             textAlignVertical: "top",
-            borderRadius: 5,
+            borderRadius: 12,
           }}
           placeholder="Comentário ou dúvida sobre o agendamento"
           placeholderTextColor={theme.colors.text}
           multiline={true}
         />
       </View>
-      <View
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          bottom: 3,
-          height: 88,
-          backgroundColor: theme.colors.background300,
-          borderRadius: 15,
-          marginTop: 10,
-          padding: 10,
-        }}
-      >
-        <View
-          style={{
-            margin: "auto",
-            width: 420,
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <View style={{ width: "40%", marginLeft: -25 }}>
+    </ContainerDefault>
+    <View style={{ flex: 1, position: "relative" }}>
+      <ContainerFooter
+                position="absolute"
+                backgroundColor="#404040"
+                width={"100%"}
+                height={88}
+                borderTopRightRadius={20}
+                borderTopLeftRadius={20}
+                zIndex={1}
+                bottom={0}
+                paddingHorizontal={20}
+                alignItems="center"
+                flexDirection="row"
+                justifyContent="space-between"
+              >
+          <CustomContainer>
             <Text
               style={{ fontSize: theme.fonts.sizes.sm, fontWeight: "bold" }}
             >
@@ -271,8 +274,8 @@ export default function AppointmentScreen() {
             <Text style={{ fontSize: theme.fonts.sizes.sm, fontWeight: 500 }}>
               {`${totalServices} serviço(s) - ${duracaoFormatada}`}
             </Text>
-          </View>
-          <View style={{ width: "60%" }}>
+          </CustomContainer>
+          <CustomContainer>
             <Button
               onPress={handleClickAppointment}
               style={{
@@ -289,14 +292,15 @@ export default function AppointmentScreen() {
                 style={{
                   fontSize: theme.fonts.sizes.md,
                   color: theme.colors.background,
+                  fontFamily: "medium",
                 }}
               >
                 Confirmar Agendamento
               </ButtonText>
             </Button>
-          </View>
+          </CustomContainer>
+        </ContainerFooter>
         </View>
-      </View>
-    </ContainerDefault>
+    </>
   );
 }

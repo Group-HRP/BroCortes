@@ -61,6 +61,8 @@ interface CustomContainerProps {
 	marginVertical?: number;
 	backgroundColor?: string;
 	borderRadius?: number;
+	borderTopRightRadius?: number;
+    borderTopLeftRadius?: number;
 	borderWidth?: number;
 	borderColor?: string;
 	gap?: number;
@@ -104,6 +106,10 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 
 	${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
 	${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius}px;`}
+	${({ borderTopRightRadius }) =>
+        borderTopRightRadius !== undefined && `border-top-right-radius: ${borderTopRightRadius}px;`}
+    ${({ borderTopLeftRadius }) =>
+        borderTopLeftRadius !== undefined && `border-top-left-radius: ${borderTopLeftRadius}px;`}
 	${({ borderWidth }) => borderWidth && `border-width: ${borderWidth}px;`}
 	${({ borderColor }) => borderColor && `border-color: ${borderColor};`}
 

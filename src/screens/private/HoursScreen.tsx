@@ -11,6 +11,9 @@ import { AppointmentContext } from "../../context/AppointmentContext";
 import { Loading } from "../../components/Loading";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 
+import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
+
+
 export function HoursScreen() {
 	const {
 		dataSelecionada,
@@ -38,10 +41,13 @@ export function HoursScreen() {
 
 	return (
 		<ContainerDefault>
-			<HeaderDefault paddingTop={40} marginBottom={40}>
-				<HeaderTitle>Selecionar horário</HeaderTitle>
+			<HeaderDefault paddingTop={40}>
+				<Button onPress={() => navigation.goBack()}>
+					<BackArrowIcon/>
+				</Button>
+				<HeaderTitle marginTop={40}>Selecionar horário</HeaderTitle>
 			</HeaderDefault>
-			<CustomContainer>
+			<CustomContainer marginTop={64}>
 				<Calendar
 					onDayPress={(day: { dateString: string }) => {
 						handleDatePress(day);
@@ -75,9 +81,6 @@ export function HoursScreen() {
 
 				{isLoading ? (
 					<>
-						<Text fontSize="lg" fontWeight="semiBold" paddingVertical={12}>
-							Horários disponíveis:
-						</Text>
 						<CustomContainer
 							alignItems="center"
 							justifyContent="center"
@@ -90,9 +93,7 @@ export function HoursScreen() {
 					<>
 						{dataSelecionada ? (
 							<>
-								<Text fontSize="lg" fontWeight="semiBold" paddingVertical={12}>
-									Horários disponíveis:
-								</Text>
+							<CustomContainer marginTop={40} gap={16}>
 								<FlatList
 									data={horariosDisponiveis}
 									keyExtractor={(item) => item}
@@ -101,18 +102,22 @@ export function HoursScreen() {
 									renderItem={({ item }) => (
 										<Button
 											onPress={() => setHoraSelecionada(item)}
-											marginHorizontal={8}
 											marginVertical={8}
+											width={"100%"}
 											backgroundColor={
-												horaSelecionada === item ? "primary" : "background200"
+												horaSelecionada === item? "primary" : "background"
 											}
 											paddingHorizontal={24}
-											paddingVertical={12}
+											paddingVertical={16}
+											borderWidth={1}
+											borderColor="accent300"
+											borderRadius={16}
 										>
-											<ButtonText>{item}</ButtonText>
+											<ButtonText fontSize="md" fontFamily="medium">{item}</ButtonText>
 										</Button>
 									)}
 								/>
+							</CustomContainer>	
 							</>
 						) : (
 							<CustomContainer
@@ -121,7 +126,7 @@ export function HoursScreen() {
 								height={120}
 								backgroundColor="#404040"
 								borderRadius={20}
-								marginVertical={24}
+								marginTop={40}
 							>
 								<Text color="accent300">Selecione uma data no calendário</Text>
 							</CustomContainer>
