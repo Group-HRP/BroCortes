@@ -43,8 +43,6 @@ type AppointmentContextType = {
   setHoraSelecionada: React.Dispatch<React.SetStateAction<string>>;
   appointment: Appointment[];
   setAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
-  historicalAppointments?: Appointment[];
-  setHistoricalAppointments?: React.Dispatch<React.SetStateAction<Appointment[]>>;
   isLoading: boolean;
 };
 
@@ -60,8 +58,6 @@ export const AppointmentContext = createContext<AppointmentContextType>({
   setHoraSelecionada: () => {},
   appointment: [],
   setAppointment: () => {},
-  historicalAppointments: [],
-  setHistoricalAppointments: () => {},
   isLoading: false,
 });
 
@@ -79,7 +75,6 @@ export function AppointmentProvider({
   const [horariosDisponiveis, setHorariosDisponiveis] = useState<string[]>([]);
   const [horaSelecionada, setHoraSelecionada] = useState("");
   const [appointment, setAppointment] = useState<Appointment[]>([]);
-  const [historicalAppointments, setHistoricalAppointments] = useState<Appointment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   type RootStackParamList = {
@@ -142,7 +137,6 @@ export function AppointmentProvider({
   }, [token]);
 
   useEffect(() => {
-
     const fetchHistoricalAppointments = async () => {
       try {
         setIsLoading(true);
@@ -153,26 +147,22 @@ export function AppointmentProvider({
           },
           params: {
             userId: user.sub,
-          }
-        })
+          },
+        });
 
         const data = Array.isArray(response.data.data)
           ? response.data.data
           : [response.data.data];
-        setHistoricalAppointments(data);
-
-        console.log("Historical Appointments:", response.data.data);
+        setAppointment(data);
       } catch (error) {
-
+        console.log("Erro ao listar historico", error);
       } finally {
         setIsLoading(false);
       }
-    }
+    };
 
     fetchHistoricalAppointments();
   }, [token, user.sub]);
-
-  
 
   return (
     <AppointmentContext.Provider
@@ -188,7 +178,6 @@ export function AppointmentProvider({
         setHoraSelecionada,
         appointment,
         setAppointment,
-        historicalAppointments,
         isLoading,
       }}
     >
