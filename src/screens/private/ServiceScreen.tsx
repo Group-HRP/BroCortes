@@ -144,7 +144,8 @@ export default function ServiceScreen() {
 						renderItem={({ item }) => (
 							<Button
 								onPress={() => handleClickCategoryList(item)}
-								marginVertical={12}
+								marginTop={40}
+								marginBottom={16}
 								borderRadius={20}
 								paddingHorizontal={16}
 								paddingVertical={8}
@@ -154,7 +155,7 @@ export default function ServiceScreen() {
 									selectedCategory?.id === item.id ? "primary200" : "background"
 								}
 							>
-								<Title fontSize="md" textAlign="center" marginBottom={6}>
+								<Title fontSize="md" textAlign="center" paddingBottom={6}>
 									{item.name}
 								</Title>
 							</Button>
@@ -231,7 +232,7 @@ export default function ServiceScreen() {
 								</Text>
 								<Text fontSize="sm" fontWeight="medium">
 									{selectedItem.id.toString().length} serviços -
-									<Text fontSize="sm">{selectedItem.duration} min</Text>
+									<Text fontSize="sm"> {selectedItem.duration} min</Text>
 								</Text>
 							</CustomContainer>
 							<Button

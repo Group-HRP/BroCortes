@@ -21,8 +21,8 @@ export default function Historic() {
 			>
 				<CustomContainer
 					backgroundColor={theme.colors.background300}
-					paddingVertical={10}
-					paddingHorizontal={16}
+					paddingVertical={12}
+					paddingHorizontal={24}
 					borderRadius={8}
 					flexDirection={"row"}
 					alignItems="center"
@@ -32,7 +32,7 @@ export default function Historic() {
 						<Title fontSize="h6" marginBottom={4}>
 							Low Fade
 						</Title>
-						<Text fontSize="md" fontFamily="medium">
+						<Text fontSize="md" marginBottom={4} fontFamily="medium">
 							Ter, 1 Abril, 2025
 						</Text>
 						<Text fontSize="md" fontFamily="medium">

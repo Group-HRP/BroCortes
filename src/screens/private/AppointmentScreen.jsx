@@ -80,10 +80,10 @@ export default function AppointmentScreen() {
 									alignItems="center"
 								>
 									<CustomContainer>
-										<Text fontSize="h6" fontWeight="medium">
+										<Text fontSize="h6" fontWeight="medium" marginBottom={4}>
 											{item.service?.name ?? "Serviço não encontrado"}
 										</Text>
-										<Text fontSize="md" fontWeight="medium" marginTop={4}>
+										<Text fontSize="md" fontWeight="medium" marginBottom={4}>
 											{formatarDataPersonalizada(item.date)}
 										</Text>
 										<Text fontSize="md" fontWeight="medium">
@@ -122,17 +122,26 @@ export default function AppointmentScreen() {
 							marginTop={32}
 						>
 							<CustomContainer>
-								<Text fontSize="h6" fontWeight="medium">
+								<Text fontSize="h6" fontWeight="medium" marginBottom={4}>
 									slala
 								</Text>
-								<Text fontSize="md" fontWeight="medium" marginTop={4}>
+								<Text fontSize="md" fontWeight="medium" marginBottom={4}>
 									1556156
 								</Text>
 								<Text fontSize="md" fontWeight="medium">
 									R$ 20,00
 								</Text>
 							</CustomContainer>
-							<ArrowRightIcon/>
+							<Button
+								backgroundColor="accent"
+								paddingHorizontal={20}
+								paddingVertical={12}
+								borderRadius={16}
+							>
+								<ButtonText fontSize="md" fontFamily="medium" color="text">
+									Agendar Novamente
+								</ButtonText>
+							</Button>
 						</CustomContainer>
 				</>
 			) : (

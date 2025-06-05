@@ -11,6 +11,8 @@ interface TypographyProps {
 		| keyof DefaultTheme["fonts"]["heading"]
 		| string;
 	padding?: number;
+	paddingTop?: number;
+	paddingBottom?: number;
 	paddingHorizontal?: number;
 	paddingVertical?: number;
 	margin?: number;
@@ -107,7 +109,9 @@ const BaseText = styled.Text<TypographyProps>`
 			paddingHorizontal ? `${paddingHorizontal}px` : "0px"};
     padding-vertical: ${({ paddingVertical }) =>
 			paddingVertical ? `${paddingVertical}px` : "0px"};
-
+	padding-top: ${({ paddingTop }) => (paddingTop ? `${paddingTop}px` : "0px")};
+	padding-bottom: ${({ paddingBottom }) =>
+			paddingBottom ? `${paddingBottom}px` : "0px"};
     margin: ${({ margin }) => (margin ? `${margin}px` : "0px")};
     margin-top: ${({ marginTop }) => (marginTop ? `${marginTop}px` : "0px")};
     margin-bottom: ${({ marginBottom }) =>
