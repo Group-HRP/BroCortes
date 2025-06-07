@@ -183,7 +183,7 @@ export function AppointmentProvider({
       const data = response.data;
       setViewAppointment(data);
 
-      navigation.navigate("AppStack", { screen: "ViewAppointment", params: { appointment: data } });
+      navigation.navigate("AppStack", { screen: "ViewAppointment", params: { viewAppointment: data } });
     } catch (error) {
       console.log("erro ao mostrar appointments", error);
     } finally {

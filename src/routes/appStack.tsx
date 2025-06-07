@@ -7,7 +7,7 @@ import ProfileScreen from "../screens/private/ProfileScreen";
 import ServiceScreen from "../screens/private/ServiceScreen";
 import { HoursScreen } from "../screens/private/HoursScreen";
 import {
-  type AppointmentContextType,
+  type Appointment,
   AppointmentProvider,
 } from "../context/AppointmentContext";
 import ReviewAppointmentScreen from "../screens/private/ReviewAppointmentScreen";
@@ -21,7 +21,7 @@ export type AppStackParamList = {
   Appointment: undefined;
   Service: undefined;
   ReviewAppointment: undefined;
-  ViewAppointment: { appointment: AppointmentContextType };
+  ViewAppointment: { viewAppointment: Appointment };
   Hours: undefined;
   ConfirmAppointment: undefined;
 };
