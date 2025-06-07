@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 import api from "../services/axios";
 import { AuthContext } from "./AuthContext";
 import { useNavigation, type NavigationProp } from "@react-navigation/native";
-import { is } from "date-fns/locale";
+import type { AppStackParamList } from "../routes/appStack";
 
 interface Service {
   id: number;
@@ -27,7 +27,7 @@ export interface Appointment {
   userId: number;
 }
 
-type AppointmentContextType = {
+export type AppointmentContextType = {
   services: Service[];
   setServices: React.Dispatch<React.SetStateAction<Service[]>>;
   selectedItem?: { id: number; name: string; duration: string; price: string };
@@ -43,6 +43,11 @@ type AppointmentContextType = {
   setHoraSelecionada: React.Dispatch<React.SetStateAction<string>>;
   appointment: Appointment[];
   setAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
+  historicAppointment: Appointment[];
+  setHistoricAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
+  fetchViewAppointment: (id: number) => Promise<void>;
+  viewAppointment: Appointment[];
+  setViewAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
   isLoading: boolean;
 };
 
@@ -58,6 +63,11 @@ export const AppointmentContext = createContext<AppointmentContextType>({
   setHoraSelecionada: () => {},
   appointment: [],
   setAppointment: () => {},
+  historicAppointment: [],
+  setHistoricAppointment: () => {},
+  fetchViewAppointment: async () => {},
+  viewAppointment: [],
+  setViewAppointment: () => {},
   isLoading: false,
 });
 
@@ -75,12 +85,13 @@ export function AppointmentProvider({
   const [horariosDisponiveis, setHorariosDisponiveis] = useState<string[]>([]);
   const [horaSelecionada, setHoraSelecionada] = useState("");
   const [appointment, setAppointment] = useState<Appointment[]>([]);
+  const [historicAppointment, setHistoricAppointment] = useState<Appointment[]>(
+    []
+  );
+  const [viewAppointment, setViewAppointment] = useState<Appointment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  type RootStackParamList = {
-    ConfirmAppointment: undefined;
-  };
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
   useEffect(() => {
     if (horaSelecionada) {
@@ -140,20 +151,17 @@ export function AppointmentProvider({
     const fetchHistoricalAppointments = async () => {
       try {
         setIsLoading(true);
-        const response = await api.get("/appointments", {
+        const response = await api.get(`/appointments/${user.sub}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          params: {
-            userId: user.sub,
-          },
         });
 
-        const data = Array.isArray(response.data.data)
-          ? response.data.data
-          : [response.data.data];
-        setAppointment(data);
+        const data = Array.isArray(response.data)
+          ? response.data
+          : [response.data];
+        setHistoricAppointment(data);
       } catch (error) {
         console.log("Erro ao listar historico", error);
       } finally {
@@ -163,6 +171,25 @@ export function AppointmentProvider({
 
     fetchHistoricalAppointments();
   }, [token, user.sub]);
+
+  const fetchViewAppointment = async (id: number) => {
+    try {
+      setIsLoading(true);
+      const response = await api.get(`/appointments/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = response.data;
+      setViewAppointment(data);
+
+      navigation.navigate("AppStack", { screen: "ViewAppointment", params: { appointment: data } });
+    } catch (error) {
+      console.log("erro ao mostrar appointments", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <AppointmentContext.Provider
@@ -178,6 +205,11 @@ export function AppointmentProvider({
         setHoraSelecionada,
         appointment,
         setAppointment,
+        historicAppointment,
+        setHistoricAppointment,
+        fetchViewAppointment,
+        viewAppointment,
+        setViewAppointment,
         isLoading,
       }}
     >
