@@ -56,7 +56,7 @@ export function HoursScreen() {
 					markedDates={{
 						[dataSelecionada]: {
 							selected: true,
-							marked: true,
+							marked: false,
 							selectedColor: "#B8860B",
 						},
 					}}
@@ -69,12 +69,12 @@ export function HoursScreen() {
 						todayTextColor: "#986B00",
 						dayTextColor: "#E0E0E0",
 						textDisabledColor: "#959aa2",
-						arrowColor: "#404040",
-						monthTextColor: "#B8860B",
+						arrowColor: "#B8860B",
+						monthTextColor: "#ffffff",
 						textDayFontWeight: "500",
 						textMonthFontWeight: "bold",
 						textDayFontSize: 16,
-						textMonthFontSize: 18,
+						textMonthFontSize: 20,
 						textDayHeaderFontSize: 14,
 					}}
 				/>
@@ -110,7 +110,7 @@ export function HoursScreen() {
 											paddingHorizontal={24}
 											paddingVertical={16}
 											borderWidth={1}
-											borderColor="accent300"
+											borderColor="background300"
 											borderRadius={16}
 										>
 											<ButtonText fontSize="md" fontFamily="medium">{item}</ButtonText>

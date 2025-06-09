@@ -237,15 +237,15 @@ export default function ReviewAppointment() {
           style={{
             height: 129,
             backgroundColor: theme.colors.background300,
-            padding: 12,
+            padding: 16,
             fontSize: theme.fonts.sizes.md,
             marginTop: 16,
             color: theme.colors.text,
             textAlignVertical: "top",
             borderRadius: 12,
           }}
-          placeholder="Comentário ou dúvida sobre o agendamento"
-          placeholderTextColor={theme.colors.text}
+          placeholder="Digite aqui suas observações"
+          placeholderTextColor={theme.colors.placeholdertext}
           multiline={true}
         />
       </View>
