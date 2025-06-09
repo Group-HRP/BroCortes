@@ -18,7 +18,7 @@ import { ContainerFooter, CustomContainer } from "../../components/Containers";
 
 import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
 
-export default function AppointmentScreen() {
+export default function ReviewAppointment() {
   type RootStackParamList = {
     Appointment: undefined;
   };

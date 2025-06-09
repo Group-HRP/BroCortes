@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { FlatList, View } from "react-native";
 import { ContainerDefault } from "../../components/ContainerDefault";
 import { HeaderDefault, HeaderTitle } from "../../components/HeaderDefault";
 import { useTheme } from "styled-components/native";
@@ -16,7 +16,8 @@ export default function AppointmentScreen() {
 	const theme = useTheme();
 	const navigation = useNavigation();
 
-	const { appointment, isLoading } = useContext(AppointmentContext)
+	const { appointment, historicAppointment, isLoading, fetchViewAppointment } = useContext(AppointmentContext)
+
 
 	function formatarDataPersonalizada(dataISO) {
 		const data = new Date(dataISO);
@@ -28,25 +29,21 @@ export default function AppointmentScreen() {
 			year: "numeric",
 		});
 
-		// Capitaliza a primeira letra de cada palavra
 		return formatada
 			.split(" ")
 			.map((palavra) => palavra.charAt(0).toUpperCase() + palavra.slice(1))
 			.join(" ")
 			.replace(" De ", ", ")
-			.replace(" De ", ", "); // Remove "de" e substitui por vírgulas
+			.replace(" De ", ", ");
 	}
 
 	const isValidAppointment = (appointments) => {
-		// Se não for array ou estiver vazio, inválido
 		if (!Array.isArray(appointments)) return false;
 		if (appointments.length === 0) return false;
 
-		// Verifica cada item do array
 		return appointments.every(item => {
-			if (!item) return false; // Item é null/undefined
+			if (!item) return false;
 
-			// Verifica propriedades essenciais
 			const hasValidService = !!item.service &&
 				!!item.service.name &&
 				item.service.price !== undefined;
@@ -67,9 +64,15 @@ export default function AppointmentScreen() {
 			) : isValidAppointment(appointment) ? (
 				<>
 					<Title fontSize="h4">Em Andamento</Title>
-					{appointment
-						.map((item) => (
-							<Button key={item.id} marginTop={32}>
+					<FlatList
+						data={appointment}
+						showsVerticalScrollIndicator
+						keyExtractor={(item) => item.id.toString()}
+						renderItem={({ item }) => (
+							<Button 
+							key={item.id}
+							onPress={() => fetchViewAppointment(item.id)}
+							marginTop={15}>
 								<CustomContainer
 									backgroundColor={theme.colors.background300}
 									borderRadius={8}
@@ -90,59 +93,57 @@ export default function AppointmentScreen() {
 											R$ {item.service?.price ?? "N/A"},00
 										</Text>
 									</CustomContainer>
-									<ArrowRightIcon/>
+									<ArrowRightIcon />
 								</CustomContainer>
 							</Button>
-						))}
-						<CustomContainer marginTop={48} flexDirection="row" alignItems="center" justifyContent="space-between">
-							<Text width={200}>Quer fazer um novo agendamento?</Text>
-							<Button 
-								onPress={() => navigation.navigate("Service")}
-								backgroundColor="primary"
-								width={186}
-								paddingHorizontal={24}
-								paddingVertical={12}
-								borderRadius={18}
-								alignItems="center" >
-								<ButtonText color="background" fontSize="md" weight="medium">
-									Agendar Agora
-								</ButtonText>
-							</Button>
-						</CustomContainer>
+						)
+						}
+					/>
+					<CustomContainer marginTop={28} flexDirection="row" alignItems="center" justifyContent="space-between">
+						<Text width={200}>Quer fazer um novo agendamento?</Text>
+						<Button
+							onPress={() => navigation.navigate("Service")}
+							backgroundColor="primary"
+							width={186}
+							paddingHorizontal={24}
+							paddingVertical={12}
+							borderRadius={18}
+							alignItems="center" >
+							<ButtonText color="background" fontSize="md" weight="medium">
+								Agendar Agora
+							</ButtonText>
+						</Button>
+					</CustomContainer>
 
 					<Title fontSize="h4" marginTop={96}>Histórico</Title>
-						<CustomContainer
-							backgroundColor={theme.colors.background300}
-							borderRadius={8}
-							paddingVertical={12}
-							paddingHorizontal={24}
-							flexDirection="row"
-							justifyContent="space-between"
-							alignItems="center"
-							marginTop={32}
-						>
-							<CustomContainer>
-								<Text fontSize="h6" fontWeight="medium" marginBottom={4}>
-									slala
-								</Text>
-								<Text fontSize="md" fontWeight="medium" marginBottom={4}>
-									1556156
-								</Text>
-								<Text fontSize="md" fontWeight="medium">
-									R$ 20,00
-								</Text>
-							</CustomContainer>
-							<Button
-								backgroundColor="accent"
-								paddingHorizontal={20}
+					{historicAppointment.map((item) => (
+						<Button key={item.id}>
+							<CustomContainer
+								backgroundColor={theme.colors.background300}
+								borderRadius={8}
 								paddingVertical={12}
-								borderRadius={16}
+								paddingHorizontal={24}
+								flexDirection="row"
+								justifyContent="space-between"
+								alignItems="center"
+								marginTop={32}
+								marginBottom={32}
 							>
-								<ButtonText fontSize="md" fontFamily="medium" color="text">
-									Agendar Novamente
-								</ButtonText>
-							</Button>
-						</CustomContainer>
+								<CustomContainer>
+									<Text fontSize="h6" fontWeight="medium">
+										{item?.service.name}
+									</Text>
+									<Text fontSize="md" fontWeight="medium" marginTop={4}>
+										{formatarDataPersonalizada(item.date)}
+									</Text>
+									<Text fontSize="md" fontWeight="medium">
+										R${item?.service.price},00
+									</Text>
+								</CustomContainer>
+								<ArrowRightIcon />
+							</CustomContainer>
+						</Button>
+					))}
 				</>
 			) : (
 				<View
