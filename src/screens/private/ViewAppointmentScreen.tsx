@@ -8,6 +8,7 @@ import { type RouteProp, useRoute } from "@react-navigation/native";
 import type { AppStackParamList } from "../../routes/appStack";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 
 import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
 
@@ -51,6 +52,8 @@ export default function ViewAppointmentScreen() {
 
   const duration = viewAppointment.service?.duration;
   const formattedDuration = formatDuration(typeof duration === "number" ? duration : 0);
+
+  const navigation = useNavigation();
 
   return (
     <ContainerDefault key={viewAppointment.id}>

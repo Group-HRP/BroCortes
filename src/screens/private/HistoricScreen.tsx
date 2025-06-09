@@ -108,7 +108,7 @@ export default function Historic() {
           />
         ) : (
           <View>
-            <Text>Voce nao tem nenhum agendamento</Text>
+            <Text>Você não tem nenhum agendamento</Text>
           </View>
         )}
       </View>
