@@ -9,6 +9,8 @@ import type { AppStackParamList } from "../../routes/appStack";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
+import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
+
 type ViewAppointmentRouteProp = RouteProp<AppStackParamList, "ViewAppointment">;
 
 export default function ViewAppointmentScreen() {
@@ -52,34 +54,38 @@ export default function ViewAppointmentScreen() {
 
   return (
     <ContainerDefault key={viewAppointment.id}>
-      <HeaderDefault>
-        <HeaderTitle>{viewAppointment.service?.name}</HeaderTitle>
+      <HeaderDefault paddingTop={40}>
+        <Button onPress={() => navigation.goBack()}>
+          <BackArrowIcon/>
+        </Button>
+        <HeaderTitle marginTop={56}>{viewAppointment.service?.name}</HeaderTitle>
       </HeaderDefault>
-      <View style={{ marginTop: 35 }}>
+      <View style={{ marginTop: 32 }}>
+        {/*
         <Text style={{ fontSize: theme.fonts.sizes.h3, fontWeight: "bold" }}>
-          {finalFormatted}
+          {finalFormatted}*/}
+        <Text fontFamily="bold" fontSize="h3">{finalFormatted}
         </Text>
-        <Text style={{ fontSize: theme.fonts.sizes.lg, marginTop: 5 }}>
+        <Text style={{ fontSize: theme.fonts.sizes.lg, marginTop: 8 }}>
           {formattedDuration}
         </Text>
         <Text
           style={{
             fontSize: theme.fonts.sizes.h4,
             fontWeight: "bold",
-            marginTop: 35,
+            marginTop: 40,
           }}
         >
           Visão Geral
         </Text>
-        <Text style={{ fontSize: theme.fonts.sizes.lg, marginTop: 5 }}>
+        <Text style={{ fontSize: theme.fonts.sizes.lg, marginTop: 8 }}>
           {viewAppointment.service?.name}
         </Text>
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            marginVertical: 10,
-            marginTop: 35,
+            marginVertical: 40,
           }}
         >
           <Text style={{ fontSize: theme.fonts.sizes.lg }}>Preço total</Text>
@@ -90,13 +96,12 @@ export default function ViewAppointmentScreen() {
         <Text
           style={{
             fontSize: theme.fonts.sizes.h4,
-            marginTop: 35,
             fontWeight: "bold",
           }}
         >
           Cancelamento
         </Text>
-        <Text style={{ fontSize: theme.fonts.sizes.lg, marginTop: 5 }}>
+        <Text style={{ fontSize: theme.fonts.sizes.lg, marginTop: 8 }}>
           Cancelar até{" "}
           <Text style={{ textDecorationLine: "underline" }}>
             uma hora antes
@@ -104,6 +109,21 @@ export default function ViewAppointmentScreen() {
           do período agendado{" "}
         </Text>
       </View>
+      <Button 
+				alignItems="center"
+        borderWidth={1}
+        borderColor="text"
+				marginTop={112}
+				paddingHorizontal={24}
+				paddingVertical={16}
+				borderRadius={18}>
+        <ButtonText 
+          weight="medium"
+					color="text"
+          fontSize="lg">
+            Cancelar agendamento
+        </ButtonText>
+      </Button>
     </ContainerDefault>
   );
 }
