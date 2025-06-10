@@ -13,10 +13,8 @@ import { Loading } from "../../components/Loading";
 
 export default function Historic() {
   const theme = useTheme();
-  const { historicAppointment, isLoading } =
+  const { historicAppointment, isLoading, fetchViewAppointment } =
     useContext(AppointmentContext);
-
-    console.log("historico de agendamentos: ", historicAppointment)
 
   function formataData(dataIso: string) {
     const data = new Date(dataIso);
@@ -72,38 +70,42 @@ export default function Historic() {
             data={historicAppointment}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <CustomContainer
-                backgroundColor={theme.colors.background300}
-                paddingVertical={10}
-                paddingHorizontal={16}
-                marginVertical={8}
-                borderRadius={8}
-                flexDirection={"row"}
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <CustomContainer key={item.id}>
-                  <Title fontSize="h6" marginBottom={4}>
-                    {item.service?.name}
-                  </Title>
-                  <Text fontSize="md" fontFamily="medium">
-                    {formataData(item.date)}
-                  </Text>
-                  <Text fontSize="md" fontFamily="medium">
-                    {`R$${item.service?.price},00`}
-                  </Text>
-                </CustomContainer>
-                <Button
-                  backgroundColor="accent"
-                  paddingHorizontal={20}
-                  paddingVertical={12}
-                  borderRadius={16}
+              <Button
+              key={item.id}
+              onPress={() => fetchViewAppointment(item.id)}>
+                <CustomContainer
+                  backgroundColor={theme.colors.background300}
+                  paddingVertical={10}
+                  paddingHorizontal={16}
+                  marginVertical={8}
+                  borderRadius={8}
+                  flexDirection={"row"}
+                  alignItems="center"
+                  justifyContent="space-between"
                 >
-                  <ButtonText fontSize="md" fontFamily="medium" color="text">
-                    Agendar Novamente
-                  </ButtonText>
-                </Button>
-              </CustomContainer>
+                  <CustomContainer>
+                    <Title fontSize="h6" marginBottom={4}>
+                      {item.service?.name}
+                    </Title>
+                    <Text fontSize="md" fontFamily="medium">
+                      {formataData(item.date)}
+                    </Text>
+                    <Text fontSize="md" fontFamily="medium">
+                      {`R$${item.service?.price},00`}
+                    </Text>
+                  </CustomContainer>
+                  <Button
+                    backgroundColor="accent"
+                    paddingHorizontal={20}
+                    paddingVertical={12}
+                    borderRadius={16}
+                  >
+                    <ButtonText fontSize="md" fontFamily="medium" color="text">
+                      Agendar Novamente
+                    </ButtonText>
+                  </Button>
+                </CustomContainer>
+              </Button>
             )}
           />
         ) : (

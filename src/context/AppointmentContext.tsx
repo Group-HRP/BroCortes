@@ -94,12 +94,6 @@ export function AppointmentProvider({
   const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
   useEffect(() => {
-    if (horaSelecionada) {
-      navigation.navigate("ConfirmAppointment");
-    }
-  }, [horaSelecionada, navigation]);
-
-  useEffect(() => {
     const fetchHorariosDisponiveis = async () => {
       try {
         const response = await api.get("/working-hours/available-times", {
@@ -183,7 +177,10 @@ export function AppointmentProvider({
       const data = response.data;
       setViewAppointment(data);
 
-      navigation.navigate("AppStack", { screen: "ViewAppointment", params: { viewAppointment: data } });
+      navigation.navigate("AppStack", {
+        screen: "ViewAppointment",
+        params: { viewAppointment: data },
+      });
     } catch (error) {
       console.log("erro ao mostrar appointments", error);
     } finally {

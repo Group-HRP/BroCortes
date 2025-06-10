@@ -19,8 +19,6 @@ export default function ViewAppointmentScreen() {
   const { params } = useRoute<ViewAppointmentRouteProp>();
   const { viewAppointment } = params;
 
-  console.log("Params", viewAppointment);
-
   const dataISO = viewAppointment.date;
   const date = new Date(dataISO);
 
@@ -36,7 +34,7 @@ export default function ViewAppointmentScreen() {
     const hours = Math.floor(minutes / 60);
     const remainingMunutes = minutes % 60;
 
-    let parts = [];
+     const parts = [];
 
     if(hours > 0) {
       parts.push(`${hours} hr`)

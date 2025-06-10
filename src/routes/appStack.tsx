@@ -14,16 +14,26 @@ import ReviewAppointmentScreen from "../screens/private/ReviewAppointmentScreen"
 import ViewAppointmentScreen from "../screens/private/ViewAppointmentScreen";
 
 export type AppStackParamList = {
-  AppStack: undefined;	
+  AppStack: undefined;
   Tabs: undefined;
   Profile: undefined;
   Historic: undefined;
   Appointment: undefined;
   Service: undefined;
-  ReviewAppointment: undefined;
   ViewAppointment: { viewAppointment: Appointment };
   Hours: undefined;
-  ConfirmAppointment: undefined;
+  ReviewAppointment: {
+    appointment: {
+      horaSelecionada: string;
+      dataSelecionada: string;
+      selectedItem: {
+        id: number;
+        name: string;
+        duration: string;
+        price: string;
+      };
+    };
+  };
 };
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -45,10 +55,6 @@ export default function AppStack() {
         />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Service" component={ServiceScreen} />
-        <Stack.Screen
-          name="ConfirmAppointment"
-          component={ReviewAppointmentScreen}
-        />
       </Stack.Navigator>
     </AppointmentProvider>
   );

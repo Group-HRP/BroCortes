@@ -117,7 +117,9 @@ export default function AppointmentScreen() {
 
 					<Title fontSize="h4" marginTop={96}>Histórico</Title>
 					{historicAppointment.map((item) => (
-						<Button key={item.id}>
+						<Button 
+						key={item.id}
+						onPress={() => fetchViewAppointment(item.id)}>
 							<CustomContainer
 								backgroundColor={theme.colors.background300}
 								borderRadius={8}
