@@ -6,6 +6,7 @@ import HistoricScreen from "../screens/private/HistoricScreen";
 import ProfileScreen from "../screens/private/ProfileScreen";
 import ServiceScreen from "../screens/private/ServiceScreen";
 import { HoursScreen } from "../screens/private/HoursScreen";
+import PersonalInfoScreen from "../screens/private/PersonalInfoScreen";
 import {
   type Appointment,
   AppointmentProvider,
@@ -24,6 +25,7 @@ export type AppStackParamList = {
   ViewAppointment: { viewAppointment: Appointment };
   Hours: undefined;
   ConfirmAppointment: undefined;
+  PersonalInfoScreen: undefined;
 };
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -44,6 +46,7 @@ export default function AppStack() {
           component={ViewAppointmentScreen}
         />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />
         <Stack.Screen name="Service" component={ServiceScreen} />
         <Stack.Screen
           name="ConfirmAppointment"

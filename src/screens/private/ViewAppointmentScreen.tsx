@@ -8,7 +8,7 @@ import { type RouteProp, useRoute } from "@react-navigation/native";
 import type { AppStackParamList } from "../../routes/appStack";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { type NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
 

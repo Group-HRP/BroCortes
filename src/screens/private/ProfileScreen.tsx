@@ -4,14 +4,16 @@ import { CustomContainer } from "../../components/Containers";
 import { Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
 import { useTheme } from "styled-components/native";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 
+import PersonalInfoProfileIcon from "../../../assets/icons/PersonalInfoProfileIcon";
 import HeartProfileIcon from "../../../assets/icons/HeartProfileIcon";
 import ClockProfileIcon from "../../../assets/icons/ClockProfileIcon";
 import RightArrowProfileIcon from "../../../assets/icons/RightArrowProfileIcon";
 import DoorProfileIcon from "../../../assets/icons/DoorProfileIcon";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { type NavigationProp, useNavigation } from "@react-navigation/native";
+
 
 export default function ProfileScreen() {
   const theme = useTheme();
@@ -52,7 +54,7 @@ export default function ProfileScreen() {
         paddingHorizontal={24}
       >
         <Button
-          disabled={true}
+          onPress={() => navigation.navigate("PersonalInfoScreen")}
           backgroundColor="background300"
           display="flex"
           flexDirection="row"
@@ -62,9 +64,9 @@ export default function ProfileScreen() {
           alignItems="center"
         >
           <CustomContainer gap={12} flexDirection="row">
-            <HeartProfileIcon />
+            <PersonalInfoProfileIcon width={20} />
             <ButtonText fontSize="lg" weight="medium">
-              Favoritos
+              Informações pessoais
             </ButtonText>
           </CustomContainer>
           <RightArrowProfileIcon />
@@ -83,6 +85,24 @@ export default function ProfileScreen() {
             <ClockProfileIcon width={20} />
             <ButtonText fontSize="lg" weight="medium">
               Histórico de agendamentos
+            </ButtonText>
+          </CustomContainer>
+          <RightArrowProfileIcon />
+        </Button>
+        <Button
+          disabled={true}
+          backgroundColor="background300"
+          display="flex"
+          flexDirection="row"
+          width={"100%"}
+          justifyContent="space-between"
+          paddingVertical={24}
+          alignItems="center"
+        >
+          <CustomContainer gap={12} flexDirection="row">
+            <HeartProfileIcon />
+            <ButtonText fontSize="lg" weight="medium">
+              Favoritos
             </ButtonText>
           </CustomContainer>
           <RightArrowProfileIcon />
