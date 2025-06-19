@@ -68,6 +68,7 @@ interface CustomContainerProps {
 	gap?: number;
 	bottom?: number;
 	zIndex?: number;
+	textAlign?: "left" | "center" | "right" | "justify";
 	position?: "absolute" | "relative";
 }
 
@@ -84,6 +85,8 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 	${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
 	${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
 	${({ zIndex }) => zIndex && `z-index: ${zIndex};`}
+
+	${({ textAlign }) => textAlign && `text-align: ${textAlign};`}
 
 	/* Dimensions */
 	${({ width }) => width && `width: ${typeof width === "number" ? `${width}px` : width};`}

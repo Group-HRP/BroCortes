@@ -54,7 +54,7 @@ export default function ProfileScreen() {
         paddingHorizontal={24}
       >
         <Button
-          onPress={() => navigation.navigate("PersonalInfoScreen")}
+          onPress={() => navigation.navigate("PersonalInfo")}
           backgroundColor="background300"
           display="flex"
           flexDirection="row"
