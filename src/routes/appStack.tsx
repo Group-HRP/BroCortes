@@ -6,12 +6,15 @@ import HistoricScreen from "../screens/private/HistoricScreen";
 import ProfileScreen from "../screens/private/ProfileScreen";
 import ServiceScreen from "../screens/private/ServiceScreen";
 import { HoursScreen } from "../screens/private/HoursScreen";
+import PersonalInfoScreen from "../screens/private/PersonalInfoScreen";
 import {
   type Appointment,
   AppointmentProvider,
 } from "../context/AppointmentContext";
 import ReviewAppointmentScreen from "../screens/private/ReviewAppointmentScreen";
 import ViewAppointmentScreen from "../screens/private/ViewAppointmentScreen";
+import CodeCheckScreen from "../screens/private/CodeCheckScreen";
+import NewPasswordScreen from "../screens/private/NewPasswordScreen";
 
 export type AppStackParamList = {
   AppStack: undefined;	
@@ -24,6 +27,9 @@ export type AppStackParamList = {
   ViewAppointment: { viewAppointment: Appointment };
   Hours: undefined;
   ConfirmAppointment: undefined;
+  PersonalInfo: undefined;
+  CodeCheck: undefined;
+  NewPassword: undefined; // Adicionando NewPasswordScreen
 };
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -44,11 +50,14 @@ export default function AppStack() {
           component={ViewAppointmentScreen}
         />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen} />
         <Stack.Screen name="Service" component={ServiceScreen} />
         <Stack.Screen
           name="ConfirmAppointment"
           component={ReviewAppointmentScreen}
         />
+        <Stack.Screen name="CodeCheck" component={CodeCheckScreen} />
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
       </Stack.Navigator>
     </AppointmentProvider>
   );
