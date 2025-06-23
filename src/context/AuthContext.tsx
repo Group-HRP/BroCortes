@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const [user, setUser] = useState<any>(null);
 	const [token, setToken] = useState<string | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const loadStorageData = async () => {
@@ -75,7 +75,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			await AsyncStorage.setItem("@user", JSON.stringify(userData));
 			await AsyncStorage.setItem("@token", token);
 
-			console.log("Login realizado com sucesso");
 			return true; // Indica sucesso
 		} catch (error) {
 			console.error("Falha no login:", error);
@@ -83,7 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			setUser(null);
 			setToken(null);
 			await AsyncStorage.multiRemove(["@user", "@token"]);
-			throw error; // Propaga o erro para quem chamou
+			throw error; 
 		}
 	};
 

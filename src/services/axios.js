@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-	baseURL: "https://brocortes-api-production.up.railway.app",
+	baseURL: "https://brocortes-api.onrender.com",
 	timeout: 10000,
 });
 
