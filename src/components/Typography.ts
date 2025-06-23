@@ -26,7 +26,7 @@ interface TypographyProps {
 	borderColor?: keyof DefaultTheme["colors"] | string;
 	borderWidth?: number;
 	borderRadius?: number | keyof DefaultTheme["spacing"];
-	textAlign?: "auto" | "center" | "left" | "right" | "justify";
+	textAlign?: string;
 	lineHeight?: number;
 	letterSpacing?: number;
 	textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
@@ -97,7 +97,7 @@ const BaseText = styled.Text<TypographyProps>`
     /* font-weight: ${({ fontWeight }) => fontWeight || "regular"}; */ // Remover esta linha
 
     /* Extras */
-    text-align: ${({ textAlign }) => textAlign ?? "left"};
+    text-align: ${({ textAlign }) => textAlign || 'left'};
 
     text-transform: ${({ textTransform }) => textTransform ?? "none"};
     line-height: ${({ lineHeight }) => (lineHeight ? `${lineHeight}px` : "auto")};

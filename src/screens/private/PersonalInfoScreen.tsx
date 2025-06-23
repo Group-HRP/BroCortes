@@ -56,7 +56,7 @@ const navigation = useNavigation();
           borderRadius="md"
           fontSize="md"
           />
-          <Button onPress={() => navigation.navigate("NewPassword")} position="absolute" right={2} bottom={16}>
+          <Button onPress={() => navigation.navigate("CodeCheck")} position="absolute" right={2} bottom={16}>
             <ButtonText weight="medium" color="link">Alterar senha</ButtonText>
           </Button>
         </CustomContainer>

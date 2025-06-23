@@ -17,6 +17,8 @@ interface InputProps {
 	marginTop?: number;
 	marginBottom?: number;
 	isTitle?: boolean;
+	textAlign?: string;
+  	textAlignVertical?: string;
 }
 
 const getFontSize = (
@@ -62,7 +64,8 @@ font-size: ${({ fontSize, isTitle, theme }) =>
     borderBottomWidth !== undefined && `border-bottom-width: ${borderBottomWidth}px;`}
   border-color: ${({ borderColor, theme }) =>
 		borderColor ? theme.colors[borderColor] : theme.colors.background};
-    
+  text-align: ${({ textAlign }) => textAlign || 'left'};
+  text-align-vertical: ${({ textAlignVertical }) => textAlignVertical || 'center'};
   margin-top: ${({ marginTop }) => (marginTop ? `${marginTop}px` : "0px")};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? `${marginBottom}px` : "0px")};
   padding: ${({ padding }) => (padding ? `${padding}px` : "12px")};
