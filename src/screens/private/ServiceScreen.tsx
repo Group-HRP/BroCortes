@@ -12,6 +12,8 @@ import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { Loading } from "../../components/Loading";
 import { AppointmentContext } from "../../context/AppointmentContext";
 
+import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
+
 export default function ServiceScreen() {
 	type RootStackParamList = {
 		Hours: undefined;
@@ -129,12 +131,11 @@ export default function ServiceScreen() {
 	return (
 		<>
 			<ContainerDefault>
-				<Button onPress={logout}>
-					<Text>Seta</Text>
-				</Button>
-
 				<HeaderDefault paddingTop={40}>
-					<HeaderTitle fontFamily="bold">Selecionar serviços</HeaderTitle>
+					<Button onPress={() => navigation.goBack()}>
+						<BackArrowIcon/>
+					</Button>
+					<HeaderTitle fontFamily="bold" marginTop={40}>Selecionar serviços</HeaderTitle>
 					<FlatList
 						data={category}
 						keyExtractor={(item) => item.id.toString()}
@@ -143,17 +144,18 @@ export default function ServiceScreen() {
 						renderItem={({ item }) => (
 							<Button
 								onPress={() => handleClickCategoryList(item)}
-								marginVertical={12}
+								marginTop={40}
+								marginBottom={16}
 								borderRadius={20}
 								paddingHorizontal={16}
 								paddingVertical={8}
 								justifyContent="center"
 								alignItems="baseline"
 								backgroundColor={
-									selectedCategory === item ? "primary200" : "background"
+									selectedCategory?.id === item.id ? "primary200" : "background"
 								}
 							>
-								<Title fontSize="md" textAlign="center" marginBottom={6}>
+								<Title fontSize="md" textAlign="center" paddingBottom={6}>
 									{item.name}
 								</Title>
 							</Button>
@@ -212,7 +214,8 @@ export default function ServiceScreen() {
 					backgroundColor="#404040"
 					width={"100%"}
 					height={88}
-					borderRadius={20}
+					borderTopRightRadius={20}
+					borderTopLeftRadius={20}
 					zIndex={1}
 					bottom={0}
 					paddingHorizontal={20}
@@ -229,7 +232,7 @@ export default function ServiceScreen() {
 								</Text>
 								<Text fontSize="sm" fontWeight="medium">
 									{selectedItem.id.toString().length} serviços -
-									<Text fontSize="sm">{selectedItem.duration} min</Text>
+									<Text fontSize="sm"> {selectedItem.duration} min</Text>
 								</Text>
 							</CustomContainer>
 							<Button
@@ -239,7 +242,7 @@ export default function ServiceScreen() {
 								paddingVertical={12}
 								borderRadius={18}
 							>
-								<ButtonText color="background" weight="semiBold">
+								<ButtonText color="background" weight="medium">
 									Continuar
 								</ButtonText>
 							</Button>

@@ -35,6 +35,11 @@ interface ButtonProps {
 	| "space-evenly";
 	flex?: number;
 	display?: string;
+	position?: "absolute" | "relative";
+	top?: number;
+	left?: number;
+	right?: number;
+	bottom?: number;
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
@@ -66,6 +71,12 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   ${({ marginTop }) => marginTop !== undefined && `margin-top: ${marginTop}px;`}
   ${({ marginBottom }) => marginBottom !== undefined && `margin-bottom: ${marginBottom}px;`}
   
+${({ position }) => position && `position: ${position};`}
+${({ top }) => top && `top: ${top};`}
+${({ left }) => left && `left: ${left};`}
+${({ right }) => right && `right: ${right};`}
+${({ bottom }) => bottom && `bottom: ${bottom};`}
+
   /* Borders */
   ${({ borderRadius, theme }) => {
 		if (borderRadius === undefined) return "border-radius: 4px;";

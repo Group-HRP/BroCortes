@@ -61,11 +61,14 @@ interface CustomContainerProps {
 	marginVertical?: number;
 	backgroundColor?: string;
 	borderRadius?: number;
+	borderTopRightRadius?: number;
+    borderTopLeftRadius?: number;
 	borderWidth?: number;
 	borderColor?: string;
 	gap?: number;
 	bottom?: number;
 	zIndex?: number;
+	textAlign?: "left" | "center" | "right" | "justify";
 	position?: "absolute" | "relative";
 }
 
@@ -82,6 +85,8 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 	${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
 	${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
 	${({ zIndex }) => zIndex && `z-index: ${zIndex};`}
+
+	${({ textAlign }) => textAlign && `text-align: ${textAlign};`}
 
 	/* Dimensions */
 	${({ width }) => width && `width: ${typeof width === "number" ? `${width}px` : width};`}
@@ -104,6 +109,10 @@ export const CustomContainer = styled.View<CustomContainerProps>`
 
 	${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
 	${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius}px;`}
+	${({ borderTopRightRadius }) =>
+        borderTopRightRadius !== undefined && `border-top-right-radius: ${borderTopRightRadius}px;`}
+    ${({ borderTopLeftRadius }) =>
+        borderTopLeftRadius !== undefined && `border-top-left-radius: ${borderTopLeftRadius}px;`}
 	${({ borderWidth }) => borderWidth && `border-width: ${borderWidth}px;`}
 	${({ borderColor }) => borderColor && `border-color: ${borderColor};`}
 

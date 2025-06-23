@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components/native";
 import { AuthProvider } from "./src/context/AuthContext";
 import Routes from "./src/routes";
-import theme from "./src/theme"; // Ensure this matches the DefaultTheme structure
+import theme from "./src/theme";
 import useLoadFonts from "./src/hooks/useLoadFonts";
 import { ActivityIndicator } from "react-native";
 

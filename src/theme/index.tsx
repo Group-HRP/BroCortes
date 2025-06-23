@@ -10,6 +10,7 @@ export interface ThemeColors {
 	accent300: string;
 	text: string;
 	placeholdertext: string;
+	link: string;
 	transparent: string;
 }
 
@@ -94,6 +95,7 @@ const theme = {
 		accent300: "#E0E0E0",
 		text: "#FFFFFF",
 		placeholdertext: "#FFFFFF99",
+		link:"#F4B210",
 		transparent: "transparent",
 	},
 	fonts: {
@@ -101,6 +103,7 @@ const theme = {
 			light: "Satoshi-Light",
 			regular: "Satoshi-Regular",
 			medium: "Satoshi-Medium",
+			bold: "Satoshi-Bold",
 			black: "Satoshi-Black",
 		},
 		heading: {
@@ -122,8 +125,8 @@ const theme = {
 			light: 300,
 			regular: 400,
 			medium: 500,
-			bold: 600,
-			black: 700,
+			bold: 700,
+			black: 900,
 		},
 		lineHeight: "150%",
 	},

@@ -11,6 +11,8 @@ interface TypographyProps {
 		| keyof DefaultTheme["fonts"]["heading"]
 		| string;
 	padding?: number;
+	paddingTop?: number;
+	paddingBottom?: number;
 	paddingHorizontal?: number;
 	paddingVertical?: number;
 	margin?: number;
@@ -24,12 +26,12 @@ interface TypographyProps {
 	borderColor?: keyof DefaultTheme["colors"] | string;
 	borderWidth?: number;
 	borderRadius?: number | keyof DefaultTheme["spacing"];
-	textAlign?: "auto" | "center" | "left" | "right" | "justify";
+	textAlign?: string;
 	lineHeight?: number;
 	letterSpacing?: number;
 	textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
 	isTitle?: boolean;
-	width?: number;
+	width?: number | string; // Adicionando a propriedade width
 }
 
 // Helpers
@@ -82,7 +84,7 @@ const BaseText = styled.Text<TypographyProps>`
 				: color;
 		}};
 
-	width: ${({ width }) => (width ? `${width}px` : "auto")};
+	width: ${({ width }) => (width ? (typeof width === "number" ? `${width}px` : width) : "auto")};
 
     /* Tipografia */
 
@@ -95,7 +97,7 @@ const BaseText = styled.Text<TypographyProps>`
     /* font-weight: ${({ fontWeight }) => fontWeight || "regular"}; */ // Remover esta linha
 
     /* Extras */
-    textAlign: ${({ textAlign }) => textAlign ?? "left"};
+    text-align: ${({ textAlign }) => textAlign || 'left'};
 
     text-transform: ${({ textTransform }) => textTransform ?? "none"};
     line-height: ${({ lineHeight }) => (lineHeight ? `${lineHeight}px` : "auto")};
@@ -103,21 +105,16 @@ const BaseText = styled.Text<TypographyProps>`
 
     /* Espaçamento */
     padding: ${({ padding }) => (padding ? `${padding}px` : "0px")};
-    padding-horizontal: ${({ paddingHorizontal }) =>
-			paddingHorizontal ? `${paddingHorizontal}px` : "0px"};
-    padding-vertical: ${({ paddingVertical }) =>
-			paddingVertical ? `${paddingVertical}px` : "0px"};
-
+   
+	padding-top: ${({ paddingTop }) => (paddingTop ? `${paddingTop}px` : "0px")};
+	padding-bottom: ${({ paddingBottom }) =>
+			paddingBottom ? `${paddingBottom}px` : "0px"};
     margin: ${({ margin }) => (margin ? `${margin}px` : "0px")};
     margin-top: ${({ marginTop }) => (marginTop ? `${marginTop}px` : "0px")};
     margin-bottom: ${({ marginBottom }) =>
 			marginBottom ? `${marginBottom}px` : "0px"};
     margin-left: ${({ marginLeft }) => (marginLeft ? `${marginLeft}px` : "0px")};
     margin-right: ${({ marginRight }) => (marginRight ? `${marginRight}px` : "0px")};
-    margin-horizontal: ${({ marginHorizontal }) =>
-			marginHorizontal ? `${marginHorizontal}px` : "0px"};
-    margin-vertical: ${({ marginVertical }) =>
-			marginVertical ? `${marginVertical}px` : "0px"};
 
     /* Borda */
     border-bottom-width: ${({ borderBottomWidth }) =>
