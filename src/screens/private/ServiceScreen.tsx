@@ -231,7 +231,7 @@ export default function ServiceScreen() {
 									{selectedItem.price}
 								</Text>
 								<Text fontSize="sm" fontWeight="medium">
-									{selectedItem.id.toString().length} serviços -
+									{selectedItem.id.toString().length} serviço -
 									<Text fontSize="sm"> {selectedItem.duration} min</Text>
 								</Text>
 							</CustomContainer>
