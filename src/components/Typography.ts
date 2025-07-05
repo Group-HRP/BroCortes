@@ -26,7 +26,7 @@ interface TypographyProps {
 	borderColor?: keyof DefaultTheme["colors"] | string;
 	borderWidth?: number;
 	borderRadius?: number | keyof DefaultTheme["spacing"];
-	textAlign?: string;
+	textAlign?: "left" | "right" | "center" | "justify";
 	lineHeight?: number;
 	letterSpacing?: number;
 	textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";

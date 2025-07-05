@@ -15,6 +15,7 @@ import ReviewAppointmentScreen from "../screens/private/ReviewAppointmentScreen"
 import ViewAppointmentScreen from "../screens/private/ViewAppointmentScreen";
 import CodeCheckScreen from "../screens/private/CodeCheckScreen";
 import NewPasswordScreen from "../screens/private/NewPasswordScreen";
+import ValidateScreen from "../screens/public/ValidateScreen";
 
 export type AppStackParamList = {
   AppStack: undefined;	
@@ -29,7 +30,8 @@ export type AppStackParamList = {
   ConfirmAppointment: undefined;
   PersonalInfo: undefined;
   CodeCheck: undefined;
-  NewPassword: undefined; // Adicionando NewPasswordScreen
+  NewPassword: undefined;
+  ValidateToken: undefined;
 };
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -58,6 +60,7 @@ export default function AppStack() {
         />
         <Stack.Screen name="CodeCheck" component={CodeCheckScreen} />
         <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
+        <Stack.Screen name="ValidateToken" component={ValidateScreen} />
       </Stack.Navigator>
     </AppointmentProvider>
   );

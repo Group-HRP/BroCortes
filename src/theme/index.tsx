@@ -87,7 +87,7 @@ const theme = {
 		background: "#1A1A1A",
 		background200: "#292929",
 		background300: "#404040",
-		primary: "#B8860B",
+		primary: "#D09910",
 		primary200: "#986B00",
 		primary300: "#543000",
 		accent: "#8B4513",

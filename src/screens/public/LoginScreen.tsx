@@ -110,7 +110,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
             width: "100%",
           }}
         >
-          <Button marginTop={12}>
+          <Button marginTop={12} onPress={() => navigation.navigate("SendEmail")}>
             <ButtonText color="text" fontSize="sm" weight="medium">
               Esqueceu a senha?
             </ButtonText>
