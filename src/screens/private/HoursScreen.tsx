@@ -13,6 +13,7 @@ import { type NavigationProp, useNavigation } from "@react-navigation/native";
 
 import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
 
+const today = new Date().toISOString().split("T")[0];
 
 export function HoursScreen() {
 	const {
@@ -49,6 +50,7 @@ export function HoursScreen() {
 			</HeaderDefault>
 			<CustomContainer marginTop={64}>
 				<Calendar
+					minDate={today}
 					onDayPress={(day: { dateString: string }) => {
 						handleDatePress(day);
 						setHoraSelecionada("");

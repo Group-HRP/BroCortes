@@ -90,7 +90,7 @@ export default function Historic() {
                     {formataData(item.date)}
                   </Text>
                   <Text fontSize="md" fontFamily="medium">
-                    {`R$${item.service?.price},00`}
+                    {`R$${Number(item.service?.price).toFixed(2)}`}
                   </Text>
                 </CustomContainer>
                 <Button

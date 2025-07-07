@@ -126,7 +126,7 @@ export default function AppointmentScreen() {
 								flexDirection="row"
 								justifyContent="space-between"
 								alignItems="center"
-								marginTop={32}
+								marginTop={16}
 								marginBottom={32}
 							>
 								<CustomContainer>

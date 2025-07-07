@@ -17,13 +17,14 @@ import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { ContainerFooter, CustomContainer } from "../../components/Containers";
 
 import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
+import { AppStackParamList } from "../../routes/appStack";
+import { CommonActions } from "@react-navigation/native";
 
 export default function ReviewAppointment() {
-  type RootStackParamList = {
-    Appointment: undefined;
-  };
-
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  
+  
+  
+  const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
   const theme = useTheme();
   const screenWidth = Dimensions.get("window").width;
@@ -97,9 +98,21 @@ export default function ReviewAppointment() {
       );
 
       if (response.status === 201) {
-        navigation.navigate("Appointment");
-        setIsLoading(false);
-      } else {
+  navigation.dispatch(
+    CommonActions.reset({
+      index: 0,
+      routes: [
+        {
+          name: "Tabs",
+          state: {
+            routes: [{ name: "Appointment" }],
+          },
+        },
+      ],
+    })
+  );
+  setIsLoading(false);
+} else {
         console.error("Erro ao agendar:", response.data);
       }
     } catch (error) {
@@ -295,7 +308,7 @@ export default function ReviewAppointment() {
                   fontFamily: "medium",
                 }}
               >
-                Confirmar Agendamento
+                Confirmar
               </ButtonText>
             </Button>
           </CustomContainer>

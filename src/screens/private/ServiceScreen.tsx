@@ -32,7 +32,7 @@ export default function ServiceScreen() {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const [messageError, setMessageError] = useState<string | null>(null);
-
+	console.log(selectedItem);
 	useEffect(() => {
 		const fetchCategory = async () => {
 			setIsLoading(true);
