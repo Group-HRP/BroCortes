@@ -5,18 +5,24 @@ import { HeaderDefault, HeaderTitle } from "../../components/HeaderDefault";
 import { useTheme } from "styled-components/native";
 import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { AppointmentContext } from "../../context/AppointmentContext";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Loading } from "../../components/Loading";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Historic() {
   const theme = useTheme();
   const { historicAppointment, isLoading } =
     useContext(AppointmentContext);
 
-    console.log("historico de agendamentos: ", historicAppointment)
+      useFocusEffect(
+        // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+        useCallback(() => {
+          historicAppointment
+        }, [])
+      );
 
   function formataData(dataIso: string) {
     const data = new Date(dataIso);
@@ -30,7 +36,7 @@ export default function Historic() {
   }
 
   interface Appointment {
-    id: string;
+    id: number;
     service: Service;
     date: string;
   }
