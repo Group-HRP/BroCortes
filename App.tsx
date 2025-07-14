@@ -4,9 +4,9 @@ import Routes from "./src/routes";
 import theme from "./src/theme";
 import useLoadFonts from "./src/hooks/useLoadFonts";
 import { ActivityIndicator } from "react-native";
-//import CustomFlash from "./src/components/FlashMessage";
+import CustomFlash from "./src/components/FlashMessage";
 import { ResetProvider } from "./src/context/ResetContext";
-//import { AppointmentProvider } from "./src/context/AppointmentContext";
+import FlashMessage from "react-native-flash-message";
 
 export default function App() {
   const fontsLoaded = useLoadFonts();
@@ -18,9 +18,23 @@ export default function App() {
   return (
     <AuthProvider>
       <ResetProvider>
-      <ThemeProvider theme={theme}>
-        <Routes />
-      </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <Routes />
+          <FlashMessage
+            message=""
+            description=""
+            position="bottom"
+            style={{
+              backgroundColor: "transparent",
+            }}
+            titleStyle={{
+              color: "transparent",
+            }}
+            renderCustomContent={(menssage) => (
+              <CustomFlash textProps={menssage?.message} />
+            )}
+          />
+        </ThemeProvider>
       </ResetProvider>
     </AuthProvider>
   );

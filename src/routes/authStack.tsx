@@ -5,8 +5,6 @@ import SendEmailScreen from "../screens/public/SendEmailScreen";
 import ValidateScreen from "../screens/public/ValidateScreen";
 import ResetPasswordScreen from "../screens/public/ResetPassword";
 
-
-
 export type AuthStackParamList = {
 	Login: undefined;
 	Register: undefined;

@@ -4,22 +4,21 @@ import { CustomContainer } from "../../components/Containers";
 import { Input } from "../../components/Input";
 import { Title, Text } from "../../components/Typography";
 import { Button, ButtonText } from "../../components/Button";
-import type { LoginScreenNavigationProp } from "../../@types/navigation";
 import { useState } from "react";
 import api from "../../services/axios";
-import { useNavigation } from "@react-navigation/native";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "styled-components/native";
 
 import LogoBroCortes from "../../../assets/logo/LogoBroCortes";
 import { Loading } from "../../components/Loading";
+import type { AuthStackParamList } from "../../routes/authStack";
+import { showMessage } from "react-native-flash-message";
 
-interface LoginScreenProps {
-  navigation: LoginScreenNavigationProp;
-}
-
-export default function LoginScreen({ navigation }: LoginScreenProps) {
+export default function LoginScreen() {
   const { login } = useAuth();
+  const navigation =
+    useNavigation<NavigationProp<AuthStackParamList>>();
 
   const theme = useTheme();
 
@@ -54,12 +53,17 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
       if (response.status !== 201) {
         menssageError("Erro ao fazer login");
+        showMessage({
+          message: "Erro ao fazer login"
+        })
         return;
       }
 
       login(user, token);
     } catch (error) {
-      Alert.alert("Erro", "Email ou senha incorretos");
+      showMessage({
+        message: "Email ou senha incorretos"
+      })
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -110,7 +114,10 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
             width: "100%",
           }}
         >
-          <Button marginTop={12} onPress={() => navigation.navigate("SendEmail")}>
+          <Button
+            marginTop={12}
+            onPress={() => navigation.navigate("SendEmail")}
+          >
             <ButtonText color="text" fontSize="sm" weight="medium">
               Esqueceu a senha?
             </ButtonText>
@@ -123,6 +130,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
           )}
         </View>
         <Button
+          disabled={isLoading}
           onPress={handleSubmit}
           alignItems="center"
           backgroundColor="primary"
