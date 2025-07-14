@@ -37,7 +37,7 @@ export function HoursScreen() {
 
 	if (horaSelecionada) {
 		navigation.navigate("ReviewAppointment");
-		return null; // Prevent rendering the rest of the component
+		return null;
 	}
 
 	return (
@@ -50,6 +50,7 @@ export function HoursScreen() {
 			</HeaderDefault>
 			<CustomContainer marginTop={64}>
 				<Calendar
+					hideExtraDays={false}
 					minDate={today}
 					onDayPress={(day: { dateString: string }) => {
 						handleDatePress(day);
