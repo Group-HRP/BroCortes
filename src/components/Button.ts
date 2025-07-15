@@ -9,8 +9,8 @@ interface ButtonProps {
 	backgroundColor?: keyof DefaultTheme["colors"];
 	color?: keyof DefaultTheme["colors"];
 	fontFamily?:
-	| keyof DefaultTheme["fonts"]["body"]
-	| keyof DefaultTheme["fonts"]["heading"];
+		| keyof DefaultTheme["fonts"]["body"]
+		| keyof DefaultTheme["fonts"]["heading"];
 	margin?: number;
 	marginHorizontal?: number;
 	marginVertical?: number;
@@ -27,12 +27,12 @@ interface ButtonProps {
 	flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
 	alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
 	justifyContent?:
-	| "flex-start"
-	| "center"
-	| "flex-end"
-	| "space-between"
-	| "space-around"
-	| "space-evenly";
+		| "flex-start"
+		| "center"
+		| "flex-end"
+		| "space-between"
+		| "space-around"
+		| "space-evenly";
 	flex?: number;
 	display?: string;
 	position?: "absolute" | "relative";
@@ -98,8 +98,8 @@ interface ButtonTextProps {
 	color?: keyof DefaultTheme["colors"];
 	fontSize?: keyof DefaultTheme["fonts"]["sizes"];
 	fontFamily?:
-	| keyof DefaultTheme["fonts"]["body"]
-	| keyof DefaultTheme["fonts"]["heading"];
+		| keyof DefaultTheme["fonts"]["body"]
+		| keyof DefaultTheme["fonts"]["heading"];
 	weight?: keyof DefaultTheme["fonts"]["weights"];
 	uppercase?: boolean;
 	isTitle?: boolean;
@@ -117,7 +117,7 @@ export const ButtonText = styled.Text<ButtonTextProps>`
 		return isTitle
 			? theme.fonts.heading.bold
 			: theme.fonts.body[weight as keyof typeof theme.fonts.body] ||
-			theme.fonts.body.regular;
+					theme.fonts.body.regular;
 	}};
   ${({ uppercase }) => uppercase && "text-transform: uppercase;"}
 `;

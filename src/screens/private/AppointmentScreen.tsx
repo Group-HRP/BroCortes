@@ -16,13 +16,18 @@ export default function AppointmentScreen() {
   const theme = useTheme();
   const navigation = useNavigation();
 
-  const { appointment, historicAppointment, isLoading, fetchViewAppointment } =
-    useContext(AppointmentContext);
+  const {
+    appointment,
+    historicAppointment,
+    isLoading,
+    fetchViewAppointment,
+    fetchAppointments,
+  } = useContext(AppointmentContext);
 
   useFocusEffect(
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useCallback(() => {
-      appointment
+      fetchAppointments();
     }, [])
   );
 
@@ -73,6 +78,7 @@ export default function AppointmentScreen() {
         <>
           <Title fontSize="h4">Em Andamento</Title>
           <FlatList
+            style={{ maxHeight: 320 }}
             data={appointment}
             showsVerticalScrollIndicator
             keyExtractor={(item) => item.id.toString()}
@@ -99,7 +105,7 @@ export default function AppointmentScreen() {
                       {formatarDataPersonalizada(item.date)}
                     </Text>
                     <Text fontSize="md" fontWeight="medium">
-                      R$ {item.service?.price ?? "N/A"},00
+                      R$ {Number(item.service?.price).toFixed(2) ?? "N/A"}
                     </Text>
                   </CustomContainer>
                   <ArrowRightIcon />
@@ -153,7 +159,10 @@ export default function AppointmentScreen() {
                     {formatarDataPersonalizada(item.date)}
                   </Text>
                   <Text fontSize="md" fontWeight="medium">
-                    R${item?.service ? Number(item.service.price).toFixed(2) : "N/A"}
+                    R$
+                    {item?.service
+                      ? Number(item.service.price).toFixed(2)
+                      : "N/A"}
                   </Text>
                 </CustomContainer>
                 <ArrowRightIcon />
@@ -174,9 +183,7 @@ export default function AppointmentScreen() {
             padding: 40,
           }}
         >
-          <Title fontSize="h6">
-            Nenhum agendamento
-          </Title>
+          <Title fontSize="h6">Nenhum agendamento</Title>
           <Text
             fontSize="md"
             marginTop={16}

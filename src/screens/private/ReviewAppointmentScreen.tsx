@@ -19,15 +19,21 @@ import { ContainerFooter, CustomContainer } from "../../components/Containers";
 import BackArrowIcon from "../../../assets/icons/BackArrowIcon";
 import type { AppStackParamList } from "../../routes/appStack";
 import { CommonActions } from "@react-navigation/native";
+import { Loading } from "../../components/Loading";
 
 export default function ReviewAppointment() {
   const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
   const theme = useTheme();
-  const screenWidth = Dimensions.get("window").width;
 
-  const { horaSelecionada, dataSelecionada, selectedItem } =
-    useContext(AppointmentContext);
+  const {
+    horaSelecionada,
+    dataSelecionada,
+    selectedItem,
+    setSelectedItem,
+    setDataSelecionada,
+
+  } = useContext(AppointmentContext);
 
   const { user, token } = useContext(AuthContext);
 
@@ -108,6 +114,9 @@ export default function ReviewAppointment() {
             ],
           })
         );
+
+        setSelectedItem(null);
+        setDataSelecionada("");
         setIsLoading(false);
       } else {
         console.error("Erro ao agendar:", response.data);
@@ -186,7 +195,7 @@ export default function ReviewAppointment() {
               </Text>
             </View>
             <Text style={{ fontSize: theme.fonts.sizes.sm, fontWeight: 500 }}>
-              {`R$${selectedItem?.price},00`}
+              {`R$${Number(selectedItem?.price).toFixed(2)}`}
             </Text>
           </View>
 
@@ -205,7 +214,7 @@ export default function ReviewAppointment() {
             <Text
               style={{ fontSize: theme.fonts.sizes.md, fontWeight: "bold" }}
             >
-              {`R$${totalPrice},00`}
+              {`R$${Number(totalPrice).toFixed(2)}`}
             </Text>
           </View>
           <View
@@ -261,7 +270,7 @@ export default function ReviewAppointment() {
           <TextInput
             style={{
               height: 129,
-              backgroundColor: theme.colors.background300,
+              backgroundColor: theme.colors.background200,
               padding: 16,
               fontSize: theme.fonts.sizes.md,
               marginTop: 16,
@@ -294,7 +303,7 @@ export default function ReviewAppointment() {
             <Text
               style={{ fontSize: theme.fonts.sizes.sm, fontWeight: "bold" }}
             >
-              {`R$${totalPrice},00`}
+              {`R$${Number(totalPrice).toFixed(2)}`}
             </Text>
             <Text style={{ fontSize: theme.fonts.sizes.sm, fontWeight: 500 }}>
               {`${totalServices} serviço(s) - ${duracaoFormatada}`}
@@ -302,6 +311,7 @@ export default function ReviewAppointment() {
           </CustomContainer>
           <CustomContainer>
             <Button
+              disabled={isLoading}
               onPress={handleClickAppointment}
               style={{
                 width: 240,
@@ -320,7 +330,7 @@ export default function ReviewAppointment() {
                   fontFamily: "medium",
                 }}
               >
-                Confirmar
+                {isLoading ? <Loading size={"small"} /> : "Confirmar"}
               </ButtonText>
             </Button>
           </CustomContainer>

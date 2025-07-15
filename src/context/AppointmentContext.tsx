@@ -4,6 +4,7 @@ import api from "../services/axios";
 import { AuthContext } from "./AuthContext";
 import { useNavigation, type NavigationProp } from "@react-navigation/native";
 import type { AppStackParamList } from "../routes/appStack";
+import { showMessage } from "react-native-flash-message";
 
 interface Service {
   id: number;
@@ -49,6 +50,9 @@ export type AppointmentContextType = {
   viewAppointment: Appointment[];
   setViewAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
   isLoading: boolean;
+  fetchCanceledAppointment: (id: number) => void;
+  fetchHistoricalAppointments: () => void;
+  fetchAppointments: () => void;
 };
 
 export const AppointmentContext = createContext<AppointmentContextType>({
@@ -69,6 +73,9 @@ export const AppointmentContext = createContext<AppointmentContextType>({
   viewAppointment: [],
   setViewAppointment: () => {},
   isLoading: false,
+  fetchCanceledAppointment: () => {},
+  fetchHistoricalAppointments: () => {},
+  fetchAppointments: () => {},
 });
 
 export function AppointmentProvider({
@@ -124,51 +131,54 @@ export function AppointmentProvider({
     }
   }, [dataSelecionada, selectedItem, token]);
 
+  const fetchAppointments = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.get("/appointments", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = Array.isArray(response.data.data)
+        ? response.data.data
+        : [response.data.data];
+      setAppointment(data);
+    } catch (error) {
+      console.error("Erro ao buscar agendamentos:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    const fetchAppointments = async () => {
-      try {
-        setIsLoading(true);
-        const response = await api.get("/appointments", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = Array.isArray(response.data.data)
-          ? response.data.data
-          : [response.data.data];
-        setAppointment(data);
-      } catch (error) {
-        console.error("Erro ao buscar agendamentos:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchAppointments();
   }, [token]);
 
+  const fetchHistoricalAppointments = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.get("/appointments/historic-appointment", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = Array.isArray(response.data)
+        ? response.data
+        : [response.data];
+      setHistoricAppointment(data);
+    } catch (error) {
+      console.log("Erro ao listar historico", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    const fetchHistoricalAppointments = async () => {
-      try {
-        setIsLoading(true);
-        const response = await api.get(`/appointments/${user.sub}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const data = Array.isArray(response.data)
-          ? response.data
-          : [response.data];
-        setHistoricAppointment(data);
-      } catch (error) {
-        console.log("Erro ao listar historico", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchHistoricalAppointments();
   }, [token, user.sub]);
 
@@ -183,9 +193,39 @@ export function AppointmentProvider({
       const data = response.data;
       setViewAppointment(data);
 
-      navigation.navigate("AppStack", { screen: "ViewAppointment", params: { viewAppointment: data } });
+      navigation.navigate("AppStack", {
+        screen: "ViewAppointment",
+        params: { viewAppointment: data },
+      });
     } catch (error) {
       console.log("erro ao mostrar appointments", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchCanceledAppointment = async (id: number) => {
+    try {
+      setIsLoading(true);
+      const response = await api.patch(
+        `/appointments/${id}`,
+        {
+          status: "canceled",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      showMessage({
+        message: "Agendamento cancelado",
+      });
+    } catch (error) {
+      console.log(error);
+      showMessage({
+        message: "Erro ao cancelar agendamento",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -211,6 +251,9 @@ export function AppointmentProvider({
         viewAppointment,
         setViewAppointment,
         isLoading,
+        fetchCanceledAppointment,
+        fetchHistoricalAppointments,
+        fetchAppointments,
       }}
     >
       {children}

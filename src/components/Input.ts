@@ -18,7 +18,7 @@ interface InputProps {
 	marginBottom?: number;
 	isTitle?: boolean;
 	textAlign?: string;
-  	textAlignVertical?: string;
+	textAlignVertical?: string;
 }
 
 const getFontSize = (
@@ -55,17 +55,18 @@ export const Input = styled.TextInput<InputProps>`
 	
 
 font-size: ${({ fontSize, isTitle, theme }) =>
-			getFontSize(fontSize, isTitle, theme)};
+	getFontSize(fontSize, isTitle, theme)};
 
   border-radius: ${({ borderRadius, theme }) =>
 		borderRadius ? `${theme.borders.radius[borderRadius]}px` : "4px"};
   border-width: ${({ borderSize }) => (borderSize ? `${borderSize}px` : "0px")};
   ${({ borderBottomWidth }) =>
-    borderBottomWidth !== undefined && `border-bottom-width: ${borderBottomWidth}px;`}
+		borderBottomWidth !== undefined &&
+		`border-bottom-width: ${borderBottomWidth}px;`}
   border-color: ${({ borderColor, theme }) =>
 		borderColor ? theme.colors[borderColor] : theme.colors.background};
-  text-align: ${({ textAlign }) => textAlign || 'left'};
-  text-align-vertical: ${({ textAlignVertical }) => textAlignVertical || 'center'};
+  text-align: ${({ textAlign }) => textAlign || "left"};
+  text-align-vertical: ${({ textAlignVertical }) => textAlignVertical || "center"};
   margin-top: ${({ marginTop }) => (marginTop ? `${marginTop}px` : "0px")};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? `${marginBottom}px` : "0px")};
   padding: ${({ padding }) => (padding ? `${padding}px` : "12px")};

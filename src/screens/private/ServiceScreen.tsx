@@ -28,11 +28,10 @@ export default function ServiceScreen() {
 	const [category, setCategory] = useState();
 	const { services, setServices, selectedItem, setSelectedItem } =
 		useContext(AppointmentContext);
-	const { token, logout } = useContext(AuthContext);
+	const { token } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const [messageError, setMessageError] = useState<string | null>(null);
-	console.log(selectedItem);
 	useEffect(() => {
 		const fetchCategory = async () => {
 			setIsLoading(true);
@@ -133,9 +132,11 @@ export default function ServiceScreen() {
 			<ContainerDefault>
 				<HeaderDefault paddingTop={40}>
 					<Button onPress={() => navigation.goBack()}>
-						<BackArrowIcon/>
+						<BackArrowIcon />
 					</Button>
-					<HeaderTitle fontFamily="bold" marginTop={40}>Selecionar serviços</HeaderTitle>
+					<HeaderTitle fontFamily="bold" marginTop={40}>
+						Selecionar serviços
+					</HeaderTitle>
 					<FlatList
 						data={category}
 						keyExtractor={(item) => item.id.toString()}

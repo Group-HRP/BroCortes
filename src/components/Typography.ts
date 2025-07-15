@@ -97,7 +97,7 @@ const BaseText = styled.Text<TypographyProps>`
     /* font-weight: ${({ fontWeight }) => fontWeight || "regular"}; */ // Remover esta linha
 
     /* Extras */
-    text-align: ${({ textAlign }) => textAlign || 'left'};
+    text-align: ${({ textAlign }) => textAlign || "left"};
 
     text-transform: ${({ textTransform }) => textTransform ?? "none"};
     line-height: ${({ lineHeight }) => (lineHeight ? `${lineHeight}px` : "auto")};
@@ -108,7 +108,7 @@ const BaseText = styled.Text<TypographyProps>`
    
 	padding-top: ${({ paddingTop }) => (paddingTop ? `${paddingTop}px` : "0px")};
 	padding-bottom: ${({ paddingBottom }) =>
-			paddingBottom ? `${paddingBottom}px` : "0px"};
+		paddingBottom ? `${paddingBottom}px` : "0px"};
     margin: ${({ margin }) => (margin ? `${margin}px` : "0px")};
     margin-top: ${({ marginTop }) => (marginTop ? `${marginTop}px` : "0px")};
     margin-bottom: ${({ marginBottom }) =>
@@ -133,27 +133,27 @@ const BaseText = styled.Text<TypographyProps>`
 
 export const Title = styled(BaseText).attrs({ isTitle: true })`
     line-height: ${({ lineHeight, fontSize = "md", theme }) => {
-        if (lineHeight) return `${lineHeight}px`;
-        // Defina os grupos de títulos
-        const group120 = ["h1", "h2", "h3"];
-        const group140 = ["h4", "h5", "h6"];
-        let size = theme.fonts.sizes[fontSize as keyof typeof theme.fonts.sizes];
-        if (!size) size = theme.fonts.sizes.md;
-        if (group120.includes(fontSize as string)) {
-            return `${size * 1.2}px`;
-        }
-        if (group140.includes(fontSize as string)) {
-            return `${size * 1.4}px`;
-        }
-        return `${size * 1.5}px`; // fallback para outros casos
-    }};
+			if (lineHeight) return `${lineHeight}px`;
+			// Defina os grupos de títulos
+			const group120 = ["h1", "h2", "h3"];
+			const group140 = ["h4", "h5", "h6"];
+			let size = theme.fonts.sizes[fontSize as keyof typeof theme.fonts.sizes];
+			if (!size) size = theme.fonts.sizes.md;
+			if (group120.includes(fontSize as string)) {
+				return `${size * 1.2}px`;
+			}
+			if (group140.includes(fontSize as string)) {
+				return `${size * 1.4}px`;
+			}
+			return `${size * 1.5}px`; // fallback para outros casos
+		}};
 `;
 
 export const Text = styled(BaseText).attrs({ isTitle: false })`
     line-height: ${({ lineHeight, fontSize = "md", theme }) => {
-        if (lineHeight) return `${lineHeight}px`;
-        let size = theme.fonts.sizes[fontSize as keyof typeof theme.fonts.sizes];
-        if (!size) size = theme.fonts.sizes.md;
-        return `${size * 1.5}px`;
-    }};
+			if (lineHeight) return `${lineHeight}px`;
+			let size = theme.fonts.sizes[fontSize as keyof typeof theme.fonts.sizes];
+			if (!size) size = theme.fonts.sizes.md;
+			return `${size * 1.5}px`;
+		}};
 `;

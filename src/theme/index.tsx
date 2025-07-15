@@ -95,7 +95,7 @@ const theme = {
 		accent300: "#E0E0E0",
 		text: "#FFFFFF",
 		placeholdertext: "#FFFFFF99",
-		link:"#F4B210",
+		link: "#F4B210",
 		transparent: "transparent",
 	},
 	fonts: {

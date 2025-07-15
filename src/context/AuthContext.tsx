@@ -82,7 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			setUser(null);
 			setToken(null);
 			await AsyncStorage.multiRemove(["@user", "@token"]);
-			throw error; 
+			throw error;
 		}
 	};
 
