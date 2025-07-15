@@ -81,6 +81,8 @@ export default function AppointmentScreen() {
             style={{ maxHeight: 320 }}
             data={appointment}
             showsVerticalScrollIndicator
+            onRefresh={fetchAppointments}
+            refreshing={isLoading}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <Button
