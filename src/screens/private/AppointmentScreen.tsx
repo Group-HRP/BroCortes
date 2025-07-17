@@ -140,9 +140,12 @@ export default function AppointmentScreen() {
           <Title fontSize="h4" marginTop={96}>
             Histórico
           </Title>
-          {historicAppointment.map((item) => (
-            <Button key={item.id}>
+          {historicAppointment
+            .slice(-1)
+            .reverse()
+            .map((item) => (
               <CustomContainer
+                key={item.id}
                 backgroundColor={theme.colors.background300}
                 borderRadius={8}
                 paddingVertical={12}
@@ -151,7 +154,7 @@ export default function AppointmentScreen() {
                 justifyContent="space-between"
                 alignItems="center"
                 marginTop={16}
-                marginBottom={32}
+                marginBottom={16}
               >
                 <CustomContainer>
                   <Text fontSize="h6" fontWeight="medium">
@@ -167,10 +170,11 @@ export default function AppointmentScreen() {
                       : "N/A"}
                   </Text>
                 </CustomContainer>
-                <ArrowRightIcon />
+                <Text color={theme.colors.primary}>
+                  {item.status === "canceled" ? "Cancelado" : "Finalizado"}
+                </Text>
               </CustomContainer>
-            </Button>
-          ))}
+            ))}
         </>
       ) : (
         <View

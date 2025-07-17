@@ -79,6 +79,7 @@ export default function ServiceScreen() {
 				});
 				const servicesData = response.data.service;
 				setServices(servicesData);
+				console.log("[service da category]", servicesData)
 			} catch (error) {
 				console.log(error);
 				setMessageError("Erro ao carregar os serviços");
