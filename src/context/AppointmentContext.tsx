@@ -7,258 +7,258 @@ import type { AppStackParamList } from "../routes/appStack";
 import { showMessage } from "react-native-flash-message";
 
 interface Service {
-  id: number;
-  name: string;
-  price: string | number;
-  duration: string | number;
-  description: string;
+	id: number;
+	name: string;
+	price: string | number;
+	duration: string | number;
+	description: string;
 }
 
 export interface Appointment {
-  id: number;
-  serviceId: number;
-  service?: Service;
-  date: string;
-  status: string;
-  canceledAt: string | null;
-  canceledById: number | null;
-  cancellationReason?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  userId: number;
+	id: number;
+	serviceId: number;
+	service?: Service;
+	date: string;
+	status: string;
+	canceledAt: string | null;
+	canceledById: number | null;
+	cancellationReason?: string | null;
+	createdAt: string;
+	updatedAt: string;
+	userId: number;
 }
 
 export type AppointmentContextType = {
-  services: Service[];
-  setServices: React.Dispatch<React.SetStateAction<Service[]>>;
-  selectedItem?: { id: number; name: string; duration: string; price: string };
-  setSelectedItem?: React.Dispatch<
-    React.SetStateAction<
-      { id: number; name: string; duration: string; price: string } | undefined
-    >
-  >;
-  dataSelecionada: string;
-  setDataSelecionada: React.Dispatch<React.SetStateAction<string>>;
-  horariosDisponiveis: string[];
-  horaSelecionada: string;
-  setHoraSelecionada: React.Dispatch<React.SetStateAction<string>>;
-  appointment: Appointment[];
-  setAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
-  historicAppointment: Appointment[];
-  setHistoricAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
-  fetchViewAppointment: (id: number) => Promise<void>;
-  viewAppointment: Appointment[];
-  setViewAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
-  isLoading: boolean;
-  fetchCanceledAppointment: (id: number) => void;
-  fetchHistoricalAppointments: () => void;
-  fetchAppointments: () => void;
+	services: Service[];
+	setServices: React.Dispatch<React.SetStateAction<Service[]>>;
+	selectedItem?: { id: number; name: string; duration: string; price: string };
+	setSelectedItem?: React.Dispatch<
+		React.SetStateAction<
+			{ id: number; name: string; duration: string; price: string } | undefined
+		>
+	>;
+	dataSelecionada: string;
+	setDataSelecionada: React.Dispatch<React.SetStateAction<string>>;
+	horariosDisponiveis: string[];
+	horaSelecionada: string;
+	setHoraSelecionada: React.Dispatch<React.SetStateAction<string>>;
+	appointment: Appointment[];
+	setAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
+	historicAppointment: Appointment[];
+	setHistoricAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
+	fetchViewAppointment: (id: number) => Promise<void>;
+	viewAppointment: Appointment[];
+	setViewAppointment: React.Dispatch<React.SetStateAction<Appointment[]>>;
+	isLoading: boolean;
+	fetchCanceledAppointment: (id: number) => void;
+	fetchHistoricalAppointments: () => void;
+	fetchAppointments: () => void;
 };
 
 export const AppointmentContext = createContext<AppointmentContextType>({
-  services: [],
-  setServices: () => {},
-  selectedItem: undefined,
-  setSelectedItem: () => {},
-  dataSelecionada: "",
-  setDataSelecionada: () => {},
-  horariosDisponiveis: [],
-  horaSelecionada: "",
-  setHoraSelecionada: () => {},
-  appointment: [],
-  setAppointment: () => {},
-  historicAppointment: [],
-  setHistoricAppointment: () => {},
-  fetchViewAppointment: async () => {},
-  viewAppointment: [],
-  setViewAppointment: () => {},
-  isLoading: false,
-  fetchCanceledAppointment: () => {},
-  fetchHistoricalAppointments: () => {},
-  fetchAppointments: () => {},
+	services: [],
+	setServices: () => {},
+	selectedItem: undefined,
+	setSelectedItem: () => {},
+	dataSelecionada: "",
+	setDataSelecionada: () => {},
+	horariosDisponiveis: [],
+	horaSelecionada: "",
+	setHoraSelecionada: () => {},
+	appointment: [],
+	setAppointment: () => {},
+	historicAppointment: [],
+	setHistoricAppointment: () => {},
+	fetchViewAppointment: async () => {},
+	viewAppointment: [],
+	setViewAppointment: () => {},
+	isLoading: false,
+	fetchCanceledAppointment: () => {},
+	fetchHistoricalAppointments: () => {},
+	fetchAppointments: () => {},
 });
 
 export function AppointmentProvider({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  const { token, user } = useContext(AuthContext);
-  const [services, setServices] = useState<Service[]>([]);
-  const [selectedItem, setSelectedItem] = useState<
-    { id: number; name: string; duration: string; price: string } | undefined
-  >(undefined);
-  const [dataSelecionada, setDataSelecionada] = useState("");
-  const [horariosDisponiveis, setHorariosDisponiveis] = useState<string[]>([]);
-  const [horaSelecionada, setHoraSelecionada] = useState("");
-  const [appointment, setAppointment] = useState<Appointment[]>([]);
-  const [historicAppointment, setHistoricAppointment] = useState<Appointment[]>(
-    []
-  );
-  const [viewAppointment, setViewAppointment] = useState<Appointment[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+	const { token, user } = useContext(AuthContext);
+	const [services, setServices] = useState<Service[]>([]);
+	const [selectedItem, setSelectedItem] = useState<
+		{ id: number; name: string; duration: string; price: string } | undefined
+	>(undefined);
+	const [dataSelecionada, setDataSelecionada] = useState("");
+	const [horariosDisponiveis, setHorariosDisponiveis] = useState<string[]>([]);
+	const [horaSelecionada, setHoraSelecionada] = useState("");
+	const [appointment, setAppointment] = useState<Appointment[]>([]);
+	const [historicAppointment, setHistoricAppointment] = useState<Appointment[]>(
+		[],
+	);
+	const [viewAppointment, setViewAppointment] = useState<Appointment[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const navigation = useNavigation<NavigationProp<AppStackParamList>>();
+	const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
-  useEffect(() => {
-    if (horaSelecionada) {
-      navigation.navigate("ConfirmAppointment");
-    }
-  }, [horaSelecionada, navigation]);
+	useEffect(() => {
+		if (horaSelecionada) {
+			navigation.navigate("ConfirmAppointment");
+		}
+	}, [horaSelecionada, navigation]);
 
-  useEffect(() => {
-    const fetchHorariosDisponiveis = async () => {
-      try {
-        const response = await api.get("/working-hours/available-times", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          params: { date: dataSelecionada, serviceId: selectedItem?.id },
-        });
+	useEffect(() => {
+		const fetchHorariosDisponiveis = async () => {
+			try {
+				const response = await api.get("/working-hours/available-times", {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`,
+					},
+					params: { date: dataSelecionada, serviceId: selectedItem?.id },
+				});
 
-        const data = response.data;
-        setHorariosDisponiveis(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Erro ao buscar horários disponíveis:", error);
-      }
-    };
+				const data = response.data;
+				setHorariosDisponiveis(data);
+				setIsLoading(false);
+			} catch (error) {
+				console.error("Erro ao buscar horários disponíveis:", error);
+			}
+		};
 
-    if (dataSelecionada && selectedItem?.id) {
-      setIsLoading(true);
-      fetchHorariosDisponiveis();
-    }
-  }, [dataSelecionada, selectedItem, token]);
+		if (dataSelecionada && selectedItem?.id) {
+			setIsLoading(true);
+			fetchHorariosDisponiveis();
+		}
+	}, [dataSelecionada, selectedItem, token]);
 
-  const fetchAppointments = async () => {
-    try {
-      setIsLoading(true);
-      const response = await api.get("/appointments", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = Array.isArray(response.data.data)
-        ? response.data.data
-        : [response.data.data];
-      setAppointment(data);
-    } catch (error) {
-      console.error("Erro ao buscar agendamentos:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+	const fetchAppointments = async () => {
+		try {
+			setIsLoading(true);
+			const response = await api.get("/appointments", {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			const data = Array.isArray(response.data.data)
+				? response.data.data
+				: [response.data.data];
+			setAppointment(data);
+		} catch (error) {
+			console.error("Erro ao buscar agendamentos:", error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    fetchAppointments();
-  }, [token]);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		fetchAppointments();
+	}, [token]);
 
-  const fetchHistoricalAppointments = async () => {
-    try {
-      setIsLoading(true);
-      const response = await api.get("/appointments/historic-appointment", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+	const fetchHistoricalAppointments = async () => {
+		try {
+			setIsLoading(true);
+			const response = await api.get("/appointments/historic-appointment", {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			});
 
-      const data = Array.isArray(response.data)
-        ? response.data
-        : [response.data];
-      setHistoricAppointment(data);
-    } catch (error) {
-      console.log("Erro ao listar historico", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+			const data = Array.isArray(response.data)
+				? response.data
+				: [response.data];
+			setHistoricAppointment(data);
+		} catch (error) {
+			console.log("Erro ao listar historico", error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    fetchHistoricalAppointments();
-  }, [token, user.sub]);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		fetchHistoricalAppointments();
+	}, [token, user.sub]);
 
-  const fetchViewAppointment = async (id: number) => {
-    try {
-      setIsLoading(true);
-      const response = await api.get(`/appointments/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = response.data;
-      setViewAppointment(data);
+	const fetchViewAppointment = async (id: number) => {
+		try {
+			setIsLoading(true);
+			const response = await api.get(`/appointments/${id}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			const data = response.data;
+			setViewAppointment(data);
 
-      navigation.navigate("AppStack", {
-        screen: "ViewAppointment",
-        params: { viewAppointment: data },
-      });
-    } catch (error) {
-      console.log("erro ao mostrar appointments", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+			navigation.navigate("AppStack", {
+				screen: "ViewAppointment",
+				params: { viewAppointment: data },
+			});
+		} catch (error) {
+			console.log("erro ao mostrar appointments", error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-  const fetchCanceledAppointment = async (id: number) => {
-    try {
-      setIsLoading(true);
-      const response = await api.patch(
-        `/appointments/${id}`,
-        {
-          status: "canceled",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      showMessage({
-        message: "Agendamento cancelado",
-      });
-    } catch (error) {
-      console.log(error);
-      showMessage({
-        message: "Erro ao cancelar agendamento",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+	const fetchCanceledAppointment = async (id: number) => {
+		try {
+			setIsLoading(true);
+			const response = await api.patch(
+				`/appointments/${id}`,
+				{
+					status: "canceled",
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				},
+			);
+			showMessage({
+				message: "Agendamento cancelado",
+			});
+		} catch (error) {
+			console.log(error);
+			showMessage({
+				message: "Erro ao cancelar agendamento",
+			});
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-  return (
-    <AppointmentContext.Provider
-      value={{
-        services,
-        setServices,
-        selectedItem,
-        setSelectedItem,
-        dataSelecionada,
-        setDataSelecionada,
-        horariosDisponiveis,
-        horaSelecionada,
-        setHoraSelecionada,
-        appointment,
-        setAppointment,
-        historicAppointment,
-        setHistoricAppointment,
-        fetchViewAppointment,
-        viewAppointment,
-        setViewAppointment,
-        isLoading,
-        fetchCanceledAppointment,
-        fetchHistoricalAppointments,
-        fetchAppointments,
-      }}
-    >
-      {children}
-    </AppointmentContext.Provider>
-  );
+	return (
+		<AppointmentContext.Provider
+			value={{
+				services,
+				setServices,
+				selectedItem,
+				setSelectedItem,
+				dataSelecionada,
+				setDataSelecionada,
+				horariosDisponiveis,
+				horaSelecionada,
+				setHoraSelecionada,
+				appointment,
+				setAppointment,
+				historicAppointment,
+				setHistoricAppointment,
+				fetchViewAppointment,
+				viewAppointment,
+				setViewAppointment,
+				isLoading,
+				fetchCanceledAppointment,
+				fetchHistoricalAppointments,
+				fetchAppointments,
+			}}
+		>
+			{children}
+		</AppointmentContext.Provider>
+	);
 }
 
 export const useAppointment = () => useContext(AppointmentContext);
